@@ -1,5 +1,6 @@
 ---
 title: "Using this package"
+bibliography: REFERENCES.bib
 ---
 
 

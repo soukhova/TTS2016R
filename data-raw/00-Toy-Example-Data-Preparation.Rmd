@@ -1,0 +1,39 @@
+---
+title: "Toy example dataset"
+output: 
+---
+In this notebook we provide a toy dataset that is used to calculate both conventional accessibility and _spatial available_ accessibility. This is a more smaller and theoretical alternative dataset that can be used in place the the real-world TTS-16.
+
+
+Libraries:
+```{r message=FALSE}
+library(sf)
+library(tidyverse)
+```
+
+Load data for example:
+```{r}
+load("toy-example-data-inputs/od_table.rda")
+toy_od_table <- od_table
+load("toy-example-data-inputs/simulated_data.rda")
+toy_sim_zones <- simulated_data
+load("toy-example-data-inputs/trips.rda")
+toy_trips <- trips
+```
+
+Remove unneeded columns and add trips to OD:
+```{r}
+toy_od_table <- toy_od_table %>% 
+  dplyr::select(-c("f", "V_ij", "W_ij", "V_ij_r")) %>%
+  merge(toy_trips %>%
+          dplyr::select(Origin, Destination, trips),
+               by = c("Origin", "Destination"), all.x=TRUE)
+```
+
+
+Save it to /data folder:
+```{r}
+usethis::use_data(toy_od_table, overwrite = TRUE)
+usethis::use_data(toy_sim_zones, overwrite = TRUE)
+```
+

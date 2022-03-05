@@ -1,0 +1,213 @@
+---
+title: "TTS Origin-Destination Data by Full-Time Employment"
+output: 
+---
+
+In this notebook we process a cross-tabulation of origin and destinations by people employed full-time in the Greater Golden Horseshoe (GGH) in 2016.
+
+The source data is in file `tts-2016-OD-FT-Employment.txt`, which was retrieved from the Transportation Tomorrow Survey Data Retrieval System on October 28, 2021.
+
+The centroids of all work zones (origins) and full-time (FT) employment zones (destinations) are calculated. 
+
+## Preliminaries
+
+Load packages:
+```{r load-packages}
+library(readxl)
+library(sf)
+library(tidyverse)
+library(units)
+```
+
+## Traffic Analysis Zones
+
+Read the boundaries of the traffic analysis zones:
+```{r}
+ggh_taz <- st_read("TTS16-data-inputs/OD-by-FT-Employment/tts06_83_region.shp")
+```
+
+Project object:
+```{r}
+ggh_taz <- ggh_taz %>%
+  st_transform(crs = 32617)
+```
+
+Prepare traffic analysis zones:
+```{r}
+ggh_taz <- ggh_taz %>%
+  transmute(GTA06 = as.character(GTA06),
+            AREA = st_area(geometry) %>% 
+              set_units(km^2) %>% 
+              drop_units())
+```
+
+Extract the IDs for all TAZ:
+```{r}
+ghta_taz_id <- ggh_taz$GTA06
+```
+
+## Planning boundaries
+
+Read the boundaries of the traffic analysis zones:
+```{r}
+ggh_pd <- st_read("TTS16-data-inputs/Boundaries/tts06_pd_83.shp")
+```
+
+Project object:
+```{r}
+ggh_pd <- ggh_pd %>%
+  st_transform(crs = 32617)
+```
+
+Adding region names to the object as they are not included in the origin data:
+(http://dmg.utoronto.ca/pdf/tts/2016/2016TTS_Conduct.pdf):
+```{r}
+ggh_pd <- ggh_pd %>%
+  mutate(REGION_name = 
+           ifelse(REGION == 1, "Toronto", 
+                  ifelse(REGION == 2, "Durham", 
+                         ifelse(REGION == 3, "York", 
+                                ifelse(REGION == 4, "Peel", 
+                                       ifelse(REGION == 5, "Halton", 
+                                              ifelse(REGION == 6, "Hamilton", 
+                                                     ifelse(REGION == 11, "Niagara", 
+                                                            ifelse(REGION == 12, "Waterloo", 
+                                                                   ifelse(REGION == 13, "Guelph", 
+                                                                          ifelse(REGION == 14, "Wellington", 
+                                                                                 ifelse(REGION == 15, "Orangeville", 
+                                                                                        ifelse(REGION == 16, "Barrier", 
+                                                                                               ifelse(REGION == 17, "Simcoe", 
+                                                                                                      ifelse(REGION == 18, "Kawartha Lakes", 
+                                                                                                             ifelse(REGION == 19, "Peterborough City", 
+                                                                                                                    ifelse(REGION == 20, "Peterborough County", 
+                                                                                                                           ifelse(REGION == 21, "Orillia", 
+                                                                                                                                  ifelse(REGION == 22, "Dufferin", 
+                                                                                                                                         ifelse(REGION == 23, "Brantford", 
+                                                                                                                                                ifelse(REGION == 24, "Brant", "NOOOO")))))))))))))))))))))
+```
+
+## Origin destination matrices for work and shop
+
+Read trip tables. The query was for "trips" by zone of residence, zone of work, and trip purpose (Work):
+```{r}
+od_ft <- read_delim(file = "TTS16-data-inputs/OD-by-FT-Employment/tts-2016-OD-FT-Employment.txt", 
+                      delim = "\t", 
+                      col_names = FALSE)
+```
+
+Find the position in the table where the information on work trips begins:
+```{r}
+idx <- which(od_ft$X1 == "TABLE    : emp_stat (Full time)")
+```
+
+Slice the table to obtain the work trips (remove heading information):
+```{r}
+od_ft <- od_ft %>% 
+  slice((idx+2):n())
+```
+
+Separate the zone identifiers and the trips, and convert to numeric:
+```{r}
+od_ft <- od_ft %>%
+  separate(X1, into = c("Zones", "Persons"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         Persons = as.numeric(Persons))
+```
+
+The resulting object `od_ft` has the number of individuals who are employed full-time by place of residence (Origin) and place of work (Destination) using the GTA06 zoning system. 
+
+## Workers and Jobs
+
+The od table can be used to calculate the workers and jobs by traffic analysis zone:
+```{r}
+workers_ft <- od_ft %>%
+  group_by(Origin) %>%
+  summarize(workers = sum(Persons),
+            .groups = "drop") %>%
+  transmute(GTA06 = Origin,
+            workers)
+
+jobs_ft <- od_ft %>%
+  group_by(Destination) %>%
+  summarize(jobs = sum(Persons),
+            .groups = "drop") %>%
+  transmute(GTA06 = Destination,
+            jobs)
+
+```
+
+Join workers and jobs to simple features object:
+```{r}
+ggh_taz <- ggh_taz %>%
+  # Join workers
+  left_join(workers_ft,
+            by = "GTA06") %>%
+  # Join jobs
+  left_join(jobs_ft,
+            by = "GTA06") %>%
+  # Replace NAs with zeros
+  mutate(workers = replace_na(workers, 0),
+         jobs = replace_na(jobs, 0))
+```
+
+Plot worker population in the ggh:
+```{r}
+ggplot() +
+  geom_sf(data = ggh_taz,
+          aes(fill = workers),
+          color = NA) +
+  scale_fill_fermenter(direction = 1)
+```
+
+Plot job distribution in the ggh:
+```{r}
+ggplot() +
+  geom_sf(data = ggh_taz,
+          aes(fill = jobs),
+          color = NA) +
+  scale_fill_fermenter(direction = 1)
+```
+
+## Creating input for travel-time OD calculations
+
+Create centroids for each feature in ggh_taz:
+```{r}
+ggh_taz_cent <- st_centroid(ggh_taz) 
+```
+
+Attach the centroid point geometry to the origin object (workers) and the destination object (jobs)
+```{r}
+#workers (origins)
+workers_ft_cent <- workers_ft %>% merge(ggh_taz_cent %>% select(GTA06), by="GTA06") %>% st_sf
+
+work_origins <- cbind(workers_ft_cent, st_coordinates(st_transform(workers_ft_cent, crs = 4326))) %>%
+  rename(lon = "X", lat = "Y", id = "GTA06") %>% as.data.frame()  %>%
+  select(id, lon, lat) %>% as.data.frame()
+
+```
+
+```{r}
+#jobs (destinations)
+jobs_ft_cent <- jobs_ft %>% merge(ggh_taz_cent %>% select(GTA06), by="GTA06") %>% st_sf
+
+job_destinations <- cbind(jobs_ft_cent, st_coordinates(st_transform(jobs_ft_cent, crs = 4326))) %>%
+  rename(lon = "X", lat = "Y", id = "GTA06") %>% as.data.frame()  %>%
+  select(id, lon, lat) 
+
+```
+
+## saving inputs for OD travel time calculations
+```{r}
+save("work_origins", file = "TTS16-data-inputs/Travel-Time-Calculations/inputs/work_origins.Rdata")
+save("job_destinations", file = "TTS16-data-inputs/Travel-Time-Calculations/inputs/job_destinations.Rdata")
+```
+
+## saving inputs for later processing
+```{r}
+save("ggh_taz", file = "TTS16-data-inputs/OD-by-FT-Employment/ggh_taz.Rdata")
+save("ggh_pd", file = "TTS16-data-inputs/Boundaries/ggh_pd.Rdata")
+save("od_ft", file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft.Rdata")
+```

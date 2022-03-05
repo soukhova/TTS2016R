@@ -1,0 +1,126 @@
+---
+title: "R Notebook"
+output:
+---
+
+Load packages:
+```{r}
+library(ggplot2)
+library(dplyr)
+library(MASS)
+
+# install.packages("fitdistrplus")
+# install.packages("logspline")
+library(fitdistrplus)
+library(logspline)
+
+options(scipen = 999)
+```
+
+##-- Exploring the OD travel time data
+
+```{r}
+load(file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft_tt.Rdata")
+summary(od_ft_tt)
+```
+Let's explore all the NA values...
+
+
+All NA travel times are 180 min or greater OR belong to a destination which is "external undefined" or "no usual location" or "unknown" (IDs 9998, 8888, 9999) according to the TTS data codes (source?); for the time being, lets set the trips which we know are 180 min or greater to "180min" and the other unknown destination trips to "300". We will see how it impacts the trip length distribution next chunk.
+```{r}
+od_ft_tt <- od_ft_tt %>% mutate(travel_time = ifelse( is.na(travel_time) & Destination != "9998" & Destination != "8888" & Destination != "9999", 180, travel_time),
+                                travel_time = ifelse( is.na(travel_time) & (Destination == "9998" | Destination == "8888" | Destination == "9999"), 300, travel_time))
+summary(od_ft_tt)
+```
+ 
+Trip length distribution (cutting the travel_time into 150 intervals and summing all trips within each interval). The TLD is a probability density function for likelihood of travel informed by travel time:
+```{r}
+tld <- od_ft_tt %>%
+  mutate(tt_classes = cut(travel_time, 
+                          150,
+                          ordered_result = TRUE)) %>%
+  group_by(tt_classes) %>%
+  summarize(trips = sum(trips),
+            travel_time = mean(travel_time))
+```
+
+Plot the TLD:
+```{r}
+ggplot(data = tld, 
+       aes(x =travel_time, y = trips)) +
+  geom_point()
+```
+So, the artificially assigned '180'min travel time appears to be an outlier (visually) of the distribution trend but there are signficantly more 'unknown' destination trips with an undetermined travel time (assigned to "300min"). So since this is the case, we will not re-run the OD travel time calculations for trip which are longer than 180 min as the number of trips are relatively insignificant; i.e. ~35,000 trips which is only...
+
+```{r}
+null_dest_trips_numb <- od_ft_tt %>% filter(travel_time=="300") %>% summarize(trips = sum(trips))
+totaltrip_trips_numb <- od_ft_tt %>% summarize(trips = sum(trips))
+dest_180_trips_numb <- od_ft_tt %>% filter(travel_time=="180") %>% summarize(trips = sum(trips))
+
+dest_180_trips_numb/(totaltrip_trips_numb-null_dest_trips_numb) * 100
+```
+
+0.95% of trips with known destinations! Compared to the number of unknown destination trips:
+```{r}
+null_dest_trips_numb/(totaltrip_trips_numb) * 100
+```
+which account for 10.1% of total trips. 
+
+Let's plot a guess: assigning a travel time for the trips with known destinations but uncalculated travel times; set a random travel time between 180min and 240min (3hr to 4hr!) for all travel times which have been artifically set to 180 min and plot.
+```{r}
+test <- od_ft_tt %>% mutate(travel_time = ifelse(travel_time==180, seq(from = 180, to = 240), travel_time))
+```
+
+Trip length distribution and plot:
+```{r}
+ test <- test %>%
+  mutate(tt_classes = cut(travel_time, 
+                          1000,
+                          ordered_result = TRUE)) %>%
+  group_by(tt_classes) %>%
+  summarize(trips = sum(trips),
+            travel_time = mean(travel_time))
+
+ggplot(data = test, 
+       aes(x =travel_time, y = trips)) +
+  geom_point()
+
+```
+
+It may be worth recalculating these longer travel times for completeness... but for now we move on. We will keep uncalculated travel times (greater than 180min) and thoses with unknown destinations NA. 
+
+```{r}
+load(file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft_tt.Rdata")
+
+tld <- od_ft_tt %>%
+  mutate(tt_classes = cut(travel_time, 
+                          150,
+                          ordered_result = TRUE)) %>%
+  group_by(tt_classes) %>%
+  summarize(trips = sum(trips),
+            travel_time = mean(travel_time))
+```
+
+
+## Saving TTS-16 objects to folder
+```{r}
+#car travel times for all origins to all destinations trips in TTS-16, number of associated trips, and the travel time.
+usethis::use_data(od_ft_tt, overwrite = TRUE)
+
+# all, unique, traffic analysis zones with associated number of workers and jobs per zone
+load(file = "TTS16-data-inputs/OD-by-FT-Employment/ggh_taz.Rdata")
+usethis::use_data(ggh_taz, overwrite = TRUE)
+```
+```{r}
+#boundaries of interest
+# load(file = "TTS16-data-inputs/Boundaries/hamilton_cma.Rdata")
+# usethis::use_data(hamilton_cma, overwrite = TRUE)
+# 
+# load(file = "TTS16-data-inputs/Boundaries/toronto_muni_bound.Rdata")
+# usethis::use_data(toronto_muni_bound, overwrite = TRUE)
+
+load(file = "TTS16-data-inputs/Boundaries/ggh_pd.Rdata")
+usethis::use_data(ggh_pd, overwrite = TRUE)
+```
+
+

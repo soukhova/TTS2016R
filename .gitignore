@@ -1,8 +1,6 @@
 .Rproj.user
-Manuscript-Data-Package
-data-raw
 .Rhistory
 .Rdata
 .httr-oauth
 .DS_Store
-docs
+**/Manuscript-Data-Package/Manuscript-Data-Package_cache/

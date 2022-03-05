@@ -11,6 +11,13 @@ This package includes person-to-jobs origin-destinations, the traffic analysis z
 \references{
 \url{https://github.com/soukhova/TTS2016R}
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://soukhova.github.io/TTS2016R/}
+}
+
+}
 \author{
 \strong{Maintainer}: Anastasia Soukhov \email{soukhoa@mcmaster.ca} (\href{https://orcid.org/0000-0003-4371-4831}{ORCID})
 
