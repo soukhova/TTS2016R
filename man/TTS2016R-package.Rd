@@ -4,24 +4,20 @@
 \name{TTS2016R-package}
 \alias{TTS2016R}
 \alias{TTS2016R-package}
-\title{TTS2016R: What the Package Does (One Line, Title Case)}
+\title{TTS2016R: An augmented 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada}
 \description{
-What the package does (one paragraph).
+This package includes person-to-jobs origin-destinations, the traffic analysis zone (TAZ) boundaries, and the associated municipality boundaries from the 2016 [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) of the Greater Golden Horse area (GGH) located in southern Ontario, Canada.
 }
 \references{
 \url{https://github.com/soukhova/TTS2016R}
 }
-\seealso{
-Useful links:
-\itemize{
-  \item \url{https://github.com/soukhova/TTS2016R}
-  \item \url{https://soukhova.github.io/TTS2016R/}
-  \item Report bugs at \url{https://github.com/soukhova/TTS2016R/issues}
-}
-
-}
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+\strong{Maintainer}: Anastasia Soukhov \email{soukhoa@mcmaster.ca} (\href{https://orcid.org/0000-0003-4371-4831}{ORCID})
+
+Authors:
+\itemize{
+  \item Antonio Paez \email{paezha@mcmaster.ca} (\href{https://orcid.org/0000-0001-6912-9919}{ORCID})
+}
 
 
 Antonio Paez, School of Earth, Environment and Society, McMaster University \email{paezha@mcmaster.ca}
