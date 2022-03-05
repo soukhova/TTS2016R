@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="What the package does (one paragraph).">
-<title>What the Package Does (One Line, Title Case) • TTS2016R</title>
+<meta name="description" content="This package includes person-to-jobs origin-destinations, the traffic analysis zone (TAZ) boundaries, and the associated municipality boundaries from the 2016 [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) of the Greater Golden Horse area (GGH) located in southern Ontario, Canada.">
+<title>An augmented 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada • TTS2016R</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
-<meta property="og:description" content="What the package does (one paragraph).">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="An augmented 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada">
+<meta property="og:description" content="This package includes person-to-jobs origin-destinations, the traffic analysis zone (TAZ) boundaries, and the associated municipality boundaries from the 2016 [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) of the Greater Golden Horse area (GGH) located in southern Ontario, Canada.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -38,40 +38,627 @@
 <li class="nav-item">
   <a class="nav-link" href="reference/index.html">Reference</a>
 </li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="articles/A-Intro.html">Using this package</a>
+  </div>
+</li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/soukhova/TTS2016R/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
+      <ul class="navbar-nav"></ul>
 </div>
 
     
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9">
-What the package does (one paragraph).
-  </main><aside class="col-md-3"><div class="links">
-<h2 data-toc-skip>Links</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/soukhova/TTS2016R/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/soukhova/TTS2016R/issues" class="external-link">Report a bug</a></li>
-</ul>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header"><h1 id="2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada">2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada<a class="anchor" aria-label="anchor" href="#2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada"></a>
+</h1></div>
+<p>This package contains objects which are sourced from the 2016 Transportation Tomorrow Survey <a href="http://dmg.utoronto.ca/survey-boundary-files" class="external-link">(TTS)</a> or are curated to facilitate the use and analysis of TTS data. TTS 2016 is one of the largest travel surveys in southern Ontario, Canada, and a slice of this survey has been cleaned, packaged, and augmented for easy use in an <code>R</code> environment.</p>
+<!-- badges: start -->
+<!-- badges: end -->
+<div class="section level2">
+<h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
+</h2>
+<p>Installation:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
+      <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span>
+  <span class="op">}</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"soukhova/TTS2016R"</span>,
+                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<p>Libraries:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://soukhova.github.io/TTS2016R/">TTS2016R</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://paleolimbot.github.io/ggspatial/" class="external-link">ggspatial</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/GuangchuangYu/shadowtext/" class="external-link">shadowtext</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://r-spatial.github.io/sf/" class="external-link">sf</a></span><span class="op">)</span></code></pre></div>
 </div>
-
-<div class="license">
+<div class="section level2">
+<h2 id="tts-2016-data-overview">TTS 2016 Data Overview<a class="anchor" aria-label="anchor" href="#tts-2016-data-overview"></a>
+</h2>
+<p>The 2016 Transportation Tomorrow Survey (TTS) data for the the Greater Golden Horseshoe (GGH) area in the province of Ontario, Canada (43.6°N 79.73°W) is included; specifically the location of origins and destinations defined by Traffic Analysis Zones (TAZ), the associated municipality boundaries, the number of jobs and workers at each origin and destination, and the trips from origin to destination for the morning home-to-work commute. Also included are calculated travel times by car (calculated via <a href="https://github.com/ipeaGIT/r5r" class="external-link"><code>r5r</code></a>) and a derived impedance function values corresponding to the cost of travel based on the trip length distribution.</p>
+<p><img src="reference/figures/TTS16-survey-area.png"></p>
+<p>See the plot below for a spatial visualization of the number of workers and jobs within each TAZ:</p>
+<p><img src="reference/figures/tts-workers-jobs-plot.png"></p>
+Sample of TTS 2016 OD data (OD pairs with 2 trips):
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+Origin
+</th>
+<th style="text-align:left;">
+Destination
+</th>
+<th style="text-align:right;">
+trips
+</th>
+<th style="text-align:right;">
+travel_time
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+3640
+</td>
+<td style="text-align:left;">
+3718
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3640
+</td>
+<td style="text-align:left;">
+3849
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3640
+</td>
+<td style="text-align:left;">
+3866
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+3877
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+4003
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+17
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+4007
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+63
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+3152
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+3707
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+3816
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+65
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+55
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+82
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+8415
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+43
+</td>
+</tr>
+</tbody>
+</table>
+Summary statistics of TTS 2016 OD data, where <code>trips</code> are the number of journeys from origin to destination, calculated <code>travel_time</code> by car, and <code>f</code> is the impedance value:
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Origin
+</th>
+<th style="text-align:left;">
+Destination
+</th>
+<th style="text-align:left;">
+trips
+</th>
+<th style="text-align:left;">
+travel_time
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Length:103076
+</td>
+<td style="text-align:left;">
+Length:103076
+</td>
+<td style="text-align:left;">
+Min. : 1
+</td>
+<td style="text-align:left;">
+Min. : 0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Class :character
+</td>
+<td style="text-align:left;">
+Class :character
+</td>
+<td style="text-align:left;">
+1st Qu.: 14
+</td>
+<td style="text-align:left;">
+1st Qu.: 13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Mode :character
+</td>
+<td style="text-align:left;">
+Mode :character
+</td>
+<td style="text-align:left;">
+Median : 22
+</td>
+<td style="text-align:left;">
+Median : 20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Mean : 33
+</td>
+<td style="text-align:left;">
+Mean : 23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+3rd Qu.: 38
+</td>
+<td style="text-align:left;">
+3rd Qu.: 30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Max. :1129
+</td>
+<td style="text-align:left;">
+Max. :179
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA’s :3507
+</td>
+</tr>
+</tbody>
+</table>
+<p>See .Rmd in the <a href="https://github.com/soukhova/TTS2016R/tree/master/data-raw" class="external-link"><code>\data-raw folder</code></a> for additional details on how the datasets were compiled. See the <a href="https://soukhova.github.io/TTS2016R/index.html">vignettes</a> for detailed examples using the datasets and comparing comparison of the conventional accessibility and <strong>spatial availability</strong> measures.</p>
+</div>
+<div class="section level2">
+<h2 id="toy-data-overview">Toy Data Overview<a class="anchor" aria-label="anchor" href="#toy-data-overview"></a>
+</h2>
+<p>This data is synthetic and can be used if a smaller test set is preferred. It is used to introduce a new competitive accessibility measure, <strong>spatial availability</strong>, in the first vignette. See the location and number of opportunities of employment centers and population centers in the plot below:</p>
+<p><img src="reference/figures/toy-plot.png" height="400"></p>
+Below is a sample of the OD table (Employment Center 1) for the theoretical toy data:
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+Origin
+</th>
+<th style="text-align:left;">
+Destination
+</th>
+<th style="text-align:right;">
+Population
+</th>
+<th style="text-align:right;">
+Jobs
+</th>
+<th style="text-align:right;">
+distance
+</th>
+<th style="text-align:right;">
+catchments
+</th>
+<th style="text-align:right;">
+trips
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Population 1
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+260
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+2548
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 2
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+255
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+1314
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+591
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 3
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+510
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+3375
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 4
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+495
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+2170
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+157
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 5
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+1020
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+5112
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 6
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+490
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+6881
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 7
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+980
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+4847
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 8
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+260
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+5303
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Population 9
+</td>
+<td style="text-align:left;">
+Employment Center 1
+</td>
+<td style="text-align:right;">
+255
+</td>
+<td style="text-align:right;">
+750
+</td>
+<td style="text-align:right;">
+7771
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+  </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li>`use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
@@ -86,7 +673,8 @@ What the package does (one paragraph).
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>First Last <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/YOUR-ORCID-ID" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Anastasia Soukhov <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0003-4371-4831" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Antonio Paez <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-6912-9919" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -98,7 +686,7 @@ What the package does (one paragraph).
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by First Last.</p>
+<p>Developed by Anastasia Soukhov, Antonio Paez.</p>
 </div>
 
 <div class="pkgdown-footer-right">
