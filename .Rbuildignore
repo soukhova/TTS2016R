@@ -1,6 +1,10 @@
 ^TTS2016R\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
+^data-raw$
 ^docs$
 ^pkgdown$
 ^\.github$
+^README\.Rmd$
+^vignettes/articles$
+^data-raw$
