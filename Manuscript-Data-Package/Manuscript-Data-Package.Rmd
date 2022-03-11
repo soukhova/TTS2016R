@@ -82,7 +82,6 @@ This manuscript presents the open data product [{TTS2016R}](https://github.com/s
 The number of jobs (`r round(sum(TTS2016R::ggh_taz$jobs), 3) %>% prettyNum(big.mark = ",")`) and workers (`r round(sum(TTS2016R::ggh_taz$workers), 3) %>% prettyNum(big.mark = ",")`) in this package are organized in the form of an origin-destination table which is indicative of home-to-work commute patterns (there are `r round(sum(TTS2016R::od_ft_tt$trips), 3) %>% prettyNum(big.mark = ",")` potential interactions). These data were retrieved from the TTS Data Retrieval System on October 28, 2021 and reflect the potential interaction of full-time employed people and jobs within the GGH survey boundaries shown in Figure \ref{fig:TTS-16-survey-area} as defined by the 2016 TTS methodology [@data_management_group_tts_2018].
 
 Also included in {TTS2016R} are travel times and cost of travel from origin to destination by car; travel times are calculated using the `R` package {r5r}. These travel times are useful to estimate the cost of travel and to calculate impedance functions, among other possible applications. For simplicity, all interactions within {TTS2016R} are assumed to be taken by car, and the travel time is calculated from an origin TAZ centroid to a destination TAZ centroid. The centroid is snapped to the nearest street line by `r5r` and the travel time is calculated for all trips assuming a car travel mode. Additionally, only travel times less than or equal to 180 mins (3 hrs) are calculated; this threshold represents 99% of trip's travel times which are summarized in Figure \ref{fig:TTS-16-survey-area}.
-
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # grouping the planning boundaries/municipalities so they make up the 20 regions in the TTS 2016. Note: st_buffer is used as there are small existing gaps between some boundaries. st_buffer of 10 m is enough to widen all boundaries and complete the st_union without issue.
 group_ggh_pd_poly <- TTS2016R::ggh_pd %>% st_buffer(10) %>% group_by(REGION) %>% 
@@ -186,21 +185,18 @@ desc_stats <- cbind(Statistics, Trips, Travel_time, Workers, Jobs)
 #                 latex_options = c("scale_down"),
 #                 position = "center")
 ```
-
-```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}The TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align='center'}
+```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align='center'}
 # knitr::include_graphics("images/TTS16-survey-area.png")
 
 TTS_area_plot + annotate(geom = "table",
-            x = 921500, y = 4890000, 
+            x = 915000, y = 4880000, 
            label = list(desc_stats))
 ```
-
-
 ## Employed individuals and jobs
 
 The origin-destination table (i.e., trips) consists of a cross-tabulation of people who are employed full-time by place of GGH residence (origin) and places of GGH employment (destination) using the GTA06 TAZ zoning system. It is important to note that the total number of workers and jobs is the TTS 2016 region are not equal but the number of trips taken are equal to the number of workers. Since the outer boundaries of the TTS are permeable, workers who reside within the boundaries but travel outside of the boundaries are counted as workers within an origin TAZ, while jobs in TAZ that are filled by workers who reside outside the GGH boundaries are _unknown_ since they were not surveyed. This mismatch results in the total number of workers being `r round(sum(ggh_taz$workers)/sum(ggh_taz$jobs),2)` times larger than the number of jobs (i.e., `r sum(ggh_taz$workers)%>% prettyNum(big.mark = ",")` workers to `r sum(ggh_taz$jobs)%>% prettyNum(big.mark = ",")` jobs). As such, the origin-destination table contained in {TTS2016R} offers a perspective on all workers in the GGH and their home-based trips to places of GGH employment.
 
-```{r tts-workers-jobs-plot, fig.cap="\\label{fig:tts-workers-jobs-plot}Number of workers (left) and jobs (right) in each TAZ in the GGH area as specified in the 2016 TTS.", fig.width=8, fig.height=5}
+```{r tts-workers-jobs-plot, fig.cap="\\label{fig:tts-workers-jobs-plot}Number of workers (left) and jobs (right) in each TAZ in the 2016 TTS.", fig.width=8, fig.height=5}
 
 tts_workers <- tm_shape(ggh_taz) +
   tm_fill(col = "workers", title = "Full-time \nemployed people", palette = "-Spectral", style = "jenks") +
@@ -259,8 +255,6 @@ Figure \ref{fig:tts-workers-jobs-plot} presents the number of workers and jobs p
 
 <!--- in which the 94th to 100th percentile and the 0th to 34th percentile of jobs in TAZ is higher than the number of workers in TAZ. This means that between these ranges, TAZ have a higher number of workers than they do jobs, echoing the more even spatial distribution of workers observed in Figure \ref{fig:tts-workers-jobs-plot}. -->
 
-\newpage
-
 ## Calculated travel time
 
 As mentioned, {TTS2016R} also includes travel time data for each home-to-work trip as displayed in Figure \ref{fig:plot-tt-ttpertrip}. This travel time corresponds to a car commute calculated using the R package {r5r} (see descriptive statistics in Table \ref{tab:TTS-16-desc-stats}). It is important to note that travel times within this data set are calculated assuming only car travel and one departure time for all origins. These assumptions are not completely realistic since we know a small proportion of trips are taken by non-car modes and travel time departures varies. However, it is not possible from the data retrieval system to obtain higher order tabulations so <!--  we do not know which trips are made with non-car modes nor exact departure times in these tables. Though modal split and travel times can be estimated through other methods [e.g., @allen_suburbanization_2021; @higgins2021changes], for simplicity,-->  we carry on with the assume that all trips are taken by one-time departure car trip. 
@@ -309,7 +303,7 @@ GGH_c_accessibility <- od_ft %>%
 GGH_taz_acc <- ggh_taz %>% merge(GGH_c_accessibility, by.x=c("GTA06"), by.y=c("Origin"), all.x=T) 
 ```
 
-```{r plot-tt-ttpertrip, fig.cap="\\label{fig:plot-tt-ttpertrip}Estimated total worker travel time (left) and average worker travel time (right) for each TAZ in the GGH.", fig.width=8, fig.height=5, message=FALSE}
+```{r plot-tt-ttpertrip, fig.cap="\\label{fig:plot-tt-ttpertrip}Calculated total worker travel time (left) and average worker travel time (right) for each TAZ in the 2016 TTS.", fig.width=8, fig.height=5, message=FALSE}
 
 tts_total_tt <- tm_shape(GGH_taz_acc) +
   tm_fill(col = "GGH_sum_tt_i", title = "Total travel time\n per TAZ (min)", palette = "-Spectral", style = "jenks") +
@@ -332,7 +326,7 @@ As can be observed in Figure \ref{fig:plot-tt-ttpertrip}, the total travel time 
 
 ## Calibrating an impedance function
 
-Impedance functions are useful to understand mobility behaviour and are used to estimate gravity models of spatial interaction [@wilson1971; @haynes_gravity_1985] and applied in accessibility analysis [@hansen_how_1959;@paez_jobs_2013;@barboza_balancing_2021]. An impedance function $f(\cdot)$ depends on the cost of travel $c_{ij}$ between locations $i$ and $j$ (all which is supplied in the travel time and origin-destination table within {TTS2016R}). <!-- The impedance function is usually a monotonically decreasing function since the separation of land uses means that very short commuting trips are relatively rare. However, sometimes the function can increase to reflect patterns of separation between activities. This could be needed to reflect fluctuations in travel cost due to hierarchical patterns, where travelers bypass opportunities in favor of more distant destinations that offer economies of agglomeration. -->
+Impedance functions are useful to understand mobility behaviour and are used to estimate gravity models of spatial interaction [@wilson1971; @haynes_gravity_1985] and applied in accessibility analysis [@hansen_how_1959;@talen_assessing_1998;@paez_jobs_2013;@barboza_balancing_2021]. An impedance function $f(\cdot)$ depends on the cost of travel $c_{ij}$ between locations $i$ and $j$ (all which is supplied in the travel time and origin-destination table within {TTS2016R}). <!-- The impedance function is usually a monotonically decreasing function since the separation of land uses means that very short commuting trips are relatively rare. However, sometimes the function can increase to reflect patterns of separation between activities. This could be needed to reflect fluctuations in travel cost due to hierarchical patterns, where travelers bypass opportunities in favor of more distant destinations that offer economies of agglomeration. -->
 
 A useful technique to calibrate an impedance function is to use the trip length distribution (TLD) as measured from origin-destination data [@horbachov_theoretical_2018; @batista_estimation_2019]. The TLD is the representation of the likelihood that a proportion of trips are taken at a specific travel cost. In our data set, where we assume cost is travel time, the impedance function maps low travel times to higher proportions of trips, and high travel times are mapped to low proportion of trips.
 
@@ -345,7 +339,7 @@ plot(gamma_)
 dev.off()
 ```
 
-```{r TLD-Gamma-plot, fig.cap="\\label{fig:TLD-Gamma-plot}Empirical TTS 2016 home-based car trip length distribution (black) and calibrated gamma distribution impedance function (red) with associated Q-Q and P-P plots", out.width="75%", fig.align='center'}
+```{r TLD-Gamma-plot, fig.cap="\\label{fig:TLD-Gamma-plot}Empirical TTS 2016 home-based car TLD (black) and calibrated gamma distribution impedance function (red) with associated Q-Q and P-P plots", out.width="75%", fig.align='center'}
 knitr::include_graphics("images/impedance_function.png")
 ```
 
