@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.1)  1 MAR 2022 22:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.1)  11 MAR 2022 12:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -207,9 +207,9 @@ Package: iftex 2022/02/03 v1.0f TeX engine tests
 \absbox=\box53
 \@bls=\dimen174
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2022/02/20 v3.6 Customizing captions (AR)
+Package: caption 2022/02/28 v3.6a Customizing captions (AR)
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2022/01/07 v2.3 caption3 kernel (AR)
+Package: caption3 2022/02/28 v2.3a caption3 kernel (AR)
 \caption@tempdima=\dimen175
 \captionmargin=\dimen176
 \caption@leftmargin=\dimen177
@@ -500,19 +500,10 @@ LaTeX Warning: Label `fig:TTS-16-survey-area' multiply defined.
 LaTeX Warning: Label `fig:tts-workers-jobs-plot' multiply defined.
 
 
-LaTeX Warning: Label `fig:ECD-plot' multiply defined.
-
-
 LaTeX Warning: Label `fig:plot-tt-ttpertrip' multiply defined.
 
 
 LaTeX Warning: Label `fig:TLD-Gamma-plot' multiply defined.
-
-
-LaTeX Warning: Label `fig:plot-cullen-frey' multiply defined.
-
-
-LaTeX Warning: Label `fig:plot-access-SA-GGH-TTS' multiply defined.
 
 )
 \openout1 = `Manuscript-Data-Package.aux'.
@@ -673,108 +664,78 @@ LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
 [1
 
 {c:/Users/user/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<images/TTS16-survey-area.png, id=60, 526.8483pt x 325.215pt>
-File: images/TTS16-survey-area.png Graphic file (type png)
-<use images/TTS16-survey-area.png>
-Package pdftex.def Info: images/TTS16-survey-area.png  used on input line 134.
-(pdftex.def)             Requested size: 282.2524pt x 174.22897pt.
+<Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf, id=58, 469.755pt x 325.215pt>
+File: Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf Graphic file (type pdf)
+<use Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf>
+Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf  used on input line 128.
+(pdftex.def)             Requested size: 352.81416pt x 244.25305pt.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 138.
+(Font)              scaled to size 8.54997pt on input line 132.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 8.54997pt on input line 138.
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 139.
-LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 9.49997pt on input line 139.
-[2]
+(Font)              scaled to size 8.54997pt on input line 132.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 166.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 137.
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 11.39996pt on input line 166.
-[3 <./images/TTS16-survey-area.png>]
-<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=79, 578.16pt x 794.97pt>
+(Font)              scaled to size 11.39996pt on input line 137.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 154.
+LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
+(Font)              scaled to size 9.49997pt on input line 154.
+[2]
+<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=71, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf Graphic file (type pdf)
 <use Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf  used on input line 186.
-(pdftex.def)             Requested size: 352.81416pt x 485.11295pt.
-<Manuscript-Data-Package_files/figure-latex/ECD-plot-1.pdf, id=80, 469.755pt x 325.215pt>
-File: Manuscript-Data-Package_files/figure-latex/ECD-plot-1.pdf Graphic file (type pdf)
-<use Manuscript-Data-Package_files/figure-latex/ECD-plot-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/ECD-plot-1.pdf  used on input line 190.
-(pdftex.def)             Requested size: 352.81416pt x 244.25305pt.
-[4] [5 <./Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>]
-<Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=120, 578.16pt x 794.97pt>
-File: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf Graphic file (type pdf)
-<use Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf  used on input line 259.
-(pdftex.def)             Requested size: 352.81416pt x 485.11295pt.
-[6 <./Manuscript-Data-Package_files/figure-latex/ECD-plot-1.pdf>] [7 <./Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>]
-<images/impedance_function.png, id=177, 481.8pt x 481.8pt>
-File: images/impedance_function.png Graphic file (type png)
-<use images/impedance_function.png>
-Package pdftex.def Info: images/impedance_function.png  used on input line 316.
-(pdftex.def)             Requested size: 352.81416pt x 352.82117pt.
-<Manuscript-Data-Package_files/figure-latex/plot-cullen-frey-1.pdf, id=179, 469.755pt x 433.62pt>
-File: Manuscript-Data-Package_files/figure-latex/plot-cullen-frey-1.pdf Graphic file (type pdf)
-<use Manuscript-Data-Package_files/figure-latex/plot-cullen-frey-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-cullen-frey-1.pdf  used on input line 333.
-(pdftex.def)             Requested size: 352.81416pt x 325.67073pt.
-[8]
+Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf  used on input line 156.
+(pdftex.def)             Requested size: 352.81416pt x 220.50589pt.
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[9 <./images/impedance_function.png>]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 370.
-(c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1ptm.fd
-File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
-) [10 <./Manuscript-Data-Package_files/figure-latex/plot-cullen-frey-1.pdf>]
-<Manuscript-Data-Package_files/figure-latex/plot-access-SA-GGH-TTS-1.pdf, id=230, 578.16pt x 794.97pt>
-File: Manuscript-Data-Package_files/figure-latex/plot-access-SA-GGH-TTS-1.pdf Graphic file (type pdf)
-<use Manuscript-Data-Package_files/figure-latex/plot-access-SA-GGH-TTS-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-access-SA-GGH-TTS-1.pdf  used on input line 386.
-(pdftex.def)             Requested size: 352.81416pt x 485.11295pt.
-[11] [12 <./Manuscript-Data-Package_files/figure-latex/plot-access-SA-GGH-TTS-1.pdf>] [13] (./Manuscript-Data-Package.bbl
-Underfull \hbox (badness 10000) in paragraph at lines 50--54
+[3 <./Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf>] [4 <./Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>]
+
+LaTeX Warning: Reference `tab:TTS-16-desc-stats' on page 5 undefined on input line 179.
+
+<Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=97, 578.16pt x 361.35pt>
+File: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf Graphic file (type pdf)
+<use Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>
+Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf  used on input line 189.
+(pdftex.def)             Requested size: 352.81416pt x 220.50589pt.
+[5 <./Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>]
+<images/impedance_function.png, id=130, 481.8pt x 481.8pt>
+File: images/impedance_function.png Graphic file (type png)
+<use images/impedance_function.png>
+Package pdftex.def Info: images/impedance_function.png  used on input line 240.
+(pdftex.def)             Requested size: 264.61061pt x 264.61588pt.
+[6] (./Manuscript-Data-Package.bbl
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[7 <./images/impedance_function.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 38--42
 [][]$\OT1/pcr/m/n/9 http : / / dmg . utoronto . ca / transportation-[]tomorrow-[]survey /
  []
 
+) [8] (./Manuscript-Data-Package.aux)
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Warning: There were undefined references.
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 112--116
-[]\OT1/ptm/m/n/9 Ontario (2019) Built Bound-ary for the Growth Plan for the Greater Golden
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--116
-\OT1/ptm/m/n/9 Horse-shoe, 2006.  URL [][]$\OT1/pcr/m/n/9 https : / / www . ontario . ca / document /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 112--116
-\OT1/pcr/m/n/9 built-[]boundary-[]growth-[]plan-[]greater-[]golden-[]horseshoe-[]2006 /
- []
-
-) [15] (./Manuscript-Data-Package.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Manuscript-Data-Package.out' has not changed.
-(rerunfilecheck)             Checksum: 1CE2516FD86E2AFECBE7E27A1EE23CB6;1203.
+(rerunfilecheck)             Checksum: D92C4C7033928648036E79878A90BE5A;1017.
  ) 
 Here is how much of TeX's memory you used:
- 14641 strings out of 480236
- 242571 string characters out of 5894297
- 528334 words of memory out of 5000000
- 32220 multiletter control sequences out of 15000+600000
- 512447 words of font info for 115 fonts, out of 8000000 for 9000
+ 14512 strings out of 480236
+ 239030 string characters out of 5894297
+ 526210 words of memory out of 5000000
+ 32118 multiletter control sequences out of 15000+600000
+ 513759 words of font info for 116 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 70i,17n,77p,475b,575s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Manuscript-Data-Package.pdf (15 pages, 7433508 bytes).
+ 70i,9n,77p,452b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Manuscript-Data-Package.pdf (8 pages, 4800938 bytes).
 PDF statistics:
- 384 PDF objects out of 1000 (max. 8388607)
- 317 compressed objects within 4 object streams
- 63 named destinations out of 1000 (max. 500000)
- 92 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 275 PDF objects out of 1000 (max. 8388607)
+ 220 compressed objects within 3 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 

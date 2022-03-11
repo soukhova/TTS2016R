@@ -75,7 +75,7 @@ ggh_pd <- ggh_pd %>%
                                                                    ifelse(REGION == 13, "Guelph", 
                                                                           ifelse(REGION == 14, "Wellington", 
                                                                                  ifelse(REGION == 15, "Orangeville", 
-                                                                                        ifelse(REGION == 16, "Barrier", 
+                                                                                        ifelse(REGION == 16, "Barrie", 
                                                                                                ifelse(REGION == 17, "Simcoe", 
                                                                                                       ifelse(REGION == 18, "Kawartha Lakes", 
                                                                                                              ifelse(REGION == 19, "Peterborough City", 
@@ -181,21 +181,21 @@ ggh_taz_cent <- st_centroid(ggh_taz)
 Attach the centroid point geometry to the origin object (workers) and the destination object (jobs)
 ```{r}
 #workers (origins)
-workers_ft_cent <- workers_ft %>% merge(ggh_taz_cent %>% select(GTA06), by="GTA06") %>% st_sf
+workers_ft_cent <- workers_ft %>% merge(ggh_taz_cent %>% dplyr::select(GTA06), by="GTA06") %>% st_sf()
 
 work_origins <- cbind(workers_ft_cent, st_coordinates(st_transform(workers_ft_cent, crs = 4326))) %>%
-  rename(lon = "X", lat = "Y", id = "GTA06") %>% as.data.frame()  %>%
-  select(id, lon, lat) %>% as.data.frame()
+  dplyr::rename(lon = "X", lat = "Y", id = "GTA06") %>% as.data.frame()  %>%
+  dplyr::select(id, lon, lat) %>% as.data.frame()
 
 ```
 
 ```{r}
 #jobs (destinations)
-jobs_ft_cent <- jobs_ft %>% merge(ggh_taz_cent %>% select(GTA06), by="GTA06") %>% st_sf
+jobs_ft_cent <- jobs_ft %>% merge(ggh_taz_cent %>% dplyr::select(GTA06), by="GTA06") %>% st_sf
 
 job_destinations <- cbind(jobs_ft_cent, st_coordinates(st_transform(jobs_ft_cent, crs = 4326))) %>%
-  rename(lon = "X", lat = "Y", id = "GTA06") %>% as.data.frame()  %>%
-  select(id, lon, lat) 
+  dplyr::rename(lon = "X", lat = "Y", id = "GTA06") %>% as.data.frame()  %>%
+  dplyr::select(id, lon, lat) 
 
 ```
 
