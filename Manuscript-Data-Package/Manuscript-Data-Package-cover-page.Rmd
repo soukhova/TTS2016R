@@ -1,0 +1,29 @@
+---
+title: "TTS2016R: A dataset to study population and employment patterns from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Toronto and Hamilton Area, Canada"
+author:
+  - name: "Anastasia Soukhov"
+    email: "soukhoa@mcmaster.ca"
+    affiliation: SEES
+  - name: "Antonio Páez"
+    email: "paezha@mcmaster.ca"
+    affiliation: SEES
+    footnote: 1
+address:
+  - code: SEES
+    address: "School of Earth, Environment and Society, McMaster University, Hamilton, ON, L8S 4K1, Canada"
+footnote:
+  - code: 1
+    text: "Corresponding Author"
+abstract: 
+  "This paper describes and visualises the data contained within the {TTS2016R} data-package created in `R`, the statistical computing and graphics language. In addition to a synthetic example, {TTS2016R} contains home-to-work commute information for the Greater Golden Horseshoe area in Canada retrieved from the 2016 Transportation Tomorrow Survey (TTS). Included are all Traffic Analysis Zones (TAZ), the number of people who are employed full-time per TAZ, the number of jobs per TAZ, origin-destination trips, and calculated car travel time from TAZ origin-destination centroid pairs. To illustrate how this information can be analysed to understand patterns in commuting, we estimate a distance-decay curve (i.e., impedance function) for the region. {TTS2016R} can be freely downloaded and explored at: https://github.com/soukhova/TTS2016R where the documentation and code involved in data creation, manipulation, and the final data products are detailed."
+    
+keywords: Jobs; population; travel time; impedance; Greater Toronto and Hamilton Area; Ontario, Canada; R 
+classoption:
+  - Royal
+  - times
+bibliography: bibfile.bib
+bibliographystyle: sageh
+output:
+  rticles::sage_article:
+    keep_tex: yes
+---

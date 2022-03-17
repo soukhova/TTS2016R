@@ -1,10 +1,10 @@
 ---
-title: "TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Toronto and Hamilton Area in Canada"
+title: "TTS2016R: A dataset to study population and employment patterns from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Toronto and Hamilton Area, Canada"
 author:
   - name: "Anastasia Soukhov"
     email: "soukhoa@mcmaster.ca"
     affiliation: SEES
-  - name: "Antonio Paez"
+  - name: "Antonio Páez"
     email: "paezha@mcmaster.ca"
     affiliation: SEES
     footnote: 1
@@ -185,13 +185,14 @@ desc_stats <- cbind(Statistics, Trips, Travel_time, Workers, Jobs)
 #                 latex_options = c("scale_down"),
 #                 position = "center")
 ```
-```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align='center'}
-# knitr::include_graphics("images/TTS16-survey-area.png")
-
-TTS_area_plot + annotate(geom = "table",
+```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align = 'center', message=FALSE, warning=FALSE}
+TTS_area_plot <- TTS_area_plot + annotate(geom = "table",
             x = 915000, y = 4880000, 
            label = list(desc_stats))
+ggsave("images/TTS16-survey-area.png")
+knitr::include_graphics("images/TTS16-survey-area.png")
 ```
+
 ## Employed individuals and jobs
 
 The origin-destination table (i.e., trips) consists of a cross-tabulation of people who are employed full-time by place of GGH residence (origin) and places of GGH employment (destination) using the GTA06 TAZ zoning system. It is important to note that the total number of workers and jobs is the TTS 2016 region are not equal but the number of trips taken are equal to the number of workers. Since the outer boundaries of the TTS are permeable, workers who reside within the boundaries but travel outside of the boundaries are counted as workers within an origin TAZ, while jobs in TAZ that are filled by workers who reside outside the GGH boundaries are _unknown_ since they were not surveyed. This mismatch results in the total number of workers being `r round(sum(ggh_taz$workers)/sum(ggh_taz$jobs),2)` times larger than the number of jobs (i.e., `r sum(ggh_taz$workers)%>% prettyNum(big.mark = ",")` workers to `r sum(ggh_taz$jobs)%>% prettyNum(big.mark = ",")` jobs). As such, the origin-destination table contained in {TTS2016R} offers a perspective on all workers in the GGH and their home-based trips to places of GGH employment.
@@ -257,7 +258,7 @@ Figure \ref{fig:tts-workers-jobs-plot} presents the number of workers and jobs p
 
 ## Calculated travel time
 
-As mentioned, {TTS2016R} also includes travel time data for each home-to-work trip as displayed in Figure \ref{fig:plot-tt-ttpertrip}. This travel time corresponds to a car commute calculated using the R package {r5r} (see descriptive statistics in Table \ref{tab:TTS-16-desc-stats}). It is important to note that travel times within this data set are calculated assuming only car travel and one departure time for all origins. These assumptions are not completely realistic since we know a small proportion of trips are taken by non-car modes and travel time departures varies. However, it is not possible from the data retrieval system to obtain higher order tabulations so <!--  we do not know which trips are made with non-car modes nor exact departure times in these tables. Though modal split and travel times can be estimated through other methods [e.g., @allen_suburbanization_2021; @higgins2021changes], for simplicity,-->  we carry on with the assume that all trips are taken by one-time departure car trip. 
+As mentioned, {TTS2016R} also includes travel time data for each home-to-work trip as displayed in Figure \ref{fig:plot-tt-ttpertrip}. This travel time corresponds to a car commute calculated using the R package {r5r} (see descriptive statistics in Figure \ref{fig:TTS-16-survey-area}). It is important to note that travel times within this data set are calculated assuming only car travel and one departure time for all origins. These assumptions are not completely realistic since we know a small proportion of trips are taken by non-car modes and travel time departures varies. However, it is not possible from the data retrieval system to obtain higher order tabulations so <!--  we do not know which trips are made with non-car modes nor exact departure times in these tables. Though modal split and travel times can be estimated through other methods [e.g., @allen_suburbanization_2021; @higgins2021changes], for simplicity,-->  we carry on with the assume that all trips are taken by one-time departure car trip. 
 
 ```{r data-for-impedance}
 # remove all NA trips from dataset and set all 0min travel times to 0.1 min

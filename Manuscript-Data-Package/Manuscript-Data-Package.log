@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.1)  11 MAR 2022 14:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.1)  11 MAR 2022 21:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -657,6 +657,9 @@ File: omsptm.fd
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 74.
+
+Overfull \vbox (0.80919pt too high) has occurred while \output is active []
+
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 91.
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
@@ -664,11 +667,11 @@ LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
 [1
 
 {c:/Users/user/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-<Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf, id=58, 469.755pt x 325.215pt>
-File: Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf Graphic file (type pdf)
-<use Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf  used on input line 128.
-(pdftex.def)             Requested size: 352.81416pt x 244.25305pt.
+<images/TTS16-survey-area.png, id=58, 469.755pt x 324.9741pt>
+File: images/TTS16-survey-area.png Graphic file (type png)
+<use images/TTS16-survey-area.png>
+Package pdftex.def Info: images/TTS16-survey-area.png  used on input line 128.
+(pdftex.def)             Requested size: 352.81416pt x 244.07213pt.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
 (Font)              scaled to size 8.54997pt on input line 132.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
@@ -682,7 +685,7 @@ LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
 (Font)              scaled to size 9.49997pt on input line 154.
 [2]
-<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=71, 578.16pt x 361.35pt>
+<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=72, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf Graphic file (type pdf)
 <use Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>
 Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf  used on input line 156.
@@ -690,17 +693,14 @@ Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[3 <./Manuscript-Data-Package_files/figure-latex/TTS-16-survey-area-1.pdf>]
-
-LaTeX Warning: Reference `tab:TTS-16-desc-stats' on page 4 undefined on input line 177.
-
-<Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=88, 578.16pt x 361.35pt>
+[3 <./images/TTS16-survey-area.png>]
+<Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=85, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf Graphic file (type pdf)
 <use Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>
 Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf  used on input line 187.
 (pdftex.def)             Requested size: 352.81416pt x 220.50589pt.
 [4 <./Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>] [5 <./Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>]
-<images/impedance_function.png, id=145, 481.8pt x 481.8pt>
+<images/impedance_function.png, id=141, 481.8pt x 481.8pt>
 File: images/impedance_function.png Graphic file (type png)
 <use images/impedance_function.png>
 Package pdftex.def Info: images/impedance_function.png  used on input line 238.
@@ -712,27 +712,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 38--42
 
 [7]) [8] (./Manuscript-Data-Package.aux)
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `Manuscript-Data-Package.out' has not changed.
 (rerunfilecheck)             Checksum: D92C4C7033928648036E79878A90BE5A;1017.
  ) 
 Here is how much of TeX's memory you used:
- 14516 strings out of 480236
- 239139 string characters out of 5894297
+ 14514 strings out of 480236
+ 238819 string characters out of 5894297
  524199 words of memory out of 5000000
  32121 multiletter control sequences out of 15000+600000
- 513759 words of font info for 116 fonts, out of 8000000 for 9000
+ 512133 words of font info for 114 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  70i,9n,77p,448b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Manuscript-Data-Package.pdf (8 pages, 4803458 bytes).
+{c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Manuscript-Data-Package.pdf (8 pages, 4723923 bytes).
 PDF statistics:
- 280 PDF objects out of 1000 (max. 8388607)
- 225 compressed objects within 3 object streams
+ 272 PDF objects out of 1000 (max. 8388607)
+ 219 compressed objects within 3 object streams
  42 named destinations out of 1000 (max. 500000)
  69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
