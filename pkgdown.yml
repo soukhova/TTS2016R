@@ -3,7 +3,7 @@ pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
   A-Intro: A-Intro.html
-last_built: 2022-03-17T15:50Z
+last_built: 2022-03-19T13:17Z
 urls:
   reference: https://soukhova.github.io/TTS2016R/reference
   article: https://soukhova.github.io/TTS2016R/articles
