@@ -71,9 +71,7 @@ options(scipen = 999)
 
 # Introduction
 
-This manuscript presents the open data product [{TTS2016R}](https://github.com/soukhova/TTS2016R). Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs [see @Arribas2021open]. The product presented in this paper is an `R` data package which currently consists of three objects which are sourced from the 2016 Transportation Tomorrow Survey (TTS) or are curated to facilitate the use and analysis of TTS data. This package includes person-to-jobs origin-destinations, traffic analysis zone (TAZ) boundaries, and planning/municipality boundaries for the Greater Golden Horse area (GGH) located in southern Ontario, Canada [@data_management_group_tts_2018]. In addition, the package includes TAZ centroid-to-centroid travel times by car computed using package {r5r} [@Pereira2021r5r]. The aim of this paper is to walk readers through the empirical home-based work commute data set, illustrate the calculation of an impedance function that can be used to calculate accessibility to employment, and invite its use in other applications.
-
-<!-- Data from the TTS are in principle available to the public but are not fully open, since permission to access the data retrieval system is required. In addition, the raw data can be technically demanding, cumbersome to work with, and requires multiple software to process. By pre-processing the data in a `R` environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region. It also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. -->
+This manuscript presents the open data product [{TTS2016R}](https://github.com/soukhova/TTS2016R). Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs [see @Arribas2021open]. The product presented in this paper is an `R` data package which currently consists of three objects which are sourced from the 2016 Transportation Tomorrow Survey (TTS) or are curated to facilitate the use and analysis of TTS data. This package includes person-to-jobs origin-destinations, traffic analysis zone (TAZ) boundaries, and planning/municipality boundaries for the Greater Golden Horse area (GGH) located in southern Ontario, Canada [@data_management_group_tts_2018]. In addition, the package includes TAZ centroid-to-centroid travel times by car computed using package {r5r} [@Pereira2021r5r]. The aim of this paper is to walk readers through the empirical home-based work commute data set, illustrate the calculation of an impedance function that can be used to calculate accessibility to employment, and invite its use in other applications.<!-- Data from the TTS are in principle available to the public but are not fully open, since permission to access the data retrieval system is required. In addition, the raw data can be technically demanding, cumbersome to work with, and requires multiple software to process. By pre-processing the data in a `R` environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region. It also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. -->
 
 # Home-to-work commute data
 
@@ -185,7 +183,7 @@ desc_stats <- cbind(Statistics, Trips, Travel_time, Workers, Jobs)
 #                 latex_options = c("scale_down"),
 #                 position = "center")
 ```
-```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align = 'center', message=FALSE, warning=FALSE}
+```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align = 'center', fig.pos='H', message=FALSE, warning=FALSE}
 TTS_area_plot <- TTS_area_plot + annotate(geom = "table",
             x = 915000, y = 4880000, 
            label = list(desc_stats))
@@ -196,7 +194,6 @@ knitr::include_graphics("images/TTS16-survey-area.png")
 ## Employed individuals and jobs
 
 The origin-destination table (i.e., trips) consists of a cross-tabulation of people who are employed full-time by place of GGH residence (origin) and places of GGH employment (destination) using the GTA06 TAZ zoning system. It is important to note that the total number of workers and jobs is the TTS 2016 region are not equal but the number of trips taken are equal to the number of workers. Since the outer boundaries of the TTS are permeable, workers who reside within the boundaries but travel outside of the boundaries are counted as workers within an origin TAZ, while jobs in TAZ that are filled by workers who reside outside the GGH boundaries are _unknown_ since they were not surveyed. This mismatch results in the total number of workers being `r round(sum(ggh_taz$workers)/sum(ggh_taz$jobs),2)` times larger than the number of jobs (i.e., `r sum(ggh_taz$workers)%>% prettyNum(big.mark = ",")` workers to `r sum(ggh_taz$jobs)%>% prettyNum(big.mark = ",")` jobs). As such, the origin-destination table contained in {TTS2016R} offers a perspective on all workers in the GGH and their home-based trips to places of GGH employment.
-
 ```{r tts-workers-jobs-plot, fig.cap="\\label{fig:tts-workers-jobs-plot}Number of workers (left) and jobs (right) in each TAZ in the 2016 TTS.", fig.width=8, fig.height=5}
 
 tts_workers <- tm_shape(ggh_taz) +
@@ -214,7 +211,6 @@ tts_jobs <- tm_shape(ggh_taz) +
 tmap_arrange(tts_workers, tts_jobs)
 
 ```
-
 <!--
 ```{r ECD-plot, fig.cap="\\label{fig:ECD-plot}The cumulative distribution of the number of jobs and workers per TAZ from the 2016 TTS data set. Light blue shaded ranges correspond to all cumulative proabilities where the number of workers per TAZ are larger than jobs per TAZ.", fig.width=8, fig.height=4}
 
@@ -250,11 +246,7 @@ ggplot(ecdf_data , aes(x=Number, col=Group)) +
         panel.border = element_blank()) 
 ```
 -->
-Figure \ref{fig:tts-workers-jobs-plot} presents the number of workers and jobs per TAZ. It can be observed that the spatial distribution of jobs and workers is unequal, which is indicative of a jobs-housing imbalance that can impact accessibility in a region [@Levine1998rethinking]. It can also be seen that there is a higher number of TAZ with no workers than zones with no jobs (i.e., `r ggh_taz %>% st_drop_geometry() %>% count(workers) %>% filter(workers == 0) %>% pull('n')` TAZ with no workers : `r ggh_taz %>% st_drop_geometry() %>% count(jobs) %>% filter(jobs == 0) %>% pull('n')` TAZ with no jobs) and the mean of workers per TAZ is higher than the mean of jobs (i.e., `r round(mean(ggh_taz$workers, na.rm=T),0)` workers : `r round(mean(ggh_taz$jobs, na.rm=T),0)` jobs) the number TAZ with an extreme number of jobs at the highest and lowest percentiles is significantly higher than the number of workers. <!-- see the following cumulative probability distribution in Figure \ref{fig:ECD-plot}. -->
-
-<!-- Workers are concentrated in TAZ within the center of the GGH and along the south-east and northern boarder of the GGH. The center of the GGH corresponds to the Greater Toronto Area (GTA) which is the most densely populated area in southern Ontario [@statistics_canada_daily_2022]. The south east border of the GGH neighbours Lake Ontario and is delineated by the urban built boundary of the Ontario Growth Plan being home to the highest density of working population in the GGH [@ontario_built_2019;@auditor_general_of_ontario_value_2021]. The northern GGH border corresponds to the Simcoe, Dufferin, Kawartha Lake, and Peterborough regions which are home to lower density of worker population density population [@auditor_general_of_ontario_value_2021]. Conversely, the spread of jobs in the GGH is lower than the number of workers indicating population is more spatially dispersed than jobs. -->
-
-<!--- in which the 94th to 100th percentile and the 0th to 34th percentile of jobs in TAZ is higher than the number of workers in TAZ. This means that between these ranges, TAZ have a higher number of workers than they do jobs, echoing the more even spatial distribution of workers observed in Figure \ref{fig:tts-workers-jobs-plot}. -->
+Figure \ref{fig:tts-workers-jobs-plot} presents the number of workers and jobs per TAZ. It can be observed that the spatial distribution of jobs and workers is unequal, which is indicative of a jobs-housing imbalance that can impact accessibility in a region [@Levine1998rethinking]. It can also be seen that there is a higher number of TAZ with no workers than zones with no jobs (i.e., `r ggh_taz %>% st_drop_geometry() %>% count(workers) %>% filter(workers == 0) %>% pull('n')` TAZ with no workers : `r ggh_taz %>% st_drop_geometry() %>% count(jobs) %>% filter(jobs == 0) %>% pull('n')` TAZ with no jobs) and the mean of workers per TAZ is higher than the mean of jobs (i.e., `r round(mean(ggh_taz$workers, na.rm=T),0)` workers : `r round(mean(ggh_taz$jobs, na.rm=T),0)` jobs) the number TAZ with an extreme number of jobs at the highest and lowest percentiles is significantly higher than the number of workers. <!-- see the following cumulative probability distribution in Figure \ref{fig:ECD-plot}. --> <!-- Workers are concentrated in TAZ within the center of the GGH and along the south-east and northern boarder of the GGH. The center of the GGH corresponds to the Greater Toronto Area (GTA) which is the most densely populated area in southern Ontario [@statistics_canada_daily_2022]. The south east border of the GGH neighbours Lake Ontario and is delineated by the urban built boundary of the Ontario Growth Plan being home to the highest density of working population in the GGH [@ontario_built_2019;@auditor_general_of_ontario_value_2021]. The northern GGH border corresponds to the Simcoe, Dufferin, Kawartha Lake, and Peterborough regions which are home to lower density of worker population density population [@auditor_general_of_ontario_value_2021]. Conversely, the spread of jobs in the GGH is lower than the number of workers indicating population is more spatially dispersed than jobs. --> <!--- in which the 94th to 100th percentile and the 0th to 34th percentile of jobs in TAZ is higher than the number of workers in TAZ. This means that between these ranges, TAZ have a higher number of workers than they do jobs, echoing the more even spatial distribution of workers observed in Figure \ref{fig:tts-workers-jobs-plot}. -->
 
 ## Calculated travel time
 
@@ -320,7 +312,6 @@ tts_tt_per_trip <- tm_shape(GGH_taz_acc) +
 
 tmap_arrange(tts_total_tt, tts_tt_per_trip)
 ```
-
 \newpage
 
 As can be observed in Figure \ref{fig:plot-tt-ttpertrip}, the total travel time resembles the spatial trend distribution in the number of employed people in the previous plot (Figure \ref{fig:tts-workers-jobs-plot}) and the spatial distribution of the average travel time is distinct from other plots presented so far. We can see that in areas around the south-eastern border that make up the Greater Toronto and Hamilton Area (GTHA)<!-- (e.g., Hamilton, Halton, Peel, Toronto, York, Durham) -->, Niagara and Waterloo, the average travel times are moderately low. Further from these areas, travel times are higher. Interestingly, even in eastern areas (e.g., Peterborough) with high employment and high job concentration, average travel time is higher than within the GTHA.
@@ -332,7 +323,6 @@ Impedance functions are useful to understand mobility behaviour and are used to 
 A useful technique to calibrate an impedance function is to use the trip length distribution (TLD) as measured from origin-destination data [@horbachov_theoretical_2018; @batista_estimation_2019]. The TLD is the representation of the likelihood that a proportion of trips are taken at a specific travel cost. In our data set, where we assume cost is travel time, the impedance function maps low travel times to higher proportions of trips, and high travel times are mapped to low proportion of trips.
 
 Using the data contained in {TTS2016R}, we fit the empirical TLD to a density distribution using maximum likelihood techniques and the Nelder-Mead method for direct optimization available within the `R` package {fitdistrplus} [@fitdistrplus_2015]. Based on goodness-of-fit criteria and diagnostics seen in Figure \ref{fig:TLD-Gamma-plot}, the gamma distribution is selected. The 'shape' parameter is $\alpha$ = `r round(gamma_$estimate[1], 3)`, the estimated 'rate' is $\beta$ = `r round(gamma_$estimate[2], 3)` , and $\Gamma(\alpha)$ is defined in Equation (\ref{gamma-dist}).
-
 ```{r save-impedance-plot, include=FALSE}
 # For some reason plot(gamma_) does not play well with knitr, so instead we save the figure and then include it as a graphic in the following chunk
 png("images/impedance_function.png")
@@ -358,18 +348,14 @@ od_ft_tt  <- od_ft_tt %>% filter( !is.na(travel_time)) %>% mutate(travel_time = 
 all_tt <- od_ft_tt  %>% dplyr::select(trips, travel_time)
 all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$trips), 2]
 ```
-
 <!-- # ```{r plot-cullen-frey, message = FALSE, fig.height=6, fig.cap="\\label{fig:plot-cullen-frey}Cullen and frey graphy for the 2016 TTS calculated travel times."} -->
 <!-- # fitdistrplus::descdist(data=all_tt)  -->
-<!-- # ``` -->
-
-\newpage
+<!-- # ``` -->\newpage
 
 # Concluding remarks
 
 The open data product introduced in this paper shares tables for home-to-work related data from the 2016 TTS. In addition, inter-centroid travel time tables are calculated, and the planning/municipality boundaries are included as a compliment. This open data product, {TTS2016R}, is freely available to explore in an `R` environment. One possible use of this data, as showcased in this paper, is the calibration of impedance functions which in turn can be used for accessibility analysis.
 
 <!-- New digital formats are increasingly complex and the explanation of the methods often do not concisely and intelligibly fit within the confines of a traditional article. With this motivation, we invite all who are interested to use {TTS2016R} to explore the worker-employment patterns contained in the {TTS2016R} package. --> In the spirit of novel and original research, we hope readers value the efforts made to detail the data in order to improve transparency in our work and encourage others to replicate and, hopefully, inspire research of their own. We see this product as providing open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. 
-
 
 # References {#references .unnumbered}

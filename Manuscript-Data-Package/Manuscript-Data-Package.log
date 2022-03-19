@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.1)  11 MAR 2022 21:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021/W32TeX) (preloaded format=pdflatex 2022.3.1)  19 MAR 2022 09:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -676,23 +676,23 @@ LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
 (Font)              scaled to size 8.54997pt on input line 132.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
 (Font)              scaled to size 8.54997pt on input line 132.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 134.
+LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
+(Font)              scaled to size 9.49997pt on input line 134.
+[2]
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12> not available
 (Font)              Font shape `OT1/phv/m/sl' tried instead on input line 137.
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
 (Font)              scaled to size 11.39996pt on input line 137.
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 154.
-LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 9.49997pt on input line 154.
-[2]
-<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=72, 578.16pt x 361.35pt>
+<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=71, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf Graphic file (type pdf)
 <use Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>
 Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf  used on input line 156.
 (pdftex.def)             Requested size: 352.81416pt x 220.50589pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [3 <./images/TTS16-survey-area.png>]
 <Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=85, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf Graphic file (type pdf)
@@ -703,7 +703,7 @@ Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpe
 <images/impedance_function.png, id=141, 481.8pt x 481.8pt>
 File: images/impedance_function.png Graphic file (type png)
 <use images/impedance_function.png>
-Package pdftex.def Info: images/impedance_function.png  used on input line 238.
+Package pdftex.def Info: images/impedance_function.png  used on input line 237.
 (pdftex.def)             Requested size: 264.61061pt x 264.61588pt.
 [6 <./images/impedance_function.png>] (./Manuscript-Data-Package.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 38--42
@@ -718,15 +718,15 @@ Package rerunfilecheck Info: File `Manuscript-Data-Package.out' has not changed.
 (rerunfilecheck)             Checksum: D92C4C7033928648036E79878A90BE5A;1017.
  ) 
 Here is how much of TeX's memory you used:
- 14514 strings out of 480236
- 238819 string characters out of 5894297
+ 14515 strings out of 480236
+ 238829 string characters out of 5894297
  524199 words of memory out of 5000000
- 32121 multiletter control sequences out of 15000+600000
+ 32122 multiletter control sequences out of 15000+600000
  512133 words of font info for 114 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  70i,9n,77p,448b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Manuscript-Data-Package.pdf (8 pages, 4723923 bytes).
+Output written on Manuscript-Data-Package.pdf (8 pages, 4723851 bytes).
 PDF statistics:
  272 PDF objects out of 1000 (max. 8388607)
  219 compressed objects within 3 object streams

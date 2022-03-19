@@ -21,7 +21,6 @@ keywords: Jobs; population; travel time; impedance; Greater Toronto and Hamilton
 classoption:
   - Royal
   - times
-bibliography: bibfile.bib
 bibliographystyle: sageh
 output:
   rticles::sage_article:
