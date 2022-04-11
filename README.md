@@ -3,6 +3,8 @@
 
 # 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
 
+[![DOI](https://zenodo.org/badge/465815515.svg)](https://zenodo.org/badge/latestdoi/465815515)
+
 This package contains objects which are sourced from the 2016
 Transportation Tomorrow Survey
 [(TTS)](http://dmg.utoronto.ca/survey-boundary-files) or are curated to
