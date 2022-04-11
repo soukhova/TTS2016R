@@ -15,21 +15,20 @@ RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
 Suggests: 
-    rmarkdown,
-    knitr
-VignetteBuilder: knitr
-Imports: 
-    sf,
     dplyr,
-    ggplot2,
-    magrittr,
-    rlang,
-    kableExtra,
-    patchwork,
-    MASS,
     fitdistrplus,
+    ggplot2,
     ggspatial,
+    kableExtra,
+    knitr,
+    magrittr,
+    MASS,
+    patchwork,
+    rlang,
+    rmarkdown,
+    sf,
     scales,
     shadowtext,
     tmap
+VignetteBuilder: knitr
 URL: https://soukhova.github.io/TTS2016R/
