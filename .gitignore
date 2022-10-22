@@ -3,5 +3,7 @@
 .Rdata
 .httr-oauth
 .DS_Store
+/Editorial-Correspondance
 **/Manuscript-Data-Package/Manuscript-Data-Package_cache/
 docs
+data-raw

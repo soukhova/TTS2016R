@@ -17,11 +17,13 @@ library(readxl)
 library(sf)
 library(tidyverse)
 library(units)
+library(tmap)
+library(ggplot2)
 ```
 
 ## Traffic Analysis Zones
 
-Read the boundaries of the traffic analysis zones:
+Read the boundaries of the traffic analysis zones (retrieved from the TTS 2016):
 ```{r}
 ggh_taz <- st_read("TTS16-data-inputs/OD-by-FT-Employment/tts06_83_region.shp")
 ```
@@ -48,7 +50,7 @@ ghta_taz_id <- ggh_taz$GTA06
 
 ## Planning boundaries
 
-Read the boundaries of the traffic analysis zones:
+Read the boundaries of the traffic analysis zones (retrieved from the TTS 2016):
 ```{r}
 ggh_pd <- st_read("TTS16-data-inputs/Boundaries/tts06_pd_83.shp")
 ```
@@ -86,9 +88,42 @@ ggh_pd <- ggh_pd %>%
                                                                                                                                                 ifelse(REGION == 24, "Brant", "NOOOO")))))))))))))))))))))
 ```
 
-## Origin destination matrices for work and shop
+add 'REGION' from the planning distract object to the `ggh_taz`. 
+```{r}
+#buffering to clean up the edges of these objects -> there wre issues using st_join. 
+ggh_taz <- st_buffer(ggh_taz, dist=0)
+ggh_pd <- st_buffer(ggh_pd, dist=0)
 
-Read trip tables. The query was for "trips" by zone of residence, zone of work, and trip purpose (Work):
+ggh_taz <- st_join(ggh_taz, ggh_pd %>% transmute(REGION),left = TRUE, largest = TRUE)
+```
+
+## CMA and CA boundaries
+If there's interest in tying the TAZ to the Canadian Census, the boundaries and IDs for census metropolitan areas (CMA) and census ares (CA) are provided in this package as well. These areas are determined by Statistics Canada and 
+
+Read the boundaries of the traffic analysis zones (retrieved from the TTS 2016):
+```{r}
+ggh_cma <- st_read("TTS16-data-inputs/Boundaries/lcma000b16a_e.shp")
+```
+
+Project object and retain specific columns:
+```{r}
+ggh_cma <- ggh_cma %>%
+  st_transform(crs = 32617) %>%
+  transmute(CMAUID,
+            CMANAME,
+            CMATYPE)
+```
+
+add 'CMAUID' from the cma object to the `ggh_taz`. 
+```{r}
+#doing a st_join doesn't provide a clean solution, so I find the centroids of each TAZ, st_join them to the CMA/CA, and then join the resulting CMAUID property to the ggh_taz object
+test_pts <-st_centroid(ggh_taz)
+test<-st_join(test_pts, ggh_cma %>% transmute(CMAUID), left = TRUE, join=st_within)
+ggh_taz <-merge(ggh_taz, test %>% transmute(GTA06, CMAUID)%>% st_drop_geometry(), by=c("GTA06"))
+```
+
+## Origin destination matrices for place of residence and typical place work (by person)
+Read exported TTS 2016 tables. The query was a cross-tabulation of "persons" by zone of residence and place of employment. The data was filtered to only include full-time not-remote workers and was retrieved from the TTS 2016:
 ```{r}
 od_ft <- read_delim(file = "TTS16-data-inputs/OD-by-FT-Employment/tts-2016-OD-FT-Employment.txt", 
                       delim = "\t", 
@@ -119,24 +154,265 @@ od_ft <- od_ft %>%
 
 The resulting object `od_ft` has the number of individuals who are employed full-time by place of residence (Origin) and place of work (Destination) using the GTA06 zoning system. 
 
+## Trips taken (by mode) by worker from place of residence to job at place of work
+Read exported TTs 2016 tables. The query was a cross-tablulation of "trips" by zone of residence and place of employment. The data was filtered to only include full-time not-remote working trip purposes by primary mode and was retrieved from the TTS 2016:
+```{r}
+od_ft_trips <- read_delim(file = "TTS16-data-inputs/OD-by-FT-Employment/tts-2016-OD-FT-Employment-by_W_R_trip-byprimmode.txt", 
+                      delim = "\t", 
+                      col_names = FALSE)
+```
+
+Find the position in the table where the information on work trips begins:
+```{r}
+id_transit <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Transit excluding GO rail)")
+id_cycle <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Cycle)")
+id_car_driver <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Auto driver)")
+id_GO <- which(od_ft_trips$X1 == "TABLE    : mode_prime (GO rail only)")
+id_GO_transit <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Joint GO rail and local transit)")
+id_motorcycle <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Motorcycle)")
+id_other <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Other)")
+id_car_pass <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Auto passenger)")
+id_schoolbus <- which(od_ft_trips$X1 == "TABLE    : mode_prime (School bus)")
+id_taxi <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Taxi passenger)")
+id_rideshare <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Paid rideshare)")
+id_walk <- which(od_ft_trips$X1 == "TABLE    : mode_prime (Walk)")
+id_end <- od_ft_trips$X1 %>% length()
+```
+
+Slice the table to obtain the work trips by primary mode (there are 12 possible modes, so 12 new tables) (remove heading information and other modes):
+```{r}
+od_ft_trips_transit <- od_ft_trips %>% 
+  slice((id_transit+3):id_cycle-1)
+
+od_ft_trips_cycle <- od_ft_trips %>% 
+  slice((id_cycle+3):id_car_driver-1)
+
+od_ft_trips_car_driver <- od_ft_trips %>% 
+  slice((id_car_driver+3):id_GO-1)
+
+od_ft_trips_GO <- od_ft_trips %>% 
+  slice((id_GO+3):id_GO_transit-1)
+
+od_ft_trips_GO_transit <- od_ft_trips %>% 
+  slice((id_GO_transit+3):id_motorcycle-1)
+
+od_ft_trips_motorcycle <- od_ft_trips %>% 
+  slice((id_motorcycle+3):id_other-1)
+
+od_ft_trips_other <- od_ft_trips %>% 
+  slice((id_other+3):id_car_pass-1)
+
+od_ft_trips_car_pass <- od_ft_trips %>% 
+  slice((id_car_pass+3):id_schoolbus-1)
+
+od_ft_trips_schoolbus <- od_ft_trips %>% 
+  slice((id_schoolbus+3):id_taxi-1)
+
+od_ft_trips_taxi<- od_ft_trips %>% 
+  slice((id_taxi+3):id_rideshare-1)
+
+od_ft_trips_rideshare <- od_ft_trips %>% 
+  slice((id_rideshare+3):id_walk-1)
+
+od_ft_trips_walk <- od_ft_trips %>% 
+  slice((id_walk+2):id_end)
+```
+
+Let's consolidate the 12 tables into 1 table, based on origin - destination and clean up the table. If there's no trip using that mode, a 0 is added. The following are the codes:
+
+- T_LT - Local transit excluding GO rail
+- T_LTGO - Local transit and GO
+- T_GO - GO rail excluding local transit
+```{r}
+od_ft_trips_transit <- od_ft_trips_transit %>%
+  separate(X1, into = c("Zones", "T_LT"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         T_LT = as.numeric(T_LT))
+
+od_ft_trips_GO_transit <- od_ft_trips_GO_transit %>%
+  separate(X1, into = c("Zones", "T_LTGO"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         T_LTGO = as.numeric(T_LTGO))
+
+od_ft_trips_GO <- od_ft_trips_GO %>%
+  separate(X1, into = c("Zones", "T_GO"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         T_GO = as.numeric(T_GO))
+```
+
+- BC - Cycle
+- W - Walk
+```{r}
+od_ft_trips_cycle <- od_ft_trips_cycle %>%
+  separate(X1, into = c("Zones", "BC"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         BC = as.numeric(BC))
+
+od_ft_trips_walk <- od_ft_trips_walk %>%
+  separate(X1, into = c("Zones", "W"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         W = as.numeric(W))
+```
+
+- C_DPC - Driver private car 
+- C_PPC - Passenger private car
+- C_TA - Taxi
+- C_RS - Rideshare
+- C_SB - School bus
+```{r}
+od_ft_trips_car_driver <- od_ft_trips_car_driver %>%
+  separate(X1, into = c("Zones", "C_DPC"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         C_DPC = as.numeric(C_DPC))
+
+od_ft_trips_car_pass <- od_ft_trips_car_pass %>%
+  separate(X1, into = c("Zones", "C_PPC"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         C_PPC = as.numeric(C_PPC))
+
+od_ft_trips_taxi <- od_ft_trips_taxi %>%
+  separate(X1, into = c("Zones", "C_TA"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         C_TA = as.numeric(C_TA))
+
+od_ft_trips_rideshare <- od_ft_trips_rideshare %>%
+  separate(X1, into = c("Zones", "C_RS"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         C_RS = as.numeric(C_RS))
+
+od_ft_trips_schoolbus <- od_ft_trips_schoolbus %>%
+  separate(X1, into = c("Zones", "C_SB"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         C_SB = as.numeric(C_SB))
+```
+
+- M - Motorcycle
+- O - Other
+```{r}
+od_ft_trips_motorcycle<- od_ft_trips_motorcycle %>%
+  separate(X1, into = c("Zones", "M"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         M = as.numeric(M))
+
+od_ft_trips_other <- od_ft_trips_other %>%
+  separate(X1, into = c("Zones", "O"), sep = " (?=[^ ]+$)") %>%
+  mutate(Zones = str_trim(Zones, side = "both")) %>%
+  separate(Zones, into = c("Origin", "Destination"), sep = " (?=[^ ]+$)") %>%
+  mutate(Origin = str_trim(Origin),
+         Destination = str_trim(Destination),
+         O = as.numeric(O))
+```
+
+And now, consolidate all 12 tables into 1 table! with 12 columns for mode trips numbers + the origin and destination columns (those are GTA06 TAZ IDs):
+```{r}
+od_ft_trips <- full_join(od_ft_trips_transit, od_ft_trips_GO_transit, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_GO, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_cycle, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_walk, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_car_driver, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_car_pass, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_taxi, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_rideshare, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_schoolbus, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_motorcycle, by=c("Origin", "Destination")) %>%
+  full_join(od_ft_trips_other, by=c("Origin", "Destination")) 
+```
+
+Replace all NAs with 0s:
+```{r}
+od_ft_trips[is.na(od_ft_trips)] <- 0
+```
+
+Combine the `od_ft` person data frame with the `od_ft_trips` data frame. Notice that there are more OD pairs in the `od_ft` data frame (`r od_ft$Origin %>% length()`) than `od_ft_trips` (`r od_ft_trips$Origin %>% length()`) because some OD pairs which have workers and/or are a location for jobs do not have any trips taken that survey day. The TTS 2016 is a travel survey after all. 
+```{r}
+od_ft_p_t <- full_join(od_ft, od_ft_trips, by=c("Origin", "Destination")) 
+```
+
+Check to see if the total number of trips adds up to the total available from TTS 2016 (to ensure we separated and merged all the tables correctly)
+```{r}
+od_ft_p_t <- od_ft_p_t %>% rowwise() %>%
+  mutate(sum_trips = sum(T_LT,T_LTGO,T_GO,BC,W,C_DPC,C_PPC,C_TA,C_RS,C_SB,M,O, na.rm=T))
+
+#the number of total trips. This value is slightly higher than the value for total trips (not disagg. by mode, which is equal to 3,282,539 - I checked in excel) as available from the TTS 2016. However, I checked the summed up total trip, disaggregated by mode, in excel, and it yields this number of 3,282,611 as well. So there must just be some rounding up that occurred in the TTS 2016 when disaggregating by mode... regardless the numerical difference is insignificant. 
+od_ft_p_t$sum_trips %>% sum()
+```
+
+Replace all NAs with 0s, again:
+```{r}
+od_ft_p_t[is.na(od_ft_p_t)] <- 0
+```
+
 ## Workers and Jobs
 
-The od table can be used to calculate the workers and jobs by traffic analysis zone:
+The od table can be used to calculate the count of workers, count of jobs, and count of % transit, bike, and walk slit, by traffic analysis zone:
 ```{r}
-workers_ft <- od_ft %>%
+workers_ft <- od_ft_p_t %>%
   group_by(Origin) %>%
   summarize(workers = sum(Persons),
             .groups = "drop") %>%
   transmute(GTA06 = Origin,
             workers)
 
-jobs_ft <- od_ft %>%
+jobs_ft <- od_ft_p_t %>%
   group_by(Destination) %>%
   summarize(jobs = sum(Persons),
             .groups = "drop") %>%
   transmute(GTA06 = Destination,
             jobs)
+```
 
+Active travel modal splits:
+```{r}
+LTGO_split_ft <- od_ft_p_t %>%
+  group_by(Origin) %>%
+  summarize(LTGO_split = sum(T_LT, T_LTGO, T_GO)/sum(sum_trips)) %>% 
+  transmute(GTA06 = Origin,
+            LTGO_split)
+
+W_split_ft <- od_ft_p_t %>%
+  group_by(Origin) %>%
+  summarize(W_split = sum(W)/sum(sum_trips)) %>%
+  transmute(GTA06 = Origin,
+            W_split)
+
+BC_split_ft <- od_ft_p_t %>%
+  group_by(Origin) %>%
+  summarize(BC_split = sum(BC)/sum(sum_trips)) %>%
+  transmute(GTA06 = Origin,
+            BC_split)
 ```
 
 Join workers and jobs to simple features object:
@@ -148,10 +424,21 @@ ggh_taz <- ggh_taz %>%
   # Join jobs
   left_join(jobs_ft,
             by = "GTA06") %>%
-  # Replace NAs with zeros
-  mutate(workers = replace_na(workers, 0),
-         jobs = replace_na(jobs, 0))
+  left_join(LTGO_split_ft,
+            by = "GTA06") %>%
+  left_join(W_split_ft,
+            by = "GTA06") %>%
+  left_join(BC_split_ft,
+            by = "GTA06")
 ```
+
+Replace NAs with 0s for the new columns:
+```{r}
+ggh_taz <- ggh_taz %>%
+  mutate_at(vars(workers, jobs, LTGO_split, W_split, BC_split), ~replace_na(., 0))
+```
+
+## Visualize 
 
 Plot worker population in the ggh:
 ```{r}
@@ -169,6 +456,43 @@ ggplot() +
           aes(fill = jobs),
           color = NA) +
   scale_fill_fermenter(direction = 1)
+```
+Plot transit split (0 to 1, 1 being 100% of trips made using transit) distribution in the ggh. Aggregating by CMA could be interesting:
+```{r}
+ggplot() +
+  geom_sf(data = ggh_taz,
+          aes(fill = LTGO_split),
+          color = NA) +
+  scale_fill_distiller(direction = 1)
+```
+Let's zoom into Toronto CMA, and plot the transit split
+```{r}
+#rotating the WGS84 crs so it displays Toronto aesthetically on a page; 17degree shift using +gamma
+# lat_0 and lonc are the approximate centroid of Toronto
+crs_string <- "+proj=omerc +lat_0=43.6532 +lonc=-79.3832 +alpha=0 +k_0=.7 +datum=WGS84 +units=m +no_defs +gamma=17"
+
+#the bounding box, so we focus on Toronto
+toronto_bb <- st_bbox(ggh_cma %>% filter(CMANAME %in% c("Toronto")))
+
+tm_shape(ggh_taz, bbox = toronto_bb, projection=crs_string) +
+  tm_polygons(col = "LTGO_split", border.alpha = 0.1, style = "jenks") +
+  tm_shape(ggh_cma %>% filter(CMANAME %in% c("Toronto")), bbox = toronto_bb, projection=crs_string) +
+  tm_borders()
+```
+The CMA/CAs overlapping all the TAZ:
+```{r}
+tm_shape(ggh_taz, projection=crs_string) +
+  tm_polygons(col = "CMAUID", border.alpha = 0.1, style = "jenks") +
+  tm_shape(ggh_cma, projection=crs_string) +
+  tm_borders()
+```
+
+The planning boundaries overlapping all the TAZ:
+```{r}
+tm_shape(ggh_taz, projection=crs_string) +
+  tm_polygons(col = "REGION", border.alpha = 0.1, style = "jenks") +
+  tm_shape(ggh_pd, projection=crs_string) +
+  tm_borders()
 ```
 
 ## Creating input for travel-time OD calculations
@@ -209,5 +533,6 @@ save("job_destinations", file = "TTS16-data-inputs/Travel-Time-Calculations/inpu
 ```{r}
 save("ggh_taz", file = "TTS16-data-inputs/OD-by-FT-Employment/ggh_taz.Rdata")
 save("ggh_pd", file = "TTS16-data-inputs/Boundaries/ggh_pd.Rdata")
-save("od_ft", file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft.Rdata")
+save("ggh_cma", file = "TTS16-data-inputs/Boundaries/ggh_cma.Rdata")
+save("od_ft_p_t", file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft_p_t.Rdata")
 ```

@@ -1,12 +1,12 @@
 Package: TTS2016R
-Title: An augmented 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
+Title: An augmented 2016 Transportation Tomorrow Survey (TTS) data package: worker and place of employment counts, trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
 Version: 0.0.0.9000
 Authors@R: 
     c(person("Anastasia", "Soukhov", , "soukhoa@mcmaster.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4371-4831")),
       person("Antonio", "Paez", , "paezha@mcmaster.ca", role = c("aut"),
            comment = c(ORCID = "0000-0001-6912-9919")))
-Description: This package includes person-to-jobs origin-destinations, the traffic analysis zone (TAZ) boundaries, and the associated municipality boundaries from the 2016 [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) of the Greater Golden Horse area (GGH) located in southern Ontario, Canada.
+Description: This package includes the count of workers (origin), count of places of employment (destination), count of associated trip (by primary modes) from each origin and destination, and estimated car travel times between origins and destinations (using package `r5r`). The data is retireved from the 2016 Transportation Tomorrow Survey [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction), a travel survey of the Greater Golden Horse area (GGH) located in southern Ontario, Canada. The packages associated spatial boundaries to faciliate analysis including: the traffic analysis zone (TAZ) boundaries (retrieved from TTS 2016), planning boundaries associated with muncipalities (retrieved from TTS 2016), and census metropolitan areas (CMA) and census aggloomeration (CA) boundaries retrieved from the Canadian Census. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -14,6 +14,8 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Depends: 
     R (>= 2.10)
+Imports:
+    magrittr
 Suggests: 
     dplyr,
     fitdistrplus,
@@ -21,7 +23,6 @@ Suggests:
     ggspatial,
     kableExtra,
     knitr,
-    magrittr,
     MASS,
     patchwork,
     rlang,

@@ -3,9 +3,9 @@
 \docType{data}
 \name{ggh_pd}
 \alias{ggh_pd}
-\title{ggh_pd}
+\title{Planning boundaries in the Greater Golden Horseshoe (GGH) area and associated data.}
 \format{
-A dataframe containing 105 rows and 4 variables; each row represents a unique planning region with associated geo-referenced geometry.
+A simple feature class (sf) polygon object containing 105 rows and 5 variables; each row represents a unique planning region with associated geo-referenced geometry.
 \describe{
 \item{MUN}{The name of the municipality and/or planning boundary.}
 \item{PD}{A unique ID.}
@@ -15,13 +15,13 @@ A dataframe containing 105 rows and 4 variables; each row represents a unique pl
 }
 }
 \source{
-"2016 Transportation Tomorrow Survey" from the \href{http://dmg.utoronto.ca/survey-boundary-files}{Data Management Group} accessed Feburary 28th 2022.
+"2016 Transportation Tomorrow Survey" from the \href{http://dmg.utoronto.ca/survey-boundary-files}{Data Management Group} accessed February 28th 2022.
 }
 \usage{
 data(ggh_pd)
 }
 \description{
-This object contains the  municipality boundaries associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
 }
 \keyword{boundary}
 \keyword{districts}

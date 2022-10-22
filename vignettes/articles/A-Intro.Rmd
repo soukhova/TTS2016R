@@ -1,5 +1,5 @@
 ---
-title: "Using this package"
+title: "The potential of this data package"
 bibliography: REFERENCES.bib
 ---
 
@@ -47,11 +47,11 @@ options(scipen = 999)
 
 This manuscript presents the open data product [{TTS2016R}](https://github.com/soukhova/TTS2016R). Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs [see @Arribas2021open]. The product presented in this paper is an `R` data package which currently consists of three objects which are sourced from the 2016 Transportation Tomorrow Survey (TTS) or are curated to facilitate the use and analysis of TTS data. This package includes person-to-jobs origin-destinations, traffic analysis zone (TAZ) boundaries, and planning/municipality boundaries for the Greater Golden Horse area (GGH) located in southern Ontario, Canada [@data_management_group_tts_2018]. In addition, the package includes TAZ centroid-to-centroid travel times by car computed using package {r5r} [@Pereira2021r5r]. The aim of this paper is to walk readers through the empirical home-based work commute data set, illustrate the calculation of an impedance function, showcase how it can be used to calculate accessibility to employment, and invite its use in other applications.
 
-Data from the TTS are in principle available to the public but are not fully open, since permission to access the data retrieval system is required. In addition, the raw data can be technically demanding, cumbersome to work with, and requires multiple software to process. By pre-processing the data in a `R` environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region. It also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. 
+Data from the TTS are in principle available to the public but are not fully open, but the raw data can be technically demanding, cumbersome to work with, and requires multiple software to process. By pre-processing the data in a `R` environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region. It also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. 
 
 # Home-to-work commute data
 
-{TTS2016R} includes counts of fully-employed population by place of residence and counts of full-time jobs by place of work aggregated by TAZ (n=`r round(length(TTS2016R::ggh_taz$GTA06), 3) %>% prettyNum(big.mark = ",")` within the survey boundaries). Unique identifiers use the GTA06 Zoning System of TTS. The number of jobs (`r round(sum(TTS2016R::ggh_taz$jobs), 3) %>% prettyNum(big.mark = ",")`) and workers (`r round(sum(TTS2016R::ggh_taz$workers), 3) %>% prettyNum(big.mark = ",")`) are organized in the form of an origin-destination table, indicative of patterns of home-to-work commute (there are `r round(sum(TTS2016R::od_ft_tt$trips), 3) %>% prettyNum(big.mark = ",")` potential interactions). These data were retrieved from the Transportation Tomorrow Survey Data Retrieval System on October 28, 2021 and reflect the potential interaction of full-time employed people and jobs within the GGH survey boundaries shown in Figure \ref{fig:TTS-16-survey-area} as defined by the 2016 TTS methodology [@data_management_group_tts_2018].
+{TTS2016R} includes counts of fully-employed population by place of residence and counts of full-time jobs by place of work aggregated by TAZ (n=`r round(length(TTS2016R::ggh_taz$GTA06), 3) %>% prettyNum(big.mark = ",")` within the survey boundaries). Unique identifiers use the GTA06 Zoning System of TTS. The number of jobs (`r round(sum(TTS2016R::ggh_taz$jobs), 3) %>% prettyNum(big.mark = ",")`) and workers (`r round(sum(TTS2016R::ggh_taz$workers), 3) %>% prettyNum(big.mark = ",")`) are organized in the form of an origin-destination table, indicative of patterns of home-to-work commute (there are `r round(sum(TTS2016R::od$Persons), 3) %>% prettyNum(big.mark = ",")` potential interactions). These data were retrieved from the Transportation Tomorrow Survey Data Retrieval System on October 28, 2021 and reflect the potential interaction of full-time employed people and jobs within the GGH survey boundaries shown in Figure \ref{fig:TTS-16-survey-area} as defined by the 2016 TTS methodology [@data_management_group_tts_2018].
 
 Also included in {TTS2016R} are travel times and cost of travel from origin to destination by car; travel times are calculated using the `R` package {r5r}. These travel times are useful to estimate the cost of travel and to calculate impedance functions, among other possible uses. It is important to note that for simplicity, all interactions within {TTS2016R} are assumed to be taken by car, and the travel time is calculated from an origin TAZ centroid to a destination TAZ centroid. The centroid is snapped to the nearest street line by `r5r` and the travel time is calculated for all trips assuming a car travel mode. Additionally, only travel times less than or equal to 180 mins (3 hrs) are calculated; this threshold represents 99% of trip's travel times which are summarized in the descriptive statistics in Table \ref{tab:TTS-16-desc-stats}.
 
@@ -107,20 +107,20 @@ knitr::include_graphics("images/TTS16-survey-area.png")
 
 Statistics <- data.frame("Statistics" = c("Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", "Max.", "NA's"))
 
-Trips <- data.frame("OD_Trips" = c(summary(od_ft_tt$trips)[[1]] %>% round(), 
-                                   summary(od_ft_tt$trips)[[2]] %>% round(),  
-                                   summary(od_ft_tt$trips)[[3]] %>% round(), 
-                                   summary(od_ft_tt$trips)[[4]] %>% round(), 
-                                   summary(od_ft_tt$trips)[[5]] %>% round(),
-                                   summary(od_ft_tt$trips)[[6]]%>% round(),
+Trips <- data.frame("OD_Trips" = c(summary(od$Persons)[[1]] %>% round(), 
+                                   summary(od$Persons)[[2]] %>% round(),  
+                                   summary(od$Persons)[[3]] %>% round(), 
+                                   summary(od$Persons)[[4]] %>% round(), 
+                                   summary(od$Persons)[[5]] %>% round(),
+                                   summary(od$Persons)[[6]]%>% round(),
                                    NA))
 
-Travel_time <- data.frame("OD_Travel_time" = c(summary(od_ft_tt$travel_time)[[1]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[2]] %>% round(),  
-                                               summary(od_ft_tt$travel_time)[[3]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[4]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[5]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[6]] %>% round(),  
+Travel_time <- data.frame("OD_Travel_time" = c(summary(od$travel_time)[[1]] %>% round(), 
+                                               summary(od$travel_time)[[2]] %>% round(),  
+                                               summary(od$travel_time)[[3]] %>% round(), 
+                                               summary(od$travel_time)[[4]] %>% round(), 
+                                               summary(od$travel_time)[[5]] %>% round(), 
+                                               summary(od$travel_time)[[6]] %>% round(),  
                                                3507)) 
 
 TAZ_Area <- data.frame("TAZ_Area" = c(summary(ggh_taz$AREA)[[1]] %>% round(), 
@@ -155,7 +155,7 @@ desc_stats %>%
         align="lrrrrrr",
         booktabs = T,
         col.names = c(" ", "(#)", "(min)", "(km^2)", "(#)", "(#)"),
-        caption = "\\label{tab:TTS-16-desc-stats}Descriptive statistics of the trips, workers, and jobs for the traffic analysis zones (TAZ) from the TTS 2016 dataset along with estimated car origin-destination travel times.") %>%
+        caption = "\\label{tab:TTS-16-desc-stats}Descriptive statistics of the Persons, workers, and jobs for the traffic analysis zones (TAZ) from the TTS 2016 dataset along with estimated car origin-destination travel times.") %>%
   add_header_above(c(" ", "Trips", "Car Travel Time", "Area", "Workers", "Jobs"), align = "r")%>%
   kable_styling(full_width = "T", 
                 latex_options = c("scale_down"),
@@ -232,14 +232,14 @@ It is important to note that all travel times within this data set are calculate
 
 ```{r data-for-impedance}
 # remove all NA trips from dataset and set all 0min travel times to 0.1 min
-od_ft_tt  <- TTS2016R::od_ft_tt %>% 
+od  <- TTS2016R::od %>% 
   filter( !is.na(travel_time)) %>% 
   mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
 
-all_tt <- od_ft_tt  %>% 
-  dplyr::select(trips, travel_time)
+all_tt <- od  %>% 
+  dplyr::select(Persons, travel_time)
 
-all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$trips), 2]
+all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 ```
 
 ```{r fitting-impedance}
@@ -249,11 +249,11 @@ gamma_ <- fitdistrplus::fitdist(data=all_tt, "gamma", method="mle", optim.method
 
 ```{r calc-for-accessibility-GGH}
 # transfer calibrated impedance function values to OD matrix
-od_ft_tt <- od_ft_tt %>%
+od <- od %>%
   mutate(f = dgamma(travel_time, gamma_$estimate["shape"], gamma_$estimate["rate"]))
 
-#add the number of jobs and workers to the od_ft_tt matrix
-od_ft <- od_ft_tt %>% merge(ggh_taz %>% dplyr::select(GTA06, workers) %>% st_drop_geometry(),
+#add the number of jobs and workers to the od matrix
+od_ft <- od %>% merge(ggh_taz %>% dplyr::select(GTA06, workers) %>% st_drop_geometry(),
                    by.x = "Origin", by.y="GTA06", all.x = TRUE)
 
 od_ft <- od_ft %>% merge(ggh_taz %>% dplyr::select(GTA06, jobs) %>% st_drop_geometry(),
@@ -325,10 +325,10 @@ f(x, \alpha, \beta) = \frac {x^{\alpha-1}e^{-\frac{x}{\beta}}}{ \beta^{\alpha}\G
 \end{equation}
 
 ```{r create-cullen-frey-data}
-# remove all NA trips from dataset and set all 0min travel times to 0.1min
-od_ft_tt  <- od_ft_tt %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
-all_tt <- od_ft_tt  %>% dplyr::select(trips, travel_time)
-all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$trips), 2]
+# remove all NA Persons from dataset and set all 0min travel times to 0.1min
+od  <- od %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
+all_tt <- od  %>% dplyr::select(Persons, travel_time)
+all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 ```
 
 ```{r plot-cullen-frey, message = FALSE, fig.height=6, fig.cap="\\label{fig:plot-cullen-frey}Cullen and frey graphy for the 2016 TTS calculated travel times."}

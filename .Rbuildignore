@@ -5,6 +5,7 @@
 ^vignettes/articles$
 ^data-raw$
 ^Manuscript-Data-Package$
+^Editorial-Correspondance$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$

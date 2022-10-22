@@ -129,17 +129,17 @@ rJava::.jgc(R.gc = TRUE)
 
 Load:
 ```{r}
+# load(file = "TTS16-data-inputs/Travel-Time-Calculations/results/output_OD_car1.Rdata")
 #Trips taken from origin to destination and associated people
-load(file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft.Rdata")
+load(file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft_p_t.Rdata")
 ```
 
 ```{r}
-od_ft_tt <- od_ft %>% 
-  merge(output_OD_car1, by.x=c("Origin", "Destination"), by.y=c("fromId", "toId"), all.x=T) %>%
-  rename(trips = Persons)
+od_ft_p_t_tt <- od_ft_p_t %>% 
+  merge(output_OD_car1, by.x=c("Origin", "Destination"), by.y=c("fromId", "toId"), all.x=T)
 
 rm(output_OD_car1)
-summary(od_ft_tt)
+summary(od_ft_p_t_tt)
 ```
 
 Travel time is between 0-179 min with 3507 OD pairs (3.5%) having NA travel time (presumably a travel time greater than 180). This is not a significant number of OD pairs but.. how many trips? Let's check:
@@ -156,6 +156,8 @@ junk1/junk2
 
 See '02-TTS-16-Imp-Function-Trip-Length-Distribution.Rmd' for further analysis:
 ```{r}
-save("od_ft_tt", file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft_tt.Rdata")
+od <- od_ft_p_t_tt
+rm(od_ft_p_t_tt)
+save("od", file = "TTS16-data-inputs/OD-by-FT-Employment/od.Rdata")
 ```
 

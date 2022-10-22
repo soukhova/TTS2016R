@@ -7,12 +7,13 @@
 ## usethis namespace: end
 NULL
 
-#' TTS2016R: A data package which currently consists of three objects which are sourced from the [2016
+#' TTS2016R
+#'
+#' A data package which consists of objects sourced from the [2016
 #' Transportation Tomorrow Survey (TTS)](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction)
-#' or are curated to facilitate the use and analysis of TTS data. This package includes person-to-jobs origin
+#' or are curated to facilitate the use and analysis of TTS data. This package includes worker-to-jobs origin
 #' -destinations and traffic analysis zone (TAZ) boundaries for the Greater Golden Horse area (GGH) located in
-#' southern Ontario, Canada. The package also includes boundary files for all municipalities included in the GGH
-#' area sourced from various municipal open data portals.
+#' southern Ontario, Canada. The package also includes associated spatial boundary files.
 #'
 #' @docType package
 #' @name TTS2016R-package
@@ -21,16 +22,21 @@ NULL
 #' @references \url{https://github.com/soukhova/TTS2016R}
 NULL
 
-#' ggh_taz
+#' Traffic analysis zones boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
 #' This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
 #'
-#' @format A simple feature class (sf) polygon object containing 3764 rows and 5 variables; each row represents a unique TAZ with associated features.
+#' @format A simple feature class (sf) polygon object containing 3764 rows and 10 variables; each row represents a unique TAZ with associated features.
 #' \describe{
 #'   \item{GTA06}{Unique ID of the traffic analysis zone (TAZ).}
 #'   \item{AREA}{Area of TAZ in units of km^2.}
-#'   \item{workers}{The number of full-time workers within each TAZ.}
-#'   \item{jobs}{The number of jobs within each TAZd. }
+#'   \item{REGION}{Retrieved from the ggh_pd object. It is a unique ID corresponding with the greater region that each planning district (PD) is part of so filtering and analysis, by PD, is simplified.}
+#'   \item{CMAUID}{Retrieved from the ggh_cma object. It is a unique identifier for each census metropolitan area (CMA)/census agglomeration (CA). Within, filtering and analysis that can be easily linked to the census data, is simplified.}
+#'   \item{workers}{The number of full-time workers in the TAZ.}
+#'   \item{jobs}{The number of full-time workers who declare their typical place of employment in the TAZ. }
+#'   \item{LTGO_split}{The percentage of full-time work related trips made from that origin to that destination using local transit and/or GO transit (regional transit) as a primary mode.}
+#'   \item{W_split}{The percentage of full-time work related trips made from that origin to that destination using a bicyle as a primary mode.}
+#'   \item{BC_split}{The percentage of full-time work related trips made from that origin to that destination by walking as a primary mode.}
 #'   \item{geometry}{The sfc polygon geometry (boundaries) of the TAZ.}
 #'}
 #' @docType data
@@ -40,29 +46,43 @@ NULL
 #' @source "2016 Transportation Tomorrow Survey" from [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
 "ggh_taz"
 
-#' od_ft_tt
+#' An origin and destination table of workers, place of employment, trip counts, and estimated travel times.
 #'
-#' This object contains the trips made from origin (TAZ) to destination (TAZ) by full-time workers to work destinations; it is sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area. Also contained within is the calculated car travel time for each trip assuming a 7:00 am departure from the centroid of the TAZ on Oct. 20 2021.
+#' This object contains the trips made from origin (TAZ) to destination (TAZ) by full-time workers to work destinations; it is sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area. Also contained within is the calculated car travel time for each trip calculated using TAZ centroids and r5r in October 2021.
 #'
-#' @format A dataframe containing 103076 rows and 4 variables; each row represents a unique trip from origin TAZ to destination TAZ with associated features.
+#' @format A dataframe containing 103076 rows and 17 variables; each row represents a unique trip from origin TAZ to destination TAZ with associated features.
 #' \describe{
-#'   \item{Origin}{The unique ID of the origin traffic analysis zone (TAZ).}
-#'   \item{Destination}{The unique ID of the destination traffic analysis zone (TAZ).}
-#'   \item{Persons}{The number of people making this trip.}
+#'   \item{Origin}{The unique ID of the origin traffic analysis zone (TAZ). It is equivalent to the IDs used in 'GTA06'.}
+#'   \item{Destination}{The unique ID of the destination traffic analysis zone (TAZ). It is equivalent to the IDs used in 'GTA06'.}
+#'   \item{Persons}{The number of full-time workers at the origin who work at the destination.}
+#'   \item{T_LT}{The number of work-related trips taken from the origin to the destination by local transit excluding GO transit (regional transit service) as a primary mode.}
+#'   \item{T_LTGO}{The number of work-related trips taken from the origin to the destination by local transit and GO transit (regional transit service) as a primary mode.}
+#'   \item{T_GO}{The number of work-related trips taken from the origin to the destination by GO transit (regional transit service as a primary mode.}
+#'   \item{BC}{The number of work-related trips taken from the origin to the destination by bicyle (primary mode).}
+#'   \item{W}{The number of work-related trips taken from the origin to the destination by walking (primary mode).}
+#'   \item{C_DPC}{The number of work-related trips taken from the origin to the destination as a driver of a private car (primary mode).}
+#'   \item{C_PPC}{The number of work-related trips taken from the origin to the destination as a passenger of a private car (primary mode).}
+#'   \item{C_TA}{The number of work-related trips taken from the origin to the destination by a taxi (primary mode).}
+#'   \item{C_RS}{The number of work-related trips taken from the origin to the destination by a paid ride-share  (primary mode).}
+#'   \item{C_SB}{The number of work-related trips taken from the origin to the destination by a school bus (primary mode).}
+#'   \item{M}{The number of work-related trips taken from the origin to the destination by a motorcycle (primary mode).}
+#'   \item{O}{The number of work-related trips taken from the origin to the destination by another mode (primary mode).}
+#'   \item{sum_trips}{The total number of work-related trips taken from the origin to the destination by all modes.}
 #'   \item{travel_time}{The car travel time from origin to destination assuming a 7:00 am departure from and to the TAZ centroids on Oct. 20 2021.}
 #'}
 #' @docType data
 #' @keywords Origin Destination Trips Jobs Workers TTS 2016 in the Greater Golden Horseshoe (GGH) area.
-#' @name od_ft_tt
-#' @usage data(od_ft_tt)
-#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021. Travel times calculated using [`r5r`](https://github.com/ipeaGIT/r5r)
-"od_ft_tt"
+#' @name od
+#' @usage data(od)
+#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
+#' @source Travel times calculated using [`r5r`](https://github.com/ipeaGIT/r5r)
+"od"
 
-#' ggh_pd
+#' Planning boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
-#' This object contains the  municipality boundaries associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#' This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
 #'
-#' @format A dataframe containing 105 rows and 4 variables; each row represents a unique planning region with associated geo-referenced geometry.
+#' @format A simple feature class (sf) polygon object containing 105 rows and 5 variables; each row represents a unique planning region with associated geo-referenced geometry.
 #' \describe{
 #'   \item{MUN}{The name of the municipality and/or planning boundary.}
 #'   \item{PD}{A unique ID.}
@@ -74,43 +94,23 @@ NULL
 #' @keywords planning districts regions municipalities boundary
 #' @name ggh_pd
 #' @usage data(ggh_pd)
-#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/survey-boundary-files) accessed Feburary 28th 2022.
+#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/survey-boundary-files) accessed February 28th 2022.
 "ggh_pd"
 
-#' toy_od_table
+#' census metropolitan area (CMA)/census agglomeration (CA) boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
-#' This object contains a hypothetical toy example of Population, Jobs, Distance, and Catchment for each Origin-Destination trip. Randomly generated.
-
-#' @format A dataframe containing 27 rows and 7 variables; each row represents a unique trip from "Population" to "Employment Center" with associated features.
+#' This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#'
+#' @format A simple feature class (sf) polygon object containing 16 rows and 4 variables; each row represents a unique census metropolitan area (CMA) of census agglomeration (CA) with associated geo-referenced geometry. CMA and CA consist of one or more adjacent municipalities around a core. The CMA/CA boundaries are defined for the purpose of the Canadian Census based on population. As such, the core of each CMA must have a population of at least 50,000 and the entire CMA must have a population of at least 100,000. CA are smaller in population, thir course must have a population of at least 10,000.
 #' \describe{
-#'   \item{Origin}{The unique ID for each "Population" from 1 to 9 }
-#'   \item{Destination}{The unique ID for each "Employment Center" from 1 to 3}
-#'   \item{Population}{The population corresponding to the "Population" ID.}
-#'   \item{Jobs}{The number of jobs corresponding to the "Employment Center" ID.}
-#'   \item{distance}{The distance between origin to destination (unitless).}
-#'   \item{catchments}{A binary code indicating if the origin-destination trip is eligible or not (details on how this can be used within the vignette).}
-#'   \item{trips}{Randomly generated number of trips made from origin to destination.}
+#'   \item{CMAUID}{A unique identifier for each census metropolitan area (CMA)/census agglomeration (CA).}
+#'   \item{CMANAME}{The name of the census metropolitan area (CMA)/census agglomeration (CA).}
+#'   \item{CMATYPE}{A one character field indicating whether the unit is a census metropolitan area, a tracted census agglomeration or a non-tracted census agglomeration. "B" is a CMA and "D" is a CA with no census tracts, and "K" is a CA with census tracts.}
+#'   \item{geometry}{The sfc polygon geometry (boundaries).}
 #'}
 #' @docType data
-#' @keywords Origin Destination Trips Jobs Workers Toy
-#' @name toy_od_table
-#' @usage data(toy_od_table)
-"toy_od_table"
-
-#' toy_sim_zones
-#'
-#' This object contains the geometries of the hypothetical toy example Origin and Destination trip zones. Randomly generated.
-
-#' @format A simple feature class (sfc) multipolygon object containing 12 rows and 5 variables; each row represents a unique "Population" or "Employment Center" zone with associated features.
-#' \describe{
-#'   \item{id}{The unique ID for each "Population" (from 1 to 9) or "Employment Center" (from 1 to 3) }
-#'   \item{id_short}{A short unique ID}
-#'   \item{number}{The population corresponding to the ID.}
-#'   \item{type}{The number of jobs corresponding the ID.}
-#'   \item{geometry}{The sfc polygon geometry (boundaries) of each ID.}
-#'}
-#' @docType data
-#' @keywords Origin Destination Jobs Workers Toy
-#' @name toy_sim_zones
-#' @usage data(toy_sim_zones)
-"toy_sim_zones"
+#' @keywords planning districts regions municipalities boundary
+#' @name ggh_cma
+#' @usage data(ggh_cma)
+#' @source "The 2016 census metropolitan areas and census agglomeration boundary files as created by the Canadian Census available [here](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) accessed October 21st 2022 (Boundary Files, 2016 Census. Statistics Canada Catalogue no. 92-160-X.). All variable definitions are based on the definitions included in the census year 2016 boundary file reference guide (Boundary Files, Reference Guide, Second edition, 2016 Census. Statistics Canada Catalogue no. 92-160-G.).
+"ggh_cma"
