@@ -25,6 +25,9 @@
     <loc>https://soukhova.github.io/TTS2016R/reference/TTS2016R-package.html</loc>
   </url>
   <url>
+    <loc>https://soukhova.github.io/TTS2016R/reference/ggh_cma.html</loc>
+  </url>
+  <url>
     <loc>https://soukhova.github.io/TTS2016R/reference/ggh_pd.html</loc>
   </url>
   <url>
@@ -34,15 +37,9 @@
     <loc>https://soukhova.github.io/TTS2016R/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://soukhova.github.io/TTS2016R/reference/od_ft_tt.html</loc>
+    <loc>https://soukhova.github.io/TTS2016R/reference/od.html</loc>
   </url>
   <url>
     <loc>https://soukhova.github.io/TTS2016R/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://soukhova.github.io/TTS2016R/reference/toy_od_table.html</loc>
-  </url>
-  <url>
-    <loc>https://soukhova.github.io/TTS2016R/reference/toy_sim_zones.html</loc>
   </url>
 </urlset>
