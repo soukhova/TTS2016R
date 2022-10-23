@@ -71,21 +71,18 @@ options(scipen = 999)
 
 # Introduction
 
-This manuscript presents the open data product [{TTS2016R}](https://github.com/soukhova/TTS2016R). Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs [see @Arribas2021open]. The product presented in this paper is an `R` data package which currently consists of three objects which are sourced from the 2016 Transportation Tomorrow Survey (TTS) or are curated to facilitate the use and analysis of TTS data. This package includes full-time home-based work-to-job origin destinations counts and mode-specific trip numbers, traffic analysis zone (TAZ) boundaries, and planning/municipality boundaries for the Greater Golden Horse area (GGH) located in southern Ontario, Canada [@data_management_group_tts_2018]. In addition, the package includes TAZ centroid-to-centroid travel times by car, transit, cyling, and walking mode computed using package {r5r} [@Pereira2021r5r]. 
+This manuscript presents the open data product [{TTS2016R}](https://github.com/soukhova/TTS2016R). Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs [see @Arribas2021open]. The product presented in this paper is a `R` data package which currently consists of a fusion of objects from a variety of sources: home-to-work flows and trips by mode are sourced from the 2016 Transportation Tomorrow Survey (TTS) [@data_management_group_tts_2018], estimated travel times are calculated, and boundary files from the TTS and from the Canadian Census.
 
-The aim of this paper is to walk readers through the empirical home-based work commute data set, illustrate the calculation of an impedance function that can be used to calculate accessibility to employment, and invite its use in other applications. Though data from the TTS is freely available to the public (URL <!-- -->), the raw data can be technically demanding, cumbersome to work with, and requires multiple software to process. By pre-processing the data in a `R` environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region and amends calculated travel times to the data set. This package also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. 
+What is a `R` data package? A `R` data package contains code, data, and documentation in a standardised collection format that can be installed by `R` users through a centralized software repository such as CRAN (the Comprehensive R Archive Network) and GitHub. {TTS2016R} is freely available on GitHub for all to install and freely use in the spirit of open and reproducible research. Currently, {TTS2016R} includes full-time home-based work-to-job origin destinations counts and mode-specific trip numbers retrieved from the 2016 TTS, traffic analysis zone (TAZ) boundaries, and municipality, planning, and census metropolitan area boundaries for the Greater Golden Horse area (GGH) located in southern Ontario, Canada. In addition, the package includes TAZ centroid-to-centroid travel times by car, transit, cycling, and walking mode computed using package {r5r} [@Pereira2021r5r]. 
+
+The aim of this paper is to walk readers through the data sets, illustrate a use case (i.e., the calculation of an impedance function that can be used to calculate accessibility to employment), and invite others to experiment in its uses and applications. Though data from the TTS is freely available to the public through the [TTS Data Retrieval System](https://dmg.utoronto.ca/idrs/index), the raw data can be technically demanding, cumbersome to work with, and requires multiple software to process. By pre-processing the data in a `R` environment and packaging it alongside complimentary data, {TTS2016R} offers a slice of the TTS data which can be immediately used by `R` users to analysis patterns of commuting to work in the region. Anticipate this package to grow in the future: it currently provides an open infrastructure for additional TTS or complimentary data sets to be amended by the authors and the open-source community in the future by request.
 
 # Home-to-work commute data
 <!-- NOTE: When extracting trip vs. person data in the TTS database. For 'by person' extraction: Trips made by person include all trips. For 'by trip' extraction: trips made do not include walking trips to non-school or non-work purposes, so the total number of trips extracted through this method is NOT equal to the total number of trips per person (the total number of trips per person is always higher than the total number of trips). You can't filter the 'by person' extraction by trip purpose. You can filter the 'by trip' extraction by trip purpose, so we will be using the 'by trip' extraction - filtered by 'home-based work' - to get the primary mode trip numbers. -->
-{TTS2016R} includes counts of full-time employed population by place of residence (origin), counts of full-time usual place of work (destination), number of trips to work by mode, average estimated travel time of trip, and the number of vehicles by mode. This data is aggregated and available at the level of TAZ: TAZ are a spatial unit of analysis typically used to estimate the number of trips produced and attracted to each zone [@meyer_urban_2001]. They are thus defined by transportation planners for a region based on intra-similarity and inter-dissimilarity between land-use and population demographics. Within the GGH boundaries, `r round(length(TTS2016R::ggh_taz$GTA06), 3) %>% prettyNum(big.mark = ",")` TAZ are specified. The TAZ range between ≥`r 0.019` km^2 in spatial area to a maximum of `r max(TTS2016R::ggh_taz$AREA) %>% prettyNum(digits =2, big.mark = ",")` km^2 (median: `r median(TTS2016R::ggh_taz$AREA) %>% prettyNum(digits =2, big.mark = ",")` km^2 and 3rd quantile: `r quantile(TTS2016R::ggh_taz$AREA, probs=0.75) %>% unname() %>% prettyNum(digits =2, big.mark = ",")` km^2). 
+Currently, {TTS2016R} includes counts of full-time employed population by place of residence (origin), counts of full-time usual place of work (destination), number of trips to work by mode, and the calculated potential travel time of the trips in the GGH. The GGH (and hence the TTS survey area) is displayed in Figure \ref{fig:TTS-16-survey-area}.
 
-The number of full-time working population (will be referred to as 'workers' throughout) and full-time places of employment (will be referred to as 'jobs' throughout) is also quite variable between TAZ. In terms of workers, TAZ contain between `r min(TTS2016R::ggh_taz$workers) %>% prettyNum(digits =2, big.mark = ",")` to `r max(TTS2016R::ggh_taz$workers) %>% prettyNum(digits =2, big.mark = ",")` workers (median: `r median(TTS2016R::ggh_taz$workers) %>% prettyNum(digits =2, big.mark = ",")`, 3rd quantile: `r quantile(TTS2016R::ggh_taz$workers, probs=0.75) %>% unname() %>% prettyNum(digits =2, big.mark = ",")`). In terms of jobs, TAZ contain between `r min(TTS2016R::ggh_taz$jobs) %>% prettyNum(digits =2, big.mark = ",")` to `r max(TTS2016R::ggh_taz$jobs) %>% prettyNum(digits =2, big.mark = ",")` jobs (median: `r median(TTS2016R::ggh_taz$jobs) %>% prettyNum(digits =2, big.mark = ",")`, 3rd quantile: `r quantile(TTS2016R::ggh_taz$jobs, probs=0.75) %>% unname() %>% prettyNum(digits =2, big.mark = ",")`).
+This data is aggregated and available at the level of TAZ: TAZ are a spatial unit of analysis typically used to estimate the number of trips produced and attracted to each zone [@meyer_urban_2001]. They are thus defined by transportation planners for a region based on intra-similarity and inter-dissimilarity between land-use and population demographics. Within the GGH boundaries, `r round(length(TTS2016R::ggh_taz$GTA06), 3) %>% prettyNum(big.mark = ",")` TAZ are specified and each TAZ is uniquely identified using the GTA06 Zoning System: the survey boundary is discussed in the 2016 TTS methodology and defined by the TTS [@data_management_group_tts_2018].  The TAZ range between $\ge$`0.019` km^2 in spatial area to a maximum of `r max(TTS2016R::ggh_taz$AREA) %>% prettyNum(digits =2, big.mark = ",")` km^2 (median: `r median(TTS2016R::ggh_taz$AREA) %>% prettyNum(digits =2, big.mark = ",")` km^2 and 3rd quantile: `r quantile(TTS2016R::ggh_taz$AREA, probs=0.75) %>% unname() %>% prettyNum(digits =2, big.mark = ",")` km^2). 
 
-Each TAZ is uniquely identified using the GTA06 Zoning System which can be used to match the worker residential location to the job location in the origin-destination table. The number of jobs (`r round(sum(TTS2016R::ggh_taz$jobs), 3) %>% prettyNum(big.mark = ",")`) and workers (`r round(sum(TTS2016R::ggh_taz$workers), 3) %>% prettyNum(big.mark = ",")`) in this package are organized in the form of an origin-destination table which is indicative of home-to-work commute patterns (there are `r round(sum(TTS2016R::od_ft_tt$trips), 3) %>% prettyNum(big.mark = ",")` potential interactions). This data was retrieved from the TTS Data Retrieval System on October 28, 2021 and reflect the interaction of full-time employed people to their places of employment as shown in Figure \ref{fig:TTS-16-survey-area} as defined by the 2016 TTS methodology [@data_management_group_tts_2018].
-
-Also included in {TTS2016R} are the estimated travel times from origin to destination by various modes; travel times are calculated using the package {r5r} and the notebook for this calculation is availalbe in the documentation of {TTS2016R}. These travel times are useful addition to {TTS2016R} since they are not included in the TTS Data Retrieval System but they are vitally important to estimate the cost of travel and associated impedance functions, among other possible applications. The included travel times are by car, walking, cyling, and public transit modes and are calculated from each origin TAZ centroid to each destination TAZ centroid where a home-based work trip is made (`r TTS2016R::od_ft_tt$Origin %>% length() %>% prettyNum(big.mark = ",") ` OD pairs). The centroid is snapped to the nearest street line by `r5r` and the travel time is calculated for all pairs. Additionally, for car and transit modes only travel times less than or equal to 180 mins are calculated. For cycling and walking modes only travel times less than or equal to 120 mins are calculated. 
-
-These threshold represents 90% or greater of trip's travel times, per mode, which are summarized in Figure \ref{fig:TTS-16-survey-area}.
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # grouping the planning boundaries/municipalities so they make up the 20 regions in the TTS 2016. Note: st_buffer is used as there are small existing gaps between some boundaries. st_buffer of 10 m is enough to widen all boundaries and complete the st_union without issue.
 group_ggh_pd_poly <- TTS2016R::ggh_pd %>% st_buffer(10) %>% group_by(REGION) %>% 
@@ -97,7 +94,7 @@ group_ggh_pd <- sf::st_centroid(group_ggh_pd_poly)
 points <- sf::st_coordinates(group_ggh_pd) %>% data.frame() 
 group_ggh_pd <- cbind(group_ggh_pd, points)
 
-## manually readjusting the X and Y coordinate of "County of Peterborough" and "Brant" as they overlap some cities
+## manually readjusting the X and Y coordinate of "County of Peterborough" and "Brant" as the resulting label overlap some city's names on the map.
 group_ggh_pd[group_ggh_pd$REGION_name=="Brant", "X"] <- 544000.0
 group_ggh_pd[group_ggh_pd$REGION_name=="Brant", "Y"] <- 4767466
 
@@ -127,28 +124,38 @@ TTS_area_plot <- ggplot() +
   theme_void() +
   theme(legend.position = "none",
         axis.title = element_blank()) 
-
 # ggsave("images/TTS16-survey-area.png")
+```
+```{r creating-desc-stats-table-edits}
+od <- od %>% mutate(travel_time = ifelse(Origin == Destination, 10, travel_time),
+              travel_time = ifelse(travel_time == 0, NA, travel_time))
 ```
 ```{r creating-desc-stats-table}
 #forming a complete descriptive statistic table
-
 Statistics <- data.frame("Statistic" = c("Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", "Max.", "NA's"))
 
-Trips <- data.frame("Trips" = c(summary(od_ft_tt$trips)[[1]] %>% round(), 
-                                   summary(od_ft_tt$trips)[[2]] %>% round(),  
-                                   summary(od_ft_tt$trips)[[3]] %>% round(), 
-                                   summary(od_ft_tt$trips)[[4]] %>% round(), 
-                                   summary(od_ft_tt$trips)[[5]] %>% round(),
-                                   summary(od_ft_tt$trips)[[6]]%>% round(),
+Links <- data.frame("Links" = c(summary(od$Persons)[[1]] %>% round(), 
+                                   summary(od$Persons)[[2]] %>% round(),  
+                                   summary(od$Persons)[[3]] %>% round(), 
+                                   summary(od$Persons)[[4]] %>% round(), 
+                                   summary(od$Persons)[[5]] %>% round(),
+                                   summary(od$Persons)[[6]]%>% round(),
                                    NA))
 
-Travel_time <- data.frame("TT" = c(summary(od_ft_tt$travel_time)[[1]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[2]] %>% round(),  
-                                               summary(od_ft_tt$travel_time)[[3]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[4]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[5]] %>% round(), 
-                                               summary(od_ft_tt$travel_time)[[6]] %>% round(),  
+Trips <- data.frame("Trips" = c(summary(od$sum_trips)[[1]] %>% round(), 
+                                   summary(od$sum_trips)[[2]] %>% round(),  
+                                   summary(od$sum_trips)[[3]] %>% round(), 
+                                   summary(od$sum_trips)[[4]] %>% round(), 
+                                   summary(od$sum_trips)[[5]] %>% round(),
+                                   summary(od$sum_trips)[[6]]%>% round(),
+                                   NA))
+
+Travel_time <- data.frame("TT" = c(summary(od$travel_time)[[1]] %>% round(), 
+                                               summary(od$travel_time)[[2]] %>% round(),  
+                                               summary(od$travel_time)[[3]] %>% round(), 
+                                               summary(od$travel_time)[[4]] %>% round(), 
+                                               summary(od$travel_time)[[5]] %>% round(), 
+                                               summary(od$travel_time)[[6]] %>% round(),  
                                                3507)) 
 
 # TAZ_Area <- data.frame("TAZ_Area" = c(summary(ggh_taz$AREA)[[1]] %>% round(1), 
@@ -175,7 +182,7 @@ Jobs <- data.frame("Jobs" = c(summary(ggh_taz$jobs)[[1]] %>% round(),
                               summary(ggh_taz$jobs)[[6]] %>% round(), 
                               NA)) 
 
-desc_stats <- cbind(Statistics, Trips, Travel_time, Workers, Jobs)
+desc_stats <- cbind(Statistics, Workers, Jobs, Links, Trips, Travel_time)
 
 # #kable tabling 
 # desc_stats %>%
@@ -189,7 +196,7 @@ desc_stats <- cbind(Statistics, Trips, Travel_time, Workers, Jobs)
 #                 latex_options = c("scale_down"),
 #                 position = "center")
 ```
-```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).", out.width="100%", fig.align = 'center', fig.pos='H', message=FALSE, warning=FALSE}
+```{r, TTS-16-survey-area, echo=FALSE, fig.cap="\\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with associated descriptive statistic of workers and jobs per TAZ, OD links (count of workers potentially interacting with their place of employment) by origin TAZ, OD trips by origin TAZ, and calculated OD car travel time (TT) per origin TAZ. 3,507 trips were not assigned travel times as they are longer than 180 mins. Spatial boundary files are retrieved from the TTS which define the survey area: the 20 regions in the GGH are represented by black lines and labelled, the dark gray lines are planning boundaries.", out.width="100%", fig.align = 'center', fig.pos='H', message=FALSE, warning=FALSE}
 TTS_area_plot <- TTS_area_plot + annotate(geom = "table",
             x = 915000, y = 4880000, 
            label = list(desc_stats))
@@ -197,19 +204,31 @@ ggsave("images/TTS16-survey-area.png")
 knitr::include_graphics("images/TTS16-survey-area.png")
 ```
 
-## Employed individuals and jobs
+## Full-time employed people and associated places of employment
 
-The origin-destination table (i.e., trips) consists of a cross-tabulation of people who are employed full-time by place of GGH residence (origin) and places of GGH employment (destination) using the GTA06 TAZ zoning system. It is important to note that the total number of workers and jobs is the TTS 2016 region are not equal but the number of trips taken are equal to the number of workers. Since the outer boundaries of the TTS are permeable, workers who reside within the boundaries but travel outside of the boundaries are counted as workers within an origin TAZ, while jobs in TAZ that are filled by workers who reside outside the GGH boundaries are _unknown_ since they were not surveyed. This mismatch results in the total number of workers being `r round(sum(ggh_taz$workers)/sum(ggh_taz$jobs),2)` times larger than the number of jobs (i.e., `r sum(ggh_taz$workers)%>% prettyNum(big.mark = ",")` workers to `r sum(ggh_taz$jobs)%>% prettyNum(big.mark = ",")` jobs). As such, the origin-destination table contained in {TTS2016R} offers a perspective on all workers in the GGH and their home-based trips to places of GGH employment.
+In the GGH, there are `r round(sum(TTS2016R::ggh_taz$workers), 3) %>% prettyNum(big.mark = ",")` workers, `r round(sum(TTS2016R::ggh_taz$jobs), 3) %>% prettyNum(big.mark = ",")` jobs, and `r TTS2016R::od$sum_trips %>% sum()%>% prettyNum(big.mark = ",")` work-related trips (for the 2016 TTS survey day). The values are organized within the origin destination (OD) table in the {TTS2016R} package and are derived from the cross-tabulation by person and by trip for the full-time employed population and associated places of employment. The TTS is a proportionally representative survey, hence the values included in {TTS2016R} are adjusted to reflect the GGH population. 
+
+It is important to note that the total number of full-time workers and jobs in the TTS 2016 region are not equal. Since the outer boundaries of the TTS are permeable, workers who reside within the boundaries but have workplaces that are outside of the boundaries are counted as workers within an origin TAZ, while jobs in TAZ that are filled by workers who reside outside the GGH boundaries are _unknown_ since they were not surveyed. This mismatch results in the total number of workers being `r round(sum(ggh_taz$workers)/sum(ggh_taz$jobs),2)` times larger than the number of jobs (i.e., `r sum(ggh_taz$workers)%>% prettyNum(big.mark = ",")` workers to `r sum(ggh_taz$jobs)%>% prettyNum(big.mark = ",")` jobs). As such, the OD table contained in {TTS2016R} offers a perspective on all workers in the GGH and their home-based trips to places of GGH employment.
+
+The count of links and trips made by the full-time working population and associated full-time place of employment per unique OD pair are quite variable. TAZ contain between `r min(TTS2016R::ggh_taz$workers) %>% prettyNum(digits =2, big.mark = ",")` to `r max(TTS2016R::ggh_taz$workers) %>% prettyNum(digits =2, big.mark = ",")` workers (median: `r median(TTS2016R::ggh_taz$workers) %>% prettyNum(digits =2, big.mark = ",")`, 3rd quantile: `r quantile(TTS2016R::ggh_taz$workers, probs=0.75) %>% unname() %>% prettyNum(digits =2, big.mark = ",")`), `r min(TTS2016R::ggh_taz$jobs) %>% prettyNum(digits =2, big.mark = ",")` to `r max(TTS2016R::ggh_taz$jobs) %>% prettyNum(digits =2, big.mark = ",")` jobs (median: `r median(TTS2016R::ggh_taz$jobs) %>% prettyNum(digits =2, big.mark = ",")`, 3rd quantile: `r quantile(TTS2016R::ggh_taz$jobs, probs=0.75) %>% unname() %>% prettyNum(digits =2, big.mark = ",")`), and generate between `r 0` to `r 241` trips (median: `r 15`, 3rd quantile: `r 42`).
+```{r, include=FALSE, eval=FALSE, echo=FALSE}
+#counting the number of trips per origin TAZ.
+t <- od %>% group_by(Origin) %>% summarize(count = n()) %>%
+  merge(ggh_taz %>% st_drop_geometry(), by.x=c("Origin"), by.y =c("GTA06"), all.y=TRUE) %>%
+  mutate(count = ifelse(is.na(count), 0, count))
+t$count %>% summary()
+```
+
 ```{r tts-workers-jobs-plot, fig.cap="\\label{fig:tts-workers-jobs-plot}Number of workers (left) and jobs (right) in each TAZ in the 2016 TTS.", fig.width=8, fig.height=5}
 
 tts_workers <- tm_shape(ggh_taz) +
-  tm_fill(col = "workers", title = "Full-time \nemployed people", palette = "-Spectral", style = "jenks") +
+  tm_fill(col = "workers", title = "Full-time \nemployed people", palette = "YlGnBu", alpha = 0.8, style = "jenks") +
   tm_compass(type = "arrow", position = c("left", "top"), size = 2) +
   tm_scale_bar(breaks = c(0, 30, 60), text.size = 0.5, position = c("left", "bottom")) +
   tm_layout(legend.position = c("right", "bottom"))
 
 tts_jobs <- tm_shape(ggh_taz) +
-  tm_fill(col = "jobs", title = "Full-time \njobs", palette = "-Spectral", style = "jenks") +
+  tm_fill(col = "jobs", title = "Full-time \njobs", palette = "YlGnBu", alpha = 0.8, style = "jenks") +
   tm_compass(type = "arrow", position = c("left", "top"), size = 2) +
   tm_scale_bar(breaks = c(0, 30, 60), text.size = 0.5, position = c("left", "bottom")) +
   tm_layout(legend.position = c("right", "bottom"))
@@ -252,22 +271,25 @@ ggplot(ecdf_data , aes(x=Number, col=Group)) +
         panel.border = element_blank()) 
 ```
 -->
-Figure \ref{fig:tts-workers-jobs-plot} presents the number of workers and jobs per TAZ. It can be observed that the spatial distribution of jobs and workers is unequal, which is indicative of a jobs-housing imbalance that can impact accessibility in a region [@Levine1998rethinking]. It can also be seen that there is a higher number of TAZ with no workers than zones with no jobs (i.e., `r ggh_taz %>% st_drop_geometry() %>% count(workers) %>% filter(workers == 0) %>% pull('n')` TAZ with no workers : `r ggh_taz %>% st_drop_geometry() %>% count(jobs) %>% filter(jobs == 0) %>% pull('n')` TAZ with no jobs) and the mean of workers per TAZ is higher than the mean of jobs (i.e., `r round(mean(ggh_taz$workers, na.rm=T),0)` workers : `r round(mean(ggh_taz$jobs, na.rm=T),0)` jobs) the number TAZ with an extreme number of jobs at the highest and lowest percentiles is significantly higher than the number of workers. <!-- see the following cumulative probability distribution in Figure \ref{fig:ECD-plot}. --> <!-- Workers are concentrated in TAZ within the center of the GGH and along the south-east and northern boarder of the GGH. The center of the GGH corresponds to the Greater Toronto Area (GTA) which is the most densely populated area in southern Ontario [@statistics_canada_daily_2022]. The south east border of the GGH neighbours Lake Ontario and is delineated by the urban built boundary of the Ontario Growth Plan being home to the highest density of working population in the GGH [@ontario_built_2019;@auditor_general_of_ontario_value_2021]. The northern GGH border corresponds to the Simcoe, Dufferin, Kawartha Lake, and Peterborough regions which are home to lower density of worker population density population [@auditor_general_of_ontario_value_2021]. Conversely, the spread of jobs in the GGH is lower than the number of workers indicating population is more spatially dispersed than jobs. --> <!--- in which the 94th to 100th percentile and the 0th to 34th percentile of jobs in TAZ is higher than the number of workers in TAZ. This means that between these ranges, TAZ have a higher number of workers than they do jobs, echoing the more even spatial distribution of workers observed in Figure \ref{fig:tts-workers-jobs-plot}. -->
+Figure \ref{fig:tts-workers-jobs-plot} presents the number of employed people and associated jobs per TAZ. It can be observed that the spatial distribution of jobs and workers is unequal, which is indicative of a jobs -housing imbalance that can impact accessibility in a region [@Levine1998rethinking]. It can also be seen that there is a higher number of TAZ with no workers than zones with no jobs (i.e., `r ggh_taz %>% st_drop_geometry() %>% count(workers) %>% filter(workers == 0) %>% pull('n')` TAZ with no workers : `r ggh_taz %>% st_drop_geometry() %>% count(jobs) %>% filter(jobs == 0) %>% pull('n')` TAZ with no jobs) and the mean of workers per TAZ is higher than the mean of jobs (i.e., `r round(mean(ggh_taz$workers, na.rm=T),0)` workers : `r round(mean(ggh_taz$jobs, na.rm=T),0)` jobs) the number TAZ with an extreme number of jobs at the highest and lowest percentiles is significantly higher than the number of workers. <!-- see the following cumulative probability distribution in Figure \ref{fig:ECD-plot}. --> <!-- Workers are concentrated in TAZ within the center of the GGH and along the south-east and northern boarder of the GGH. The center of the GGH corresponds to the Greater Toronto Area (GTA) which is the most densely populated area in southern Ontario [@statistics_canada_daily_2022]. The south east border of the GGH neighbours Lake Ontario and is delineated by the urban built boundary of the Ontario Growth Plan being home to the highest density of working population in the GGH [@ontario_built_2019;@auditor_general_of_ontario_value_2021]. The northern GGH border corresponds to the Simcoe, Dufferin, Kawartha Lake, and Peterborough regions which are home to lower density of worker population density population [@auditor_general_of_ontario_value_2021]. Conversely, the spread of jobs in the GGH is lower than the number of workers indicating population is more spatially dispersed than jobs. --> <!--- in which the 94th to 100th percentile and the 0th to 34th percentile of jobs in TAZ is higher than the number of workers in TAZ. This means that between these ranges, TAZ have a higher number of workers than they do jobs, echoing the more even spatial distribution of workers observed in Figure \ref{fig:tts-workers-jobs-plot}. -->
 
 ## Calculated travel time
 
-As mentioned, {TTS2016R} also includes travel time data for each home-to-work trip as displayed in Figure \ref{fig:plot-tt-ttpertrip}. This travel time corresponds to a car commute calculated using the R package {r5r} (see descriptive statistics in Figure \ref{fig:TTS-16-survey-area}). It is important to note that travel times within this data set are calculated assuming only car travel and one departure time for all origins. These assumptions are not completely realistic since we know a small proportion of trips are taken by non-car modes and travel time departures varies. However, it is not possible from the data retrieval system to obtain higher order tabulations so <!--  we do not know which trips are made with non-car modes nor exact departure times in these tables. Though modal split and travel times can be estimated through other methods [e.g., @allen_suburbanization_2021; @higgins2021changes], for simplicity,-->  we carry on with the assume that all trips are taken by one-time departure car trip. 
+Also included in {TTS2016R} are the estimated travel times between OD as summarized in descriptive statistics table in Figure \ref{fig:plot-tt-ttpertrip}; travel times are calculated using the package {r5r}. {r5r} interfaces with the java-based {r5} routing engine developed separately by [Conveyal](https://conveyal.com/). The inputs to {r5r} for this data package were the desired mode, a maximum travel time threshold of 180 minutes, the geo-coded origin destination pairs based on the centroids of the TAZ, and the static Open Street Map road network of Ontario. A travel time threshold of 180 minutes was selected since it captures almost all potential OD interactions. 
 
+Additionally, the car mode was included since it is a critically important commute mode in the GGH. `r sum(od$C_DPC, od$C_PPC, od$C_RS, od$C_SB, od$C_TA) %>% prettyNum(big.mark = ",")` of the trips are made using a car mode out of the total `r sum(od$sum_trips) %>% prettyNum(big.mark = ",")` work-related trips according to the TTS 2016 data  (i.e., `r (sum(od$C_DPC, od$C_PPC, od$C_RS, od$C_SB, od$C_TA) / sum(od$sum_trips)) %>% percent()` of trips are taken by car).
+
+These travel times are useful addition to {TTS2016R} since they are not included in the TTS Data Retrieval System but they are vitally important to estimate the cost of travel and associated impedance functions, among other possible applications. If the readership is interested in additional information regarding the travel time computation, please see the calculation notebook in the documentation of {TTS2016R} and details about {r5r} at the [r5r package website](https://ipeagit.github.io/r5r/index.html).
 ```{r data-for-impedance}
 # remove all NA trips from dataset and set all 0min travel times to 0.1 min
-od_ft_tt  <- TTS2016R::od_ft_tt %>% 
+od  <- TTS2016R::od %>% 
   filter( !is.na(travel_time)) %>% 
   mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
 
-all_tt <- od_ft_tt  %>% 
-  dplyr::select(trips, travel_time)
+all_tt <- od  %>% 
+  dplyr::select(Persons, travel_time)
 
-all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$trips), 2]
+all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 ```
 
 ```{r fitting-impedance}
@@ -277,11 +299,11 @@ gamma_ <- fitdistrplus::fitdist(data=all_tt, "gamma", method="mle", optim.method
 
 ```{r calc-for-accessibility-GGH}
 # transfer calibrated impedance function values to OD matrix
-od_ft_tt <- od_ft_tt %>%
+od <- od %>%
   mutate(f = dgamma(travel_time, gamma_$estimate["shape"], gamma_$estimate["rate"]))
 
-#add the number of jobs and workers to the od_ft_tt matrix
-od_ft <- od_ft_tt %>% merge(ggh_taz %>% dplyr::select(GTA06, workers) %>% st_drop_geometry(),
+#add the number of jobs and workers to the od matrix
+od_ft <- od %>% merge(ggh_taz %>% dplyr::select(GTA06, workers) %>% st_drop_geometry(),
                    by.x = "Origin", by.y="GTA06", all.x = TRUE)
 
 od_ft <- od_ft %>% merge(ggh_taz %>% dplyr::select(GTA06, jobs) %>% st_drop_geometry(),
@@ -302,16 +324,27 @@ GGH_c_accessibility <- od_ft %>%
 GGH_taz_acc <- ggh_taz %>% merge(GGH_c_accessibility, by.x=c("GTA06"), by.y=c("Origin"), all.x=T) 
 ```
 
-```{r plot-tt-ttpertrip, fig.cap="\\label{fig:plot-tt-ttpertrip}Calculated total worker travel time (left) and average worker travel time (right) for each TAZ in the 2016 TTS.", fig.width=8, fig.height=5, message=FALSE}
-
+```{r plot-tt-ttpertrip, fig.cap="\\label{fig:plot-tt-ttpertrip}Calculated total worker travel time (left) and average worker travel time (right) for each TAZ in the 2016 TTS. Planning boundaries of Niagara, Waterloo, and the Toronto census metropolitan area are drawn with purple, brown and blue borders, respectively, and discussed. ", fig.width=8, fig.height=5, message=FALSE}
 tts_total_tt <- tm_shape(GGH_taz_acc) +
-  tm_fill(col = "GGH_sum_tt_i", title = "Total travel time\n per TAZ (min)", palette = "-Spectral", style = "jenks") +
+  tm_fill(col = "GGH_sum_tt_i", title = "Total travel time\n per TAZ (min)", palette = "-Spectral", alpha=0.85, style = "jenks") +
+  tm_shape(ggh_pd %>% filter(REGION_name == "Niagara")) +
+  tm_borders(col="Purple")+
+  tm_shape(ggh_pd %>% filter(REGION_name == "Waterloo")) +
+  tm_borders(col="Brown")+
+  tm_shape(ggh_cma %>% filter(CMANAME == "Toronto")) +
+  tm_borders(col="Blue")+
   tm_compass(type = "arrow", position = c("left", "top"), size = 2) +
   tm_scale_bar(breaks = c(0, 30, 60), text.size = 0.5, position = c("left", "bottom")) +
   tm_layout(legend.position = c("right", "bottom"))
 
 tts_tt_per_trip <- tm_shape(GGH_taz_acc) +
-  tm_fill(col = "GGH_tt_trips_i", title = "Avg. travel time\n per TAZ (min)", palette = "-Spectral", style = "jenks") +
+  tm_fill(col = "GGH_tt_trips_i", title = "Avg. travel time\n per TAZ (min)", palette = "-Spectral", alpha = 0.85, style = "jenks") +
+  tm_shape(ggh_pd %>% filter(REGION_name == "Niagara")) +
+  tm_borders(col="Purple")+
+  tm_shape(ggh_pd %>% filter(REGION_name == "Waterloo")) +
+  tm_borders(col="Brown")+
+  tm_shape(ggh_cma %>% filter(CMANAME == "Toronto")) +
+  tm_borders(col="Blue")+
   tm_compass(type = "arrow", position = c("left", "top"), size = 2) +
   tm_scale_bar(breaks = c(0, 30, 60), text.size = 0.5, position = c("left", "bottom")) +
   tm_layout(legend.position = c("right", "bottom"))
@@ -320,7 +353,7 @@ tmap_arrange(tts_total_tt, tts_tt_per_trip)
 ```
 \newpage
 
-As can be observed in Figure \ref{fig:plot-tt-ttpertrip}, the total travel time resembles the spatial trend distribution in the number of employed people in the previous plot (Figure \ref{fig:tts-workers-jobs-plot}) and the spatial distribution of the average travel time is distinct from other plots presented so far. We can see that in areas around the south-eastern border that make up the Greater Toronto and Hamilton Area (GTHA)<!-- (e.g., Hamilton, Halton, Peel, Toronto, York, Durham) -->, Niagara and Waterloo, the average travel times are moderately low. Further from these areas, travel times are higher. Interestingly, even in eastern areas (e.g., Peterborough) with high employment and high job concentration, average travel time is higher than within the GTHA.
+As can be observed in Figure \ref{fig:plot-tt-ttpertrip}, the total travel time resembles the spatial trend distribution in the number of employed people in the previous plot (Figure \ref{fig:tts-workers-jobs-plot}) and the spatial distribution of the average travel time is distinct from other plots presented so far. For instance, we can see that in areas around the south-eastern border such as Niagara and Waterloo (purple and brown borders), the average travel times are moderately low. Additionally, travel times (by car) within the core of the Toronto census metropolitan area (CMA) (blue) is also moderately since traffic congestion is not reflected in the travel time estimations. Further from these areas, travel times are higher.
 
 ## Calibrating an impedance function
 
@@ -350,9 +383,9 @@ f(x, \alpha, \beta) = \frac {x^{\alpha-1}e^{-\frac{x}{\beta}}}{ \beta^{\alpha}\G
 
 ```{r create-cullen-frey-data}
 # remove all NA trips from dataset and set all 0min travel times to 0.1min
-od_ft_tt  <- od_ft_tt %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
-all_tt <- od_ft_tt  %>% dplyr::select(trips, travel_time)
-all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$trips), 2]
+od  <- od %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
+all_tt <- od  %>% dplyr::select(Persons, travel_time)
+all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 ```
 <!-- # ```{r plot-cullen-frey, message = FALSE, fig.height=6, fig.cap="\\label{fig:plot-cullen-frey}Cullen and frey graphy for the 2016 TTS calculated travel times."} -->
 <!-- # fitdistrplus::descdist(data=all_tt)  -->
@@ -360,7 +393,7 @@ all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$trips), 2]
 
 # Concluding remarks
 
-The open data product introduced in this paper shares tables for home-to-work related data from the 2016 TTS. In addition, inter-centroid travel time tables are calculated, and the planning/municipality boundaries are included as a compliment. This open data product, {TTS2016R}, is freely available to explore in an `R` environment. One possible use of this data, as showcased in this paper, is the calibration of impedance functions which in turn can be used for accessibility analysis.
+{TTS2016R}, the open data package introduced in this paper fuses multiple sources of data. It includes an OD cross-tabulation by person and by trip mode table for home-to-work commute data from the 2016 TTS alongside complimentary boundaries and estimated travel times. The value of this data package is in its transparency, easy of access, and its open infrastructure for the addition of complimentary data sets in the future. Using `R` users can immediately and easily explore GGH commute flow trends as well as suggestion further amendments to the package by request. One possible use of this data, as showcased in this paper, is the calibration of impedance functions which in turn can be used for accessibility analysis.
 
 <!-- New digital formats are increasingly complex and the explanation of the methods often do not concisely and intelligibly fit within the confines of a traditional article. With this motivation, we invite all who are interested to use {TTS2016R} to explore the worker-employment patterns contained in the {TTS2016R} package. --> In the spirit of novel and original research, we hope readers value the efforts made to detail the data in order to improve transparency in our work and encourage others to replicate and, hopefully, inspire research of their own. We see this product as providing open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. 
 

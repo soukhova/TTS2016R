@@ -74,54 +74,65 @@ This manuscript presents the open data product
 \href{https://github.com/soukhova/TTS2016R}{\{TTS2016R\}}. Open data
 products are the result of turning source data (open or otherwise) into
 accessible information that adds value to the original inputs
-\citep[see][]{Arribas2021open}. The product presented in this paper is
-an \texttt{R} data package which currently consists of three objects
-which are sourced from the 2016 Transportation Tomorrow Survey (TTS) or
-are curated to facilitate the use and analysis of TTS data. This package
-includes person-to-jobs origin-destinations, traffic analysis zone (TAZ)
-boundaries, and planning/municipality boundaries for the Greater Golden
-Horse area (GGH) located in southern Ontario, Canada
-\citep{data_management_group_tts_2018}. In addition, the package
-includes TAZ centroid-to-centroid travel times by car computed using
-package \{r5r\} \citep{Pereira2021r5r}. The aim of this paper is to walk
-readers through the empirical home-based work commute data set,
-illustrate the calculation of an impedance function that can be used to
-calculate accessibility to employment, and invite its use in other
-applications.
+\citep[see][]{Arribas2021open}. The product presented in this paper is a
+\texttt{R} data package which currently consists of a fusion of objects
+from a variety of sources: home-to-work flows and trips by mode are
+sourced from the 2016 Transportation Tomorrow Survey (TTS)
+\citep{data_management_group_tts_2018}, estimated travel times are
+calculated, and boundary files from the TTS and from the Canadian
+Census.
+
+What is a \texttt{R} data package? A \texttt{R} data package contains
+code, data, and documentation in a standardised collection format that
+can be installed by \texttt{R} users through a centralized software
+repository such as CRAN (the Comprehensive R Archive Network) and
+GitHub. \{TTS2016R\} is freely available on GitHub for all to install
+and freely use in the spirit of open and reproducible research.
+Currently, \{TTS2016R\} includes full-time home-based work-to-job origin
+destinations counts and mode-specific trip numbers retrieved from the
+2016 TTS, traffic analysis zone (TAZ) boundaries, and municipality,
+planning, and census metropolitan area boundaries for the Greater Golden
+Horse area (GGH) located in southern Ontario, Canada. In addition, the
+package includes TAZ centroid-to-centroid travel times by car, transit,
+cycling, and walking mode computed using package \{r5r\}
+\citep{Pereira2021r5r}.
+
+The aim of this paper is to walk readers through the data sets,
+illustrate a use case (i.e., the calculation of an impedance function
+that can be used to calculate accessibility to employment), and invite
+others to experiment in its uses and applications. Though data from the
+TTS is freely available to the public through the
+\href{https://dmg.utoronto.ca/idrs/index}{TTS Data Retrieval System},
+the raw data can be technically demanding, cumbersome to work with, and
+requires multiple software to process. By pre-processing the data in a
+\texttt{R} environment and packaging it alongside complimentary data,
+\{TTS2016R\} offers a slice of the TTS data which can be immediately
+used by \texttt{R} users to analysis patterns of commuting to work in
+the region. Anticipate this package to grow in the future: it currently
+provides an open infrastructure for additional TTS or complimentary data
+sets to be amended by the authors and the open-source community in the
+future by request.
 
 \hypertarget{home-to-work-commute-data}{%
 \section{Home-to-work commute data}\label{home-to-work-commute-data}}
 
-\{TTS2016R\} includes counts of fully-employed population by place of
-residence (origin) and counts of full-time jobs by place of work
-(destination) aggregated by TAZ (n=3,764 within the survey boundaries).
-TAZ typically are defined based on land-use and population demographics
-in order to estimate the number of trips produced and attracted to each
-zone \citep{meyer_urban_2001}. As such, each TAZ is uniquely identified
-using the GTA06 Zoning System which can be used to join to the
-origin-destination table (i.e., trips taken).
+Currently, \{TTS2016R\} includes counts of full-time employed population
+by place of residence (origin), counts of full-time usual place of work
+(destination), number of trips to work by mode, and the calculated
+potential travel time of the trips in the GGH. The GGH (and hence the
+TTS survey area) is displayed in Figure \ref{fig:TTS-16-survey-area}.
 
-The number of jobs (3,081,885) and workers (3,446,957) in this package
-are organized in the form of an origin-destination table which is
-indicative of home-to-work commute patterns (there are 3,446,957
-potential interactions). These data were retrieved from the TTS Data
-Retrieval System on October 28, 2021 and reflect the potential
-interaction of full-time employed people and jobs within the GGH survey
-boundaries shown in Figure \ref{fig:TTS-16-survey-area} as defined by
-the 2016 TTS methodology \citep{data_management_group_tts_2018}.
-
-Also included in \{TTS2016R\} are travel times and cost of travel from
-origin to destination by car; travel times are calculated using the
-\texttt{R} package \{r5r\}. These travel times are useful to estimate
-the cost of travel and to calculate impedance functions, among other
-possible applications. For simplicity, all interactions within
-\{TTS2016R\} are assumed to be taken by car, and the travel time is
-calculated from an origin TAZ centroid to a destination TAZ centroid.
-The centroid is snapped to the nearest street line by \texttt{r5r} and
-the travel time is calculated for all trips assuming a car travel mode.
-Additionally, only travel times less than or equal to 180 mins (3 hrs)
-are calculated; this threshold represents 99\% of trip's travel times
-which are summarized in Figure \ref{fig:TTS-16-survey-area}.
+This data is aggregated and available at the level of TAZ: TAZ are a
+spatial unit of analysis typically used to estimate the number of trips
+produced and attracted to each zone \citep{meyer_urban_2001}. They are
+thus defined by transportation planners for a region based on
+intra-similarity and inter-dissimilarity between land-use and population
+demographics. Within the GGH boundaries, 3,764 TAZ are specified and
+each TAZ is uniquely identified using the GTA06 Zoning System: the
+survey boundary is discussed in the 2016 TTS methodology and defined by
+the TTS \citep{data_management_group_tts_2018}. The TAZ range between
+\(\ge\)\texttt{0.019} km\^{}2 in spatial area to a maximum of 879
+km\^{}2 (median: 1.3 km\^{}2 and 3rd quantile: 2.8 km\^{}2).
 
 \begin{figure}[H]
 
@@ -129,37 +140,48 @@ which are summarized in Figure \ref{fig:TTS-16-survey-area}.
 
 }
 
-\caption{\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with the descriptive statistics of the trips, calculated origin-destination car travel time (TT), workers per TAZ, and jobs per TAZ. Contains 20 regions (black boundaries) and sub-regions (dark gray boundaries).}\label{fig:TTS-16-survey-area}
+\caption{\label{fig:TTS-16-survey-area}TTS 2016 study area within the GGH in Ontario, Canada along with associated descriptive statistic of workers and jobs per TAZ, OD links (count of workers potentially interacting with their place of employment) by origin TAZ, OD trips by origin TAZ, and calculated OD car travel time (TT) per origin TAZ. 3,507 trips were not assigned travel times as they are longer than 180 mins. Spatial boundary files are retrieved from the TTS which define the survey area: the 20 regions in the GGH are represented by black lines and labelled, the dark gray lines are planning boundaries.}\label{fig:TTS-16-survey-area}
 \end{figure}
 
-\hypertarget{employed-individuals-and-jobs}{%
-\subsection{Employed individuals and
-jobs}\label{employed-individuals-and-jobs}}
+\hypertarget{full-time-employed-people-and-associated-places-of-employment}{%
+\subsection{Full-time employed people and associated places of
+employment}\label{full-time-employed-people-and-associated-places-of-employment}}
 
-The origin-destination table (i.e., trips) consists of a
-cross-tabulation of people who are employed full-time by place of GGH
-residence (origin) and places of GGH employment (destination) using the
-GTA06 TAZ zoning system. It is important to note that the total number
-of workers and jobs is the TTS 2016 region are not equal but the number
-of trips taken are equal to the number of workers. Since the outer
-boundaries of the TTS are permeable, workers who reside within the
-boundaries but travel outside of the boundaries are counted as workers
+In the GGH, there are 3,446,957 workers, 3,081,900 jobs, and 3,282,611
+work-related trips (for the 2016 TTS survey day). The values are
+organized within the origin destination (OD) table in the \{TTS2016R\}
+package and are derived from the cross-tabulation by person and by trip
+for the full-time employed population and associated places of
+employment. The TTS is a proportionally representative survey, hence the
+values included in \{TTS2016R\} are adjusted to reflect the GGH
+population.
+
+It is important to note that the total number of full-time workers and
+jobs in the TTS 2016 region are not equal. Since the outer boundaries of
+the TTS are permeable, workers who reside within the boundaries but have
+workplaces that are outside of the boundaries are counted as workers
 within an origin TAZ, while jobs in TAZ that are filled by workers who
 reside outside the GGH boundaries are \emph{unknown} since they were not
 surveyed. This mismatch results in the total number of workers being
 1.12 times larger than the number of jobs (i.e., 3,446,957 workers to
-3,081,885 jobs). As such, the origin-destination table contained in
-\{TTS2016R\} offers a perspective on all workers in the GGH and their
-home-based trips to places of GGH employment.
+3,081,900 jobs). As such, the OD table contained in \{TTS2016R\} offers
+a perspective on all workers in the GGH and their home-based trips to
+places of GGH employment.
+
+The count of links and trips made by the full-time working population
+and associated full-time place of employment per unique OD pair are
+quite variable. TAZ contain between 0 to 8,491 workers (median: 464, 3rd
+quantile: 1,378), 0 to 41,821 jobs (median: 244, 3rd quantile: 700), and
+generate between 0 to 241 trips (median: 15, 3rd quantile: 42).
 
 \begin{figure}
 \includegraphics[width=1\linewidth]{Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1} \caption{\label{fig:tts-workers-jobs-plot}Number of workers (left) and jobs (right) in each TAZ in the 2016 TTS.}\label{fig:tts-workers-jobs-plot}
 \end{figure}
 
-Figure \ref{fig:tts-workers-jobs-plot} presents the number of workers
-and jobs per TAZ. It can be observed that the spatial distribution of
-jobs and workers is unequal, which is indicative of a jobs-housing
-imbalance that can impact accessibility in a region
+Figure \ref{fig:tts-workers-jobs-plot} presents the number of employed
+people and associated jobs per TAZ. It can be observed that the spatial
+distribution of jobs and workers is unequal, which is indicative of a
+jobs -housing imbalance that can impact accessibility in a region
 \citep{Levine1998rethinking}. It can also be seen that there is a higher
 number of TAZ with no workers than zones with no jobs (i.e., 791 TAZ
 with no workers : 396 TAZ with no jobs) and the mean of workers per TAZ
@@ -170,21 +192,34 @@ percentiles is significantly higher than the number of workers.
 \hypertarget{calculated-travel-time}{%
 \subsection{Calculated travel time}\label{calculated-travel-time}}
 
-As mentioned, \{TTS2016R\} also includes travel time data for each
-home-to-work trip as displayed in Figure \ref{fig:plot-tt-ttpertrip}.
-This travel time corresponds to a car commute calculated using the R
-package \{r5r\} (see descriptive statistics in Figure
-\ref{fig:TTS-16-survey-area}). It is important to note that travel times
-within this data set are calculated assuming only car travel and one
-departure time for all origins. These assumptions are not completely
-realistic since we know a small proportion of trips are taken by non-car
-modes and travel time departures varies. However, it is not possible
-from the data retrieval system to obtain higher order tabulations so we
-carry on with the assume that all trips are taken by one-time departure
-car trip.
+Also included in \{TTS2016R\} are the estimated travel times between OD
+as summarized in descriptive statistics table in Figure
+\ref{fig:plot-tt-ttpertrip}; travel times are calculated using the
+package \{r5r\}. \{r5r\} interfaces with the java-based \{r5\} routing
+engine developed separately by \href{https://conveyal.com/}{Conveyal}.
+The inputs to \{r5r\} for this data package were the desired mode, a
+maximum travel time threshold of 180 minutes, the geo-coded origin
+destination pairs based on the centroids of the TAZ, and the static Open
+Street Map road network of Ontario. A travel time threshold of 180
+minutes was selected since it captures almost all potential OD
+interactions.
+
+Additionally, the car mode was included since it is a critically
+important commute mode in the GGH. 2,598,379 of the trips are made using
+a car mode out of the total 3,282,611 work-related trips according to
+the TTS 2016 data (i.e., 79\% of trips are taken by car).
+
+These travel times are useful addition to \{TTS2016R\} since they are
+not included in the TTS Data Retrieval System but they are vitally
+important to estimate the cost of travel and associated impedance
+functions, among other possible applications. If the readership is
+interested in additional information regarding the travel time
+computation, please see the calculation notebook in the documentation of
+\{TTS2016R\} and details about \{r5r\} at the
+\href{https://ipeagit.github.io/r5r/index.html}{r5r package website}.
 
 \begin{figure}
-\includegraphics[width=1\linewidth]{Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1} \caption{\label{fig:plot-tt-ttpertrip}Calculated total worker travel time (left) and average worker travel time (right) for each TAZ in the 2016 TTS.}\label{fig:plot-tt-ttpertrip}
+\includegraphics[width=1\linewidth]{Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1} \caption{\label{fig:plot-tt-ttpertrip}Calculated total worker travel time (left) and average worker travel time (right) for each TAZ in the 2016 TTS. Planning boundaries of Niagara, Waterloo, and the Toronto census metropolitan area are drawn with purple, brown and blue borders, respectively, and discussed. }\label{fig:plot-tt-ttpertrip}
 \end{figure}
 \newpage
 
@@ -192,13 +227,13 @@ As can be observed in Figure \ref{fig:plot-tt-ttpertrip}, the total
 travel time resembles the spatial trend distribution in the number of
 employed people in the previous plot (Figure
 \ref{fig:tts-workers-jobs-plot}) and the spatial distribution of the
-average travel time is distinct from other plots presented so far. We
-can see that in areas around the south-eastern border that make up the
-Greater Toronto and Hamilton Area (GTHA), Niagara and Waterloo, the
-average travel times are moderately low. Further from these areas,
-travel times are higher. Interestingly, even in eastern areas (e.g.,
-Peterborough) with high employment and high job concentration, average
-travel time is higher than within the GTHA.
+average travel time is distinct from other plots presented so far. For
+instance, we can see that in areas around the south-eastern border such
+as Niagara and Waterloo (purple and brown borders), the average travel
+times are moderately low. Additionally, travel times (by car) within the
+core of the Toronto census metropolitan area (CMA) (blue) is also
+moderately since traffic congestion is not reflected in the travel time
+estimations. Further from these areas, travel times are higher.
 
 \hypertarget{calibrating-an-impedance-function}{%
 \subsection{Calibrating an impedance
@@ -247,21 +282,24 @@ goodness-of-fit criteria and diagnostics seen in Figure
 f(x, \alpha, \beta) = \frac {x^{\alpha-1}e^{-\frac{x}{\beta}}}{ \beta^{\alpha}\Gamma(\alpha)} \quad \text{for } 0 \leq x \leq \infty\\
 \Gamma(\alpha) =  \int_{0}^{\infty} x^{\alpha-1}e^{-x} \,dx\\
 \end{array}
-\end{equation}
+\end{equation}\textbackslash end\{equation\}
 
 \newpage
 
 \hypertarget{concluding-remarks}{%
 \section{Concluding remarks}\label{concluding-remarks}}
 
-The open data product introduced in this paper shares tables for
-home-to-work related data from the 2016 TTS. In addition, inter-centroid
-travel time tables are calculated, and the planning/municipality
-boundaries are included as a compliment. This open data product,
-\{TTS2016R\}, is freely available to explore in an \texttt{R}
-environment. One possible use of this data, as showcased in this paper,
-is the calibration of impedance functions which in turn can be used for
-accessibility analysis.
+\{TTS2016R\}, the open data package introduced in this paper fuses
+multiple sources of data. It includes an OD cross-tabulation by person
+and by trip mode table for home-to-work commute data from the 2016 TTS
+alongside complimentary boundaries and estimated travel times. The value
+of this data package is in its transparency, easy of access, and its
+open infrastructure for the addition of complimentary data sets in the
+future. Using \texttt{R} users can immediately and easily explore GGH
+commute flow trends as well as suggestion further amendments to the
+package by request. One possible use of this data, as showcased in this
+paper, is the calibration of impedance functions which in turn can be
+used for accessibility analysis.
 
 In the spirit of novel and original research, we hope readers value the
 efforts made to detail the data in order to improve transparency in our
