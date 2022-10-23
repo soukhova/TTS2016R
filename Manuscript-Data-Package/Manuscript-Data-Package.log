@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.23)  23 OCT 2022 03:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.10.23)  23 OCT 2022 11:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -626,107 +626,108 @@ LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 49
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
-LaTeX Font Info:    Trying to load font information for U+lasy on input line 60.
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 70.
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 70.
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 60.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 70.
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 17.09995pt on input line 69.
+(Font)              scaled to size 17.09995pt on input line 76.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 17.09995pt on input line 69.
+(Font)              scaled to size 17.09995pt on input line 76.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 6.64998pt on input line 69.
-LaTeX Font Info:    Trying to load font information for TS1+phv on input line 69.
+(Font)              scaled to size 6.64998pt on input line 76.
+LaTeX Font Info:    Trying to load font information for TS1+phv on input line 76.
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
-(Font)              scaled to size 6.64998pt on input line 69.
+(Font)              scaled to size 6.64998pt on input line 76.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 7.59998pt on input line 69.
+(Font)              scaled to size 7.59998pt on input line 76.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 5.69998pt on input line 69.
+(Font)              scaled to size 5.69998pt on input line 76.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 76.
+LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
+(Font)              scaled to size 9.49997pt on input line 76.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 76.
+LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
+(Font)              scaled to size 6.64998pt on input line 76.
+[1{c:/Users/user/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+]
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 7.59998pt on input line 69.
+(Font)              scaled to size 7.59998pt on input line 76.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 5.69998pt on input line 69.
+(Font)              scaled to size 5.69998pt on input line 76.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 4.74998pt on input line 69.
-LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 74.
+(Font)              scaled to size 4.74998pt on input line 76.
+LaTeX Font Info:    Trying to load font information for OMS+ptm on input line 81.
 (c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 74.
-
-Overfull \vbox (0.80919pt too high) has occurred while \output is active []
-
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <7> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 84.
-LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 6.64998pt on input line 84.
-[1
-
-{c:/Users/user/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <10> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 136.
-LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 9.49997pt on input line 136.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
 [2]
-<images/TTS16-survey-area.png, id=69, 469.755pt x 324.9741pt>
+<images/TTS16-survey-area.png, id=74, 469.755pt x 324.9741pt>
 File: images/TTS16-survey-area.png Graphic file (type png)
 <use images/TTS16-survey-area.png>
-Package pdftex.def Info: images/TTS16-survey-area.png  used on input line 139.
+Package pdftex.def Info: images/TTS16-survey-area.png  used on input line 149.
 (pdftex.def)             Requested size: 352.81416pt x 244.07213pt.
 LaTeX Font Info:    Font shape `OT1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 143.
+(Font)              scaled to size 8.54997pt on input line 153.
 LaTeX Font Info:    Font shape `OT1/phv/b/n' will be
-(Font)              scaled to size 8.54997pt on input line 143.
+(Font)              scaled to size 8.54997pt on input line 153.
 LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12> not available
-(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 148.
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 158.
 LaTeX Font Info:    Font shape `OT1/phv/m/sl' will be
-(Font)              scaled to size 11.39996pt on input line 148.
+(Font)              scaled to size 11.39996pt on input line 158.
 [3 <./images/TTS16-survey-area.png>]
-<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=77, 578.16pt x 361.35pt>
+<Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf, id=84, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf Graphic file (type pdf)
 <use Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf  used on input line 178.
+Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf  used on input line 188.
 (pdftex.def)             Requested size: 352.81416pt x 220.50589pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
 [4 <./Manuscript-Data-Package_files/figure-latex/tts-workers-jobs-plot-1.pdf>]
-<Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=99, 578.16pt x 361.35pt>
+<Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf, id=107, 578.16pt x 361.35pt>
 File: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf Graphic file (type pdf)
 <use Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>
-Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf  used on input line 222.
+Package pdftex.def Info: Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf  used on input line 234.
 (pdftex.def)             Requested size: 352.81416pt x 220.50589pt.
-[5 <./Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>]
-<images/impedance_function.png, id=135, 481.8pt x 481.8pt>
+[5] [6 <./Manuscript-Data-Package_files/figure-latex/plot-tt-ttpertrip-1.pdf>]
+<images/impedance_function.png, id=165, 481.8pt x 481.8pt>
 File: images/impedance_function.png Graphic file (type png)
 <use images/impedance_function.png>
-Package pdftex.def Info: images/impedance_function.png  used on input line 272.
+Package pdftex.def Info: images/impedance_function.png  used on input line 284.
 (pdftex.def)             Requested size: 264.61061pt x 264.61588pt.
-[6] (./Manuscript-Data-Package.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[7 <./images/impedance_function.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 38--42
-[][]$\OT1/pcr/m/n/9 http : / / dmg . utoronto . ca / transportation-[]tomorrow-[]survey /
+[7 <./images/impedance_function.png>] (./Manuscript-Data-Package.bbl
+Underfull \hbox (badness 10000) in paragraph at lines 48--52
+[]\OT1/ptm/m/n/9 Data Man-age-ment Group (2018b) TTS - Trans-porta-tion Tomor-row Sur-vey 2016.
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
+Underfull \hbox (badness 10000) in paragraph at lines 48--52
+\OT1/ptm/m/n/9 URL [][]$\OT1/pcr/m/n/9 http : / / dmg . utoronto . ca / transportation-[]tomorrow-[]survey /
+ []
 
-[8]) [9] (./Manuscript-Data-Package.aux)
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 116--119
+\OT1/pcr/m/n/9 statcan . gc . ca / census-[]recensement / 2011 / geo / bound-[]limit /
+ []
+
+) [9] (./Manuscript-Data-Package.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -734,18 +735,18 @@ Package rerunfilecheck Info: File `Manuscript-Data-Package.out' has not changed.
 (rerunfilecheck)             Checksum: 8B298627E47ECE9C0E7BB5BECDDF7CAE;1189.
  ) 
 Here is how much of TeX's memory you used:
- 14598 strings out of 477031
- 241221 string characters out of 5826714
- 582338 words of memory out of 5000000
- 35393 multiletter control sequences out of 15000+600000
- 512133 words of font info for 114 fonts, out of 8000000 for 9000
+ 14614 strings out of 477031
+ 241929 string characters out of 5826714
+ 580677 words of memory out of 5000000
+ 35404 multiletter control sequences out of 15000+600000
+ 513211 words of font info for 115 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 72i,9n,77p,753b,595s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 72i,9n,77p,750b,584s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/base/8r.enc}<c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><c:/Users/user/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Manuscript-Data-Package.pdf (9 pages, 4866127 bytes).
+Output written on Manuscript-Data-Package.pdf (9 pages, 4865450 bytes).
 PDF statistics:
- 286 PDF objects out of 1000 (max. 8388607)
- 232 compressed objects within 3 object streams
- 43 named destinations out of 1000 (max. 500000)
+ 305 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
+ 47 named destinations out of 1000 (max. 500000)
  69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
