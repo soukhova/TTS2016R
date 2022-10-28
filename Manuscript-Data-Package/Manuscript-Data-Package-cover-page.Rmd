@@ -1,19 +1,15 @@
 ---
 title: "TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe Area, Ontario, Canada"
 author:
-  - name: "Anastasia Soukhov"
-    email: "soukhoa@mcmaster.ca"
-    affiliation: SEES
-  - name: "Antonio Páez"
-    email: "paezha@mcmaster.ca"
-    affiliation: SEES
+  - name: Anastasia Soukhov*
+    num: 1
+  - name: Antonio Páez
+    num: 1
     footnote: 1
 address:
-  - code: SEES
-    address: "School of Earth, Environment and Society, McMaster University, Hamilton, ON, L8S 4K1, Canada"
-footnote:
-  - code: 1
-    text: "Corresponding Author"
+  - num: 1
+    org: School of Earth, Environment and Society, McMaster University, Hamilton, ON, L8S 4K1, Canada
+corrauth: "Anastasia Soukhov, soukhoa@mcmaster.ca"
 abstract: 
   "This paper describes and visualises the data contained within the {TTS2016R} data package created in `R`, the statistical computing and graphics language. In addition to a synthetic example, {TTS2016R} contains home-to-work commute information for the Greater Golden Horseshoe (GGH) area in Canada retrieved from the 2016 Transportation Tomorrow Survey (TTS). Included are all Traffic Analysis Zones (TAZ), the number of people who are employed full-time per TAZ, the number of jobs per TAZ, the count of origin destination (OD) pairs and trips by mode per origin TAZ, calculated car travel time from TAZ OD centroid pairs, and associated spatial boundaries to link TAZ to the Canadian Census. To illustrate how this information can be analysed to understand patterns in commuting, we estimate a distance-decay curve (i.e., impedance function) for the region. {TTS2016R} is a growing open data product built on `R` infrastructure that allows for the immediate access of home-to-work commuting data alongside complimentary objects from different sources. The package will continue expanding with additions by the authors and the community at-large by requests in the future. {TTS2016R} can be freely explored and downloaded in the associated [Github repository](https://github.com/soukhova/TTS2016R) where the documentation and code involved in data creation, manipulation, and all open data products are detailed."
   
@@ -26,3 +22,7 @@ output:
   rticles::sage_article:
     keep_tex: yes
 ---
+
+**Anastasia Soukhov** is a PhD student in the School of Earth, Environment & Society at McMaster University. She has a masters and bachelors in Civil Engineering with a transportation specialization. She is enthusiastic about sustainable and equitable housing and transportation and is a researcher within the Mobilizing Justice Partnership working to establish data driven equity standards in Canadian cities. Her recent work includes: studies on sustainable passenger vehicle energy consumption and wheel-to-wheel emission simulation, sustainable mobility policy optimization, and competitive accessibility measures. 
+
+**Antonio Páez** is full professor in the School of Earth, Environment & Society at McMaster University. Recent work includes studies on accessibility, spatial analysis of qualitative variables, aging and mobility, transportation and social exclusion, the influence of the built and social environments on travel behavior, social networks and decision making, telework adoption, and healthcare provision and trends. Paez has published widely, and is author or co-author of over 150 papers, many appearing in leading international journals. He currently serves as Editor-in-Chief of the Journal of Geographical Systems, and sits on the editorial boards of Transportation, Journal of Transport Geography, Geographical Analysis, and International Journal of Geographical Information Science, among others.
