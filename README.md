@@ -5,7 +5,7 @@
 
 ## 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
 
-Soukhov, A., & Páez, A. (2023). TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey in the Greater Golden Horseshoe area, Ontario, Canada. Environment and Planning B: Urban Analytics and City Science, 0(0). [![DOI](https://doi-org.libaccess.lib.mcmaster.ca/10.1177/23998083221146781)
+Soukhov, A., & Páez, A. (2023). TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey in the Greater Golden Horseshoe area, Ontario, Canada. Environment and Planning B: Urban Analytics and City Science, 0(0). https://doi-org.libaccess.lib.mcmaster.ca/10.1177/23998083221146781
 
 This package contains objects which are sourced from the 2016
 Transportation Tomorrow Survey [(TTS)](http://dmg.utoronto.ca/drs) or
