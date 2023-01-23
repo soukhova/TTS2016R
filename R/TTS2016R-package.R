@@ -16,7 +16,7 @@ NULL
 #' southern Ontario, Canada. The package also includes associated spatial boundary files.
 #'
 #' @docType package
-#' @name TTS2016R
+#' @name TTS2016R-package
 #' @author Antonio Paez, School of Earth, Environment and Society, McMaster University \email{paezha@@mcmaster.ca}
 #' @author Anastasia Soukhov, School of Earth, Environment and Society, McMaster University \email{soukhoa@@mcmaster.ca}
 #' @references \url{https://github.com/soukhova/TTS2016R}

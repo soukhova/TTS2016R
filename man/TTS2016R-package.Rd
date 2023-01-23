@@ -7,6 +7,15 @@
 \title{TTS2016R: An augmented 2016 Transportation Tomorrow Survey (TTS) data package: worker and place of employment counts, trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada}
 \description{
 This package includes the count of workers (origin), count of places of employment (destination), count of associated trip (by primary modes) from each origin and destination, and estimated car travel times between origins and destinations. The data is retireved from the 2016 Transportation Tomorrow Survey [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction), a travel survey of the Greater Golden Horse area (GGH) located in southern Ontario, Canada. The packages associated spatial boundaries to faciliate analysis including: the traffic analysis zone (TAZ) boundaries (retrieved from TTS 2016), planning boundaries associated with muncipalities (retrieved from TTS 2016), and census metropolitan areas (CMA) and census aggloomeration (CA) boundaries retrieved from the Canadian Census.
+
+A data package which consists of objects sourced from the
+\href{http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction}{2016 Transportation Tomorrow Survey (TTS)}
+or are curated to facilitate the use and analysis of TTS data. This package includes worker-to-jobs origin
+-destinations and traffic analysis zone (TAZ) boundaries for the Greater Golden Horse area (GGH) located in
+southern Ontario, Canada. The package also includes associated spatial boundary files.
+}
+\references{
+\url{https://github.com/soukhova/TTS2016R}
 }
 \seealso{
 Useful links:
@@ -23,5 +32,9 @@ Authors:
   \item Antonio Paez \email{paezha@mcmaster.ca} (\href{https://orcid.org/0000-0001-6912-9919}{ORCID})
 }
 
+
+Antonio Paez, School of Earth, Environment and Society, McMaster University \email{paezha@mcmaster.ca}
+
+Anastasia Soukhov, School of Earth, Environment and Society, McMaster University \email{soukhoa@mcmaster.ca}
 }
 \keyword{internal}
