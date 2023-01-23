@@ -21,7 +21,7 @@ knitr::opts_chunk$set(
 
 This package contains objects which are sourced from the 2016
 Transportation Tomorrow Survey
-[(TTS)](http://dmg.utoronto.ca/drs) or are curated to
+[(TTS)](http://dmg.utoronto.ca/drs) and objects curated to
 facilitate the use and analysis of TTS data. TTS 2016 is one of the
 largest travel surveys in southern Ontario, Canada, and a slice of this
 survey has been cleaned, packaged, and augmented for easy use in an `R`

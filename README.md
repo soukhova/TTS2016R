@@ -5,25 +5,21 @@
 
 ## 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
 
-Soukhov, A., & Páez, A. (2023). TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey in the Greater Golden Horseshoe area, Ontario, Canada. Environment and Planning B: Urban Analytics and City Science, 0(0). DOI:10.1177/23998083221146781
+[![DOI](https://zenodo.org/badge/465815515.svg)](https://zenodo.org/badge/latestdoi/465815515)
 
 This package contains objects which are sourced from the 2016
-Transportation Tomorrow Survey [(TTS)](http://dmg.utoronto.ca/drs) or
-are curated to facilitate the use and analysis of TTS data. TTS 2016 is
-one of the largest travel surveys in southern Ontario, Canada, and a
+Transportation Tomorrow Survey [(TTS)](http://dmg.utoronto.ca/drs) and
+objects curated to facilitate the use and analysis of TTS data. TTS 2016
+is one of the largest travel surveys in southern Ontario, Canada, and a
 slice of this survey has been cleaned, packaged, and augmented for easy
 use in an `R` environment.
 
-<<<<<<< HEAD
 A data paper describing and discussing this package has been published:
 Soukhov, A., & Páez, A. (2023). TTS2016R: A data set to study population
 and employment patterns from the 2016 Transportation Tomorrow Survey in
 the Greater Golden Horseshoe area, Ontario, Canada. Environment and
 Planning B: Urban Analytics and City Science, 0(0).
 <DOI:10.1177/23998083221146781>
-=======
-
->>>>>>> 7651a1effade285a422562b793d5734b67527cdc
 
 <!-- badges: start -->
 <!-- badges: end -->
