@@ -19,6 +19,9 @@ library(tidyverse)
 library(units)
 library(tmap)
 library(ggplot2)
+
+library(fitdistrplus)
+library(logspline)
 ```
 
 ## Traffic Analysis Zones

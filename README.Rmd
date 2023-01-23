@@ -27,8 +27,17 @@ largest travel surveys in southern Ontario, Canada, and a slice of this
 survey has been cleaned, packaged, and augmented for easy use in an `R`
 environment.
 
+A data paper describing and discussing this package has been published: 
+Soukhov, A., & Páez, A. (2023). TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey in the Greater Golden Horseshoe area, Ontario, Canada. Environment and Planning B: Urban Analytics and City Science, 0(0). DOI:10.1177/23998083221146781
+
 <!-- badges: start -->
 <!-- badges: end -->
+
+## What is this data package?
+
+{TTS2016R} is an open data product. Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs [see Arribas et. al (2021)](https://doi.org/10.1007/s10109-021-00363-5). The product presented in this repo is an `R` data package that consists of objects that are sourced from the 2016 Transportation Tomorrow Survey (TTS) or are curated to facilitate the use and analysis of TTS data. This package includes person-to-jobs origin-destinations, traffic analysis zone (TAZ) boundaries and planning/municipality boundaries for the Greater Golden Horse area (GGH) in Ontario, Canada [Data Management Group (2018)](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction). In addition, the package includes TAZ centroid-to-centroid travel times by car computed using package [`r5r`](https://github.com/ipeaGIT/r5r).
+
+Data from the TTS are freely available to the public through the [TTS Data Retrieval System](http://dmg.utoronto.ca/drs) but the raw data can be technically demanding, cumbersome to work with, and could require multiple software to process. By pre-processing the data in a `R` environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region. It also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future. 
 
 ## Setup
 
@@ -42,18 +51,18 @@ remotes::install_github("soukhova/TTS2016R",
                         build_vignettes = TRUE)
 ```
 
-## TTS 2016 Data Overview
+## Data Overview
 
-The 2016 Transportation Tomorrow Survey (TTS) data for the the Greater Golden Horseshoe (GGH) area in the province of Ontario, Canada (43.6°N 79.73°W) is included; specifically the location of origins and destinations defined by Traffic Analysis Zones (TAZ), the associated municipality boundaries, the number of jobs and workers at each origin and destination, and the trips (by primary mode) from origin to destination for the morning home-to-work commute. Also included are calculated travel times by car (calculated via [`r5r`](https://github.com/ipeaGIT/r5r)) and a derived impedance function values corresponding to the cost of travel based on the trip length distribution.
+The 2016 Transportation Tomorrow Survey (TTS) data is from the the Greater Golden Horseshoe (GGH), an area that is located within the province of Ontario, Canada (43.6°N 79.73°W). Included within are the associated municipality boundaries, boundaries of the Traffic Analysis Zones (TAZ), a table with the number of full-time jobs and associated full-time workers at each TAZ, and the trips (by primary mode) from origin (residential TAZ) to destination (workplace TAZ). Also included are calculated travel times by car (calculated via [`r5r`](https://github.com/ipeaGIT/r5r)) and derived impedance function values corresponding to the cost of travel based on the trip length distribution.
 
 <img src="man/figures/TTS16-survey-area.png"  />
 
-See the plot below for a spatial visualization of the number of workers
+The plot that follows has a spatial visualization of the number of workers
 and jobs within each TAZ:
 
 <img src="man/figures/tts-workers-jobs-plot.png"  />
 
-Let's take a look at the TTS 2016 OD data. The following table shows some origin-destination pairs which ave 2 workers at the origin and their associated estimated car travel time (minutes):
+Let's take a look at a slice of the TTS 2016 OD data. We filter the OD table to show a few OD pairs that have 2 workers at the origin and their associated estimated car travel time (minutes):
 <table>
 <thead>
 <tr>
@@ -252,9 +261,9 @@ accessibility measures.
 
 ## Contributing to this data package
 
-The purpose of this data package is to make the data of the TTS 2016 easily and freely available for analysis in an R environment. Currently, the data package provides a few slices of the TTS 2016, but we invite others from the community to request additional data, report issues, and even contribute to the data package. 
+The purpose of this data package is to make the data of the TTS 2016 easily and freely available for analysis in a `R` environment. Currently, the data package provides a few slices of the TTS 2016, but we invite others from the community to request additional data, report issues and even contribute to the data package. 
 
 If interested in contributing, please try to adhere to the following steps:
 
 1. If you notice spelling errors or other hick-ups, please submit an issue. 
-2. If you use the data package and would like to share an interesting use case or analysis, please fork the repository, save the analysis file in [vignettes](https://github.com/soukhova/TTS2016R/tree/master/vignettes/articles) and submit a pull request. Analysis files will be reviewed and added added as articles (with full credit).
+2. If you use the data package and would like to share an interesting use case or analysis, please fork the repository, save the analysis file in [vignettes](https://github.com/soukhova/TTS2016R/tree/master/vignettes/articles) and submit a pull request. Analysis files will be reviewed and added as articles (with full credit).
