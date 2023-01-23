@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="This package includes the count of workers (origin), count of places of employment (destination), count of associated trip (by primary modes) from each origin and destination, and estimated car travel times between origins and destinations (using package `r5r`). The data is retireved from the 2016 Transportation Tomorrow Survey [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction), a travel survey of the Greater Golden Horse area (GGH) located in southern Ontario, Canada. The packages associated spatial boundaries to faciliate analysis including: the traffic analysis zone (TAZ) boundaries (retrieved from TTS 2016), planning boundaries associated with muncipalities (retrieved from TTS 2016), and census metropolitan areas (CMA) and census aggloomeration (CA) boundaries retrieved from the Canadian Census. ">
+<meta name="description" content="This package includes the count of workers (origin), count of places of employment (destination), count of associated trip (by primary modes) from each origin and destination, and estimated car travel times between origins and destinations. The data is retireved from the 2016 Transportation Tomorrow Survey [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction), a travel survey of the Greater Golden Horse area (GGH) located in southern Ontario, Canada. The packages associated spatial boundaries to faciliate analysis including: the traffic analysis zone (TAZ) boundaries (retrieved from TTS 2016), planning boundaries associated with muncipalities (retrieved from TTS 2016), and census metropolitan areas (CMA) and census aggloomeration (CA) boundaries retrieved from the Canadian Census. ">
 <title>An augmented 2016 Transportation Tomorrow Survey (TTS) data package: worker and place of employment counts, trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada • TTS2016R</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="An augmented 2016 Transportation Tomorrow Survey (TTS) data package: worker and place of employment counts, trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada">
-<meta property="og:description" content="This package includes the count of workers (origin), count of places of employment (destination), count of associated trip (by primary modes) from each origin and destination, and estimated car travel times between origins and destinations (using package `r5r`). The data is retireved from the 2016 Transportation Tomorrow Survey [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction), a travel survey of the Greater Golden Horse area (GGH) located in southern Ontario, Canada. The packages associated spatial boundaries to faciliate analysis including: the traffic analysis zone (TAZ) boundaries (retrieved from TTS 2016), planning boundaries associated with muncipalities (retrieved from TTS 2016), and census metropolitan areas (CMA) and census aggloomeration (CA) boundaries retrieved from the Canadian Census. ">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="An augmented 2016 Transportation Tomorrow Survey (TTS) data package: worker and place of employment counts, trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada">
+<meta property="og:description" content="This package includes the count of workers (origin), count of places of employment (destination), count of associated trip (by primary modes) from each origin and destination, and estimated car travel times between origins and destinations. The data is retireved from the 2016 Transportation Tomorrow Survey [TTS](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction), a travel survey of the Greater Golden Horse area (GGH) located in southern Ontario, Canada. The packages associated spatial boundaries to faciliate analysis including: the traffic analysis zone (TAZ) boundaries (retrieved from TTS 2016), planning boundaries associated with muncipalities (retrieved from TTS 2016), and census metropolitan areas (CMA) and census aggloomeration (CA) boundaries retrieved from the Canadian Census. ">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -60,11 +60,19 @@
 <div class="page-header"><h1 id="tts2016r">TTS2016R<a class="anchor" aria-label="anchor" href="#tts2016r"></a>
 </h1></div>
 <div class="section level2">
-<h2 id="2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada">2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada<a class="anchor" aria-label="anchor" href="#2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada"></a>
+<h2 id="id_2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada">2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada<a class="anchor" aria-label="anchor" href="#id_2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada"></a>
 </h2>
-
-<p>This package contains objects which are sourced from the 2016 Transportation Tomorrow Survey <a href="http://dmg.utoronto.ca/drs" class="external-link">(TTS)</a> or are curated to facilitate the use and analysis of TTS data. TTS 2016 is one of the largest travel surveys in southern Ontario, Canada, and a slice of this survey has been cleaned, packaged, and augmented for easy use in an <code>R</code> environment.</p>
-<!-- badges: start --><!-- badges: end -->
+<p><a href="https://zenodo.org/badge/latestdoi/465815515" class="external-link"><img src="https://zenodo.org/badge/465815515.svg" alt="DOI"></a></p>
+<p>This package contains objects which are sourced from the 2016 Transportation Tomorrow Survey <a href="http://dmg.utoronto.ca/drs" class="external-link">(TTS)</a> and objects curated to facilitate the use and analysis of TTS data. TTS 2016 is one of the largest travel surveys in southern Ontario, Canada, and a slice of this survey has been cleaned, packaged, and augmented for easy use in an <code>R</code> environment.</p>
+<p>A data paper describing and discussing this package has been published: Soukhov, A., &amp; Páez, A. (2023). TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey in the Greater Golden Horseshoe area, Ontario, Canada. Environment and Planning B: Urban Analytics and City Science, 0(0). <a href="DOI:10.1177/23998083221146781" class="uri">DOI:10.1177/23998083221146781</a></p>
+<!-- badges: start -->
+<!-- badges: end -->
+</div>
+<div class="section level2">
+<h2 id="what-is-this-data-package">What is this data package?<a class="anchor" aria-label="anchor" href="#what-is-this-data-package"></a>
+</h2>
+<p>{TTS2016R} is an open data product. Open data products are the result of turning source data (open or otherwise) into accessible information that adds value to the original inputs <a href="https://doi.org/10.1007/s10109-021-00363-5" class="external-link">see Arribas et. al (2021)</a>. The product presented in this repo is an <code>R</code> data package that consists of objects that are sourced from the 2016 Transportation Tomorrow Survey (TTS) or are curated to facilitate the use and analysis of TTS data. This package includes person-to-jobs origin-destinations, traffic analysis zone (TAZ) boundaries and planning/municipality boundaries for the Greater Golden Horse area (GGH) in Ontario, Canada <a href="http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction" class="external-link">Data Management Group (2018)</a>. In addition, the package includes TAZ centroid-to-centroid travel times by car computed using package <a href="https://github.com/ipeaGIT/r5r" class="external-link"><code>r5r</code></a>.</p>
+<p>Data from the TTS are freely available to the public through the <a href="http://dmg.utoronto.ca/drs" class="external-link">TTS Data Retrieval System</a> but the raw data can be technically demanding, cumbersome to work with, and could require multiple software to process. By pre-processing the data in a <code>R</code> environment, {TTS2016R} offers a slice of the TTS data useful to understand patterns of commuting to work in the region. It also provides open infrastructure for additional TTS or complimentary data sets to be amended by the authors or wider open-source community in the future.</p>
 </div>
 <div class="section level2">
 <h2 id="setup">Setup<a class="anchor" aria-label="anchor" href="#setup"></a>
@@ -78,90 +86,196 @@
 <span>                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="tts-2016-data-overview">TTS 2016 Data Overview<a class="anchor" aria-label="anchor" href="#tts-2016-data-overview"></a>
+<h2 id="data-overview">Data Overview<a class="anchor" aria-label="anchor" href="#data-overview"></a>
 </h2>
-<p>The 2016 Transportation Tomorrow Survey (TTS) data for the the Greater Golden Horseshoe (GGH) area in the province of Ontario, Canada (43.6°N 79.73°W) is included; specifically the location of origins and destinations defined by Traffic Analysis Zones (TAZ), the associated municipality boundaries, the number of jobs and workers at each origin and destination, and the trips (by primary mode) from origin to destination for the morning home-to-work commute. Also included are calculated travel times by car (calculated via <a href="https://github.com/ipeaGIT/r5r" class="external-link"><code>r5r</code></a>) and a derived impedance function values corresponding to the cost of travel based on the trip length distribution.</p>
+<p>The 2016 Transportation Tomorrow Survey (TTS) data is from the the Greater Golden Horseshoe (GGH), an area that is located within the province of Ontario, Canada (43.6°N 79.73°W). Included within are the associated municipality boundaries, boundaries of the Traffic Analysis Zones (TAZ), a table with the number of full-time jobs and associated full-time workers at each TAZ, and the trips (by primary mode) from origin (residential TAZ) to destination (workplace TAZ). Also included are calculated travel times by car (calculated via <a href="https://github.com/ipeaGIT/r5r" class="external-link"><code>r5r</code></a>) and derived impedance function values corresponding to the cost of travel based on the trip length distribution.</p>
 <p><img src="reference/figures/TTS16-survey-area.png"></p>
-<p>See the plot below for a spatial visualization of the number of workers and jobs within each TAZ:</p>
-<p><img src="reference/figures/tts-workers-jobs-plot.png"></p>Let’s take a look at the TTS 2016 OD data. The following table shows some origin-destination pairs which ave 2 workers at the origin and their associated estimated car travel time (minutes):<table class="table">
+<p>The plot that follows has a spatial visualization of the number of workers and jobs within each TAZ:</p>
+<p><img src="reference/figures/tts-workers-jobs-plot.png"></p>
+Let’s take a look at a slice of the TTS 2016 OD data. We filter the OD table to show a few OD pairs that have 2 workers at the origin and their associated estimated car travel time (minutes):
+<table class="table">
 <thead><tr>
-<th style="text-align:left;">Origin</th>
-<th style="text-align:left;">Destination</th>
-<th style="text-align:right;">Workers</th>
-<th style="text-align:right;">Travel Time (min)</th>
+<th style="text-align:left;">
+Origin
+</th>
+<th style="text-align:left;">
+Destination
+</th>
+<th style="text-align:right;">
+Workers
+</th>
+<th style="text-align:right;">
+Travel Time (min)
+</th>
 </tr></thead>
 <tbody>
 <tr>
-<td style="text-align:left;">3640</td>
-<td style="text-align:left;">3718</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">24</td>
+<td style="text-align:left;">
+3640
+</td>
+<td style="text-align:left;">
+3718
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+24
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">3640</td>
-<td style="text-align:left;">3849</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">
+3640
+</td>
+<td style="text-align:left;">
+3849
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+20
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">3640</td>
-<td style="text-align:left;">3866</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">20</td>
+<td style="text-align:left;">
+3640
+</td>
+<td style="text-align:left;">
+3866
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+20
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">3879</td>
-<td style="text-align:left;">3877</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">8</td>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+3877
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+8
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">3879</td>
-<td style="text-align:left;">4003</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">17</td>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+4003
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+17
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">3879</td>
-<td style="text-align:left;">4007</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">18</td>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+4007
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+18
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">3879</td>
-<td style="text-align:left;">63</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">24</td>
+<td style="text-align:left;">
+3879
+</td>
+<td style="text-align:left;">
+63
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+24
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">8417</td>
-<td style="text-align:left;">3152</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">43</td>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+3152
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+43
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">8417</td>
-<td style="text-align:left;">3707</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">62</td>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+3707
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+62
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">8417</td>
-<td style="text-align:left;">3816</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">65</td>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+3816
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+65
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">8417</td>
-<td style="text-align:left;">55</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">82</td>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+55
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+82
+</td>
 </tr>
 <tr>
-<td style="text-align:left;">8417</td>
-<td style="text-align:left;">8415</td>
-<td style="text-align:right;">2</td>
-<td style="text-align:right;">43</td>
+<td style="text-align:left;">
+8417
+</td>
+<td style="text-align:left;">
+8415
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+43
+</td>
 </tr>
 </tbody>
 </table>
@@ -170,11 +284,11 @@
 <div class="section level2">
 <h2 id="contributing-to-this-data-package">Contributing to this data package<a class="anchor" aria-label="anchor" href="#contributing-to-this-data-package"></a>
 </h2>
-<p>The purpose of this data package is to make the data of the TTS 2016 easily and freely available for analysis in an R environment. Currently, the data package provides a few slices of the TTS 2016, but we invite others from the community to request additional data, report issues, and even contribute to the data package.</p>
+<p>The purpose of this data package is to make the data of the TTS 2016 easily and freely available for analysis in a <code>R</code> environment. Currently, the data package provides a few slices of the TTS 2016, but we invite others from the community to request additional data, report issues and even contribute to the data package.</p>
 <p>If interested in contributing, please try to adhere to the following steps:</p>
 <ol style="list-style-type: decimal">
 <li>If you notice spelling errors or other hick-ups, please submit an issue.</li>
-<li>If you use the data package and would like to share an interesting use case or analysis, please fork the repository, save the analysis file in <a href="https://github.com/soukhova/TTS2016R/tree/master/vignettes/articles" class="external-link">vignettes</a> and submit a pull request. Analysis files will be reviewed and added added as articles (with full credit).</li>
+<li>If you use the data package and would like to share an interesting use case or analysis, please fork the repository, save the analysis file in <a href="https://github.com/soukhova/TTS2016R/tree/master/vignettes/articles" class="external-link">vignettes</a> and submit a pull request. Analysis files will be reviewed and added as articles (with full credit).</li>
 </ol>
 </div>
 </div>
@@ -202,12 +316,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://zenodo.org/badge/latestdoi/465815515" class="external-link"><img src="https://zenodo.org/badge/465815515.svg" alt="DOI"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
@@ -220,7 +329,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>
