@@ -15,11 +15,12 @@ slice of this survey has been cleaned, packaged, and augmented for easy
 use in an `R` environment.
 
 A data paper describing and discussing this package has been published:
-Soukhov, A., & Páez, A. (2023). TTS2016R: A data set to study population
-and employment patterns from the 2016 Transportation Tomorrow Survey in
-the Greater Golden Horseshoe area, Ontario, Canada. Environment and
-Planning B: Urban Analytics and City Science, 0(0).
-<DOI:10.1177/23998083221146781>
+
+Soukhov, A., & Páez, A. (2023). *TTS2016R: A data set to study
+population and employment patterns from the 2016 Transportation Tomorrow
+Survey in the Greater Golden Horseshoe area, Ontario, Canada*.
+Environment and Planning B: Urban Analytics and City Science, 50(2)
+556-563. <DOI:10.1177/23998083221146781>
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -29,13 +30,13 @@ Planning B: Urban Analytics and City Science, 0(0).
 {TTS2016R} is an open data product. Open data products are the result of
 turning source data (open or otherwise) into accessible information that
 adds value to the original inputs [see Arribas et. al
-(2021)](https://doi.org/10.1007/s10109-021-00363-5). The product
-presented in this repo is an `R` data package that consists of objects
-that are sourced from the 2016 Transportation Tomorrow Survey (TTS) or
-are curated to facilitate the use and analysis of TTS data. This package
-includes person-to-jobs origin-destinations, traffic analysis zone (TAZ)
-boundaries and planning/municipality boundaries for the Greater Golden
-Horse area (GGH) in Ontario, Canada [Data Management Group
+(2021)](https://rdcu.be/dn6yP). The product presented here is an `R`
+data package that consists of objects sourced from the 2016
+Transportation Tomorrow Survey (TTS) or curated to facilitate the use
+and analysis of TTS data. This package includes person-to-jobs
+origin-destinations, traffic analysis zone (TAZ) boundaries and
+planning/municipality boundaries for the Greater Golden Horse area (GGH)
+in Ontario, Canada [Data Management Group
 (2018)](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction).
 In addition, the package includes TAZ centroid-to-centroid travel times
 by car computed using package [`r5r`](https://github.com/ipeaGIT/r5r).
@@ -43,11 +44,11 @@ by car computed using package [`r5r`](https://github.com/ipeaGIT/r5r).
 Data from the TTS are freely available to the public through the [TTS
 Data Retrieval System](http://dmg.utoronto.ca/drs) but the raw data can
 be technically demanding, cumbersome to work with, and could require
-multiple software to process. By pre-processing the data in a `R`
-environment, {TTS2016R} offers a slice of the TTS data useful to
+multiple software applications to process. By pre-processing the data in
+the `R` environment, {TTS2016R} offers a slice of the TTS data useful to
 understand patterns of commuting to work in the region. It also provides
-open infrastructure for additional TTS or complimentary data sets to be
-amended by the authors or wider open-source community in the future.
+open infrastructure for additional TTS or complementary data sets to be
+added by the authors or a wider open-source community in the future.
 
 ## Setup
 
