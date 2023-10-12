@@ -13,15 +13,14 @@ The centroids of all work zones (origins) and full-time (FT) employment zones (d
 
 Load packages:
 ```{r load-packages}
-library(readxl)
-library(sf)
-library(tidyverse)
-library(units)
-library(tmap)
-library(ggplot2)
-
-library(fitdistrplus)
-library(logspline)
+library(fitdistrplus) # Help to Fit of a Parametric Distribution to Non-Censored or Censored Data
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(logspline) # not installed on this machine
+library(readxl) # not installed on this machine
+library(sf) # Simple Features for R
+library(tidyverse) # not installed on this machine
+library(tmap) # Thematic Maps
+library(units) # Measurement Units for R Vectors
 ```
 
 ## Traffic Analysis Zones
@@ -539,3 +538,4 @@ save("ggh_pd", file = "TTS16-data-inputs/Boundaries/ggh_pd.Rdata")
 save("ggh_cma", file = "TTS16-data-inputs/Boundaries/ggh_cma.Rdata")
 save("od_ft_p_t", file = "TTS16-data-inputs/OD-by-FT-Employment/od_ft_p_t.Rdata")
 ```
+

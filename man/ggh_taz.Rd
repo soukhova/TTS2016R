@@ -3,6 +3,7 @@
 \docType{data}
 \name{ggh_taz}
 \alias{ggh_taz}
+\alias{hh_sed_taz}
 \title{Traffic analysis zones boundaries in the Greater Golden Horseshoe (GGH) area and associated data.}
 \format{
 A simple feature class (sf) polygon object containing 3764 rows and 10 variables; each row represents a unique TAZ with associated features.
@@ -18,15 +19,36 @@ A simple feature class (sf) polygon object containing 3764 rows and 10 variables
 \item{BC_split}{The percentage of full-time work related trips made from that origin to that destination by walking as a primary mode.}
 \item{geometry}{The sfc polygon geometry (boundaries) of the TAZ.}
 }
+
+A data frame containing 3128 rows and 8 variables; each row represents a unique TAZ with associated features.
+\describe{
+\item{GTA06}{Unique ID of the traffic analysis zone (TAZ).}
+\item{$0 to $14999}{Number of households in TAZ in this income range. }
+\item{$15000 to $39999}{Number of households in TAZ in this income range.}
+\item{$40000 to $59999}{Number of households in TAZ in this income range.}
+\item{$60000 to $99999}{Number of households in TAZ in this income range.}
+\item{$100000 to $124999}{Number of households in TAZ in this income range. }
+\item{$125000 and above}{TNumber of households in TAZ in this income range.}
+\item{Decline / do not know}{Number of households in TAZ who reportet unknown or did not state their income range.}
+}
 }
 \source{
+"2016 Transportation Tomorrow Survey" from \href{http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction}{Data Management Group} accessed November 14 2021.
+
 "2016 Transportation Tomorrow Survey" from \href{http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction}{Data Management Group} accessed November 14 2021.
 }
 \usage{
 data(ggh_taz)
+
+data(ggh_taz)
 }
 \description{
 This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+
+This object contains socio-economic and demographic information at the level of traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+The query to retrieve data for income was a cross tabulation of the Person table; the Row was 2006 GTA zone of household - gta06_hhld, and the column was Income range of household - income.
+The income reported is the total  for the household from all sources, before income tax, in the year before the survey.
+According to the TTS Data Guide "The question was voluntary and subject to high levels of non-response. The results of this question should be interpreted with caution."
 }
 \keyword{(GGH)}
 \keyword{2016}

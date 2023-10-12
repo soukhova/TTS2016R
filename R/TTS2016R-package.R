@@ -22,6 +22,45 @@ NULL
 #' @references \url{https://github.com/soukhova/TTS2016R}
 NULL
 
+
+
+#' census metropolitan area (CMA)/census agglomeration (CA) boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
+#'
+#' This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#'
+#' @format A simple feature class (sf) polygon object containing 16 rows and 4 variables; each row represents a unique census metropolitan area (CMA) of census agglomeration (CA) with associated geo-referenced geometry. CMA and CA consist of one or more adjacent municipalities around a core. The CMA/CA boundaries are defined for the purpose of the Canadian Census based on population. As such, the core of each CMA must have a population of at least 50,000 and the entire CMA must have a population of at least 100,000. CA are smaller in population, thir course must have a population of at least 10,000.
+#' \describe{
+#'   \item{CMAUID}{A unique identifier for each census metropolitan area (CMA)/census agglomeration (CA).}
+#'   \item{CMANAME}{The name of the census metropolitan area (CMA)/census agglomeration (CA).}
+#'   \item{CMATYPE}{A one character field indicating whether the unit is a census metropolitan area, a tracted census agglomeration or a non-tracted census agglomeration. "B" is a CMA and "D" is a CA with no census tracts, and "K" is a CA with census tracts.}
+#'   \item{geometry}{The sfc polygon geometry (boundaries).}
+#'}
+#' @docType data
+#' @keywords planning districts regions municipalities boundary
+#' @name ggh_cma
+#' @usage data(ggh_cma)
+#' @source "The 2016 census metropolitan areas and census agglomeration boundary files as created by the Canadian Census available [here](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) accessed October 21st 2022 (Boundary Files, 2016 Census. Statistics Canada Catalogue no. 92-160-X.). All variable definitions are based on the definitions included in the census year 2016 boundary file reference guide (Boundary Files, Reference Guide, Second edition, 2016 Census. Statistics Canada Catalogue no. 92-160-G.).
+"ggh_cma"
+
+#' Planning boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
+#'
+#' This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#'
+#' @format A simple feature class (sf) polygon object containing 105 rows and 5 variables; each row represents a unique planning region with associated geo-referenced geometry.
+#' \describe{
+#'   \item{MUN}{The name of the municipality and/or planning boundary.}
+#'   \item{PD}{A unique ID.}
+#'   \item{REGION}{A unique ID corresponding with the greater region that each PD is part of.}
+#'   \item{REGION_name}{Names of regions corresponding to the REGION ID.}
+#'   \item{geometry}{The sfc polygon geometry (boundaries).}
+#'}
+#' @docType data
+#' @keywords planning districts regions municipalities boundary
+#' @name ggh_pd
+#' @usage data(ggh_pd)
+#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/survey-boundary-files) accessed February 28th 2022.
+"ggh_pd"
+
 #' Traffic analysis zones boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
 #' This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
@@ -78,39 +117,27 @@ NULL
 #' @source Travel times calculated using [`r5r`](https://github.com/ipeaGIT/r5r)
 "od"
 
-#' Planning boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
+#' Household socio-economic and demographic attributes by TAZ in the Greater Golden Horseshoe (GGH).
 #'
-#' This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#' This object contains socio-economic and demographic information at the level of traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#' The query to retrieve data for income was a cross tabulation of the Person table; the Row was 2006 GTA zone of household - gta06_hhld, and the column was Income range of household - income.
+#' The income reported is the total  for the household from all sources, before income tax, in the year before the survey.
+#' According to the TTS Data Guide "The question was voluntary and subject to high levels of non-response. The results of this question should be interpreted with caution."
 #'
-#' @format A simple feature class (sf) polygon object containing 105 rows and 5 variables; each row represents a unique planning region with associated geo-referenced geometry.
+#' @format A data frame containing 3128 rows and 8 variables; each row represents a unique TAZ with associated features.
 #' \describe{
-#'   \item{MUN}{The name of the municipality and/or planning boundary.}
-#'   \item{PD}{A unique ID.}
-#'   \item{REGION}{A unique ID corresponding with the greater region that each PD is part of.}
-#'   \item{REGION_name}{Names of regions corresponding to the REGION ID.}
-#'   \item{geometry}{The sfc polygon geometry (boundaries).}
+#'   \item{GTA06}{Unique ID of the traffic analysis zone (TAZ).}
+#'   \item{$0 to $14999}{Number of households in TAZ in this income range. }
+#'   \item{$15000 to $39999}{Number of households in TAZ in this income range.}
+#'   \item{$40000 to $59999}{Number of households in TAZ in this income range.}
+#'   \item{$60000 to $99999}{Number of households in TAZ in this income range.}
+#'   \item{$100000 to $124999}{Number of households in TAZ in this income range. }
+#'   \item{$125000 and above}{TNumber of households in TAZ in this income range.}
+#'   \item{Decline / do not know}{Number of households in TAZ who reportet unknown or did not state their income range.}
 #'}
 #' @docType data
-#' @keywords planning districts regions municipalities boundary
-#' @name ggh_pd
-#' @usage data(ggh_pd)
-#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/survey-boundary-files) accessed February 28th 2022.
-"ggh_pd"
-
-#' census metropolitan area (CMA)/census agglomeration (CA) boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
-#'
-#' This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
-#'
-#' @format A simple feature class (sf) polygon object containing 16 rows and 4 variables; each row represents a unique census metropolitan area (CMA) of census agglomeration (CA) with associated geo-referenced geometry. CMA and CA consist of one or more adjacent municipalities around a core. The CMA/CA boundaries are defined for the purpose of the Canadian Census based on population. As such, the core of each CMA must have a population of at least 50,000 and the entire CMA must have a population of at least 100,000. CA are smaller in population, thir course must have a population of at least 10,000.
-#' \describe{
-#'   \item{CMAUID}{A unique identifier for each census metropolitan area (CMA)/census agglomeration (CA).}
-#'   \item{CMANAME}{The name of the census metropolitan area (CMA)/census agglomeration (CA).}
-#'   \item{CMATYPE}{A one character field indicating whether the unit is a census metropolitan area, a tracted census agglomeration or a non-tracted census agglomeration. "B" is a CMA and "D" is a CA with no census tracts, and "K" is a CA with census tracts.}
-#'   \item{geometry}{The sfc polygon geometry (boundaries).}
-#'}
-#' @docType data
-#' @keywords planning districts regions municipalities boundary
-#' @name ggh_cma
-#' @usage data(ggh_cma)
-#' @source "The 2016 census metropolitan areas and census agglomeration boundary files as created by the Canadian Census available [here](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm) accessed October 21st 2022 (Boundary Files, 2016 Census. Statistics Canada Catalogue no. 92-160-X.). All variable definitions are based on the definitions included in the census year 2016 boundary file reference guide (Boundary Files, Reference Guide, Second edition, 2016 Census. Statistics Canada Catalogue no. 92-160-G.).
-"ggh_cma"
+#' @keywords Jobs Workers TTS 2016 in the Greater Golden Horseshoe (GGH) area.
+#' @name ggh_taz
+#' @usage data(ggh_taz)
+#' @source "2016 Transportation Tomorrow Survey" from [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
+"hh_sed_taz"

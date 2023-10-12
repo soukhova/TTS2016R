@@ -1,6 +1,6 @@
 Package: TTS2016R
 Title: An augmented 2016 Transportation Tomorrow Survey (TTS) data package: worker and place of employment counts, trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
-Version: 0.0.1
+Version: 0.0.1-1
 Authors@R: 
     c(person("Anastasia", "Soukhov", , "soukhoa@mcmaster.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4371-4831")),
