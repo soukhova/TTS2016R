@@ -10,33 +10,37 @@ We then we save all objects (the travel time OD matrix, the geometries, IDs, and
 
 Libraries:
 ```{r setup, include=FALSE}
-library(disk.frame)
-library(dplyr)
-library(ggplot2)
-library(gridExtra)
-library(httr)
-library(knitr)
+library(disk.frame) # not installed on this machine
+library(dplyr) # A Grammar of Data Manipulation
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(gridExtra) # Miscellaneous Functions for "Grid" Graphics
+library(httr) # Tools for Working with URLs and HTTP
+library(knitr) # A General-Purpose Package for Dynamic Report Generation in R
 #install.packages("kableExtra", dependencies = TRUE) #installing kableExtra and dependencies as I was receiving errors
-library(kableExtra)
+library(kableExtra) # Construct Complex Table with 'kable' and Pipe Syntax
 # install.packages("devtools")
 # install.packages("Rtools")
 # devtools::install_github("https://github.com/hrbrmstr/lodes.git", dependencies = TRUE) # if you need to download
-library(lodes)
-library(progress)
-library(purrr)
-library(r5r)
-library(sf)
-library(stplanr)
-library(tidycensus)
-library(tidyr)
-library(tmap)
+#library(lodes) # not installed on this machine
+library(progress) # Terminal Progress Bars
+library(purrr) # Functional Programming Tools
+library(sf) # Simple Features for R
+library(stplanr) # not installed on this machine
+library(tidycensus) # not installed on this machine
+library(tidyr) # Tidy Messy Data
+library(tmap) # Thematic Maps
 library(zoo) # for rollapplyr
 
 # setup options
 setup_disk.frame() # setup disk.frame parallel computing
 options(future.globals.maxSize = Inf) # allow disk.frame threads to talk to eachother without limits
-options(java.parameters = "-Xmx6G") # assign memory for r5r to work with
 tmap_mode("plot")
+```
+
+
+```{r}
+options(java.parameters = "-Xmx30G") # assign memory for r5r to work with
+library(r5r) # Rapid Realistic Routing with 'R5' 
 ```
 
 ##--- Prepare Input Data
@@ -160,4 +164,8 @@ od <- od_ft_p_t_tt
 rm(od_ft_p_t_tt)
 save("od", file = "TTS16-data-inputs/OD-by-FT-Employment/od.Rdata")
 ```
+
+
+
+
 

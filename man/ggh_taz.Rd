@@ -3,6 +3,7 @@
 \docType{data}
 \name{ggh_taz}
 \alias{ggh_taz}
+\alias{ggh_taz_v4}
 \alias{hh_sed_taz}
 \title{Traffic analysis zones boundaries in the Greater Golden Horseshoe (GGH) area and associated data.}
 \format{
@@ -12,6 +13,22 @@ A simple feature class (sf) polygon object containing 3764 rows and 10 variables
 \item{AREA}{Area of TAZ in units of km^2.}
 \item{REGION}{Retrieved from the ggh_pd object. It is a unique ID corresponding with the greater region that each planning district (PD) is part of so filtering and analysis, by PD, is simplified.}
 \item{CMAUID}{Retrieved from the ggh_cma object. It is a unique identifier for each census metropolitan area (CMA)/census agglomeration (CA). Within, filtering and analysis that can be easily linked to the census data, is simplified.}
+\item{workers}{The number of full-time workers in the TAZ.}
+\item{jobs}{The number of full-time workers who declare their typical place of employment in the TAZ. }
+\item{LTGO_split}{The percentage of full-time work related trips made from that origin to that destination using local transit and/or GO transit (regional transit) as a primary mode.}
+\item{W_split}{The percentage of full-time work related trips made from that origin to that destination using a bicyle as a primary mode.}
+\item{BC_split}{The percentage of full-time work related trips made from that origin to that destination by walking as a primary mode.}
+\item{geometry}{The sfc polygon geometry (boundaries) of the TAZ.}
+}
+
+A simple feature class (sf) polygon object containing 3258 rows and 7 variables; each row represents a unique TAZ with associated features. The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
+\describe{
+\item{GGHV4}{Unique ID of the traffic analysis zone (TAZ).}
+\item{CSDUID}{Unique ID corresponding with the greater region that each Census Subdivision (CSD) is part of so filtering and analysis, by CSD, is simplified.}
+\item{CSDNAME}{Name of the Census Subdivision (CSD).}
+\item{CMAUID}{Unique identifier for each census metropolitan area (CMA)/census agglomeration (CA). Within, filtering and analysis that can be easily linked to the census data, is simplified.}
+\item{CMAUID}{Retrieved from the ggh_cma object. It is a unique identifier for each census metropolitan area (CMA)/census agglomeration (CA). Within, filtering and analysis that can be easily linked to the census data, is simplified.}
+\item{CMANAME}{Name of the census metropolitan area (CMA)/census agglomeration (CA).}
 \item{workers}{The number of full-time workers in the TAZ.}
 \item{jobs}{The number of full-time workers who declare their typical place of employment in the TAZ. }
 \item{LTGO_split}{The percentage of full-time work related trips made from that origin to that destination using local transit and/or GO transit (regional transit) as a primary mode.}
@@ -36,13 +53,19 @@ A data frame containing 3128 rows and 8 variables; each row represents a unique 
 "2016 Transportation Tomorrow Survey" from \href{http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction}{Data Management Group} accessed November 14 2021.
 
 "2016 Transportation Tomorrow Survey" from \href{http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction}{Data Management Group} accessed November 14 2021.
+
+"2016 Transportation Tomorrow Survey" from \href{http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction}{Data Management Group} accessed November 14 2021.
 }
 \usage{
 data(ggh_taz)
 
+data(ggh_taz_v4)
+
 data(ggh_taz)
 }
 \description{
+This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area. The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
+
 This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
 
 This object contains socio-economic and demographic information at the level of traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.

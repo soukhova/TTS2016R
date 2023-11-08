@@ -20,7 +20,7 @@ A simple feature class (sf) polygon object containing 16 rows and 4 variables; e
 data(ggh_cma)
 }
 \description{
-This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.  The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
 }
 \keyword{boundary}
 \keyword{districts}

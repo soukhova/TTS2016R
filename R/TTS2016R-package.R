@@ -26,7 +26,7 @@ NULL
 
 #' census metropolitan area (CMA)/census agglomeration (CA) boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
-#' This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#' This object contains the census metropolitan area (CMA)/census agglomeration (CA) for the spatial region  associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.  The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
 #'
 #' @format A simple feature class (sf) polygon object containing 16 rows and 4 variables; each row represents a unique census metropolitan area (CMA) of census agglomeration (CA) with associated geo-referenced geometry. CMA and CA consist of one or more adjacent municipalities around a core. The CMA/CA boundaries are defined for the purpose of the Canadian Census based on population. As such, the core of each CMA must have a population of at least 50,000 and the entire CMA must have a population of at least 100,000. CA are smaller in population, thir course must have a population of at least 10,000.
 #' \describe{
@@ -44,7 +44,7 @@ NULL
 
 #' Planning boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
-#' This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#' This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.  The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
 #'
 #' @format A simple feature class (sf) polygon object containing 105 rows and 5 variables; each row represents a unique planning region with associated geo-referenced geometry.
 #' \describe{
@@ -63,7 +63,7 @@ NULL
 
 #' Traffic analysis zones boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
 #'
-#' This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#' This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area. The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
 #'
 #' @format A simple feature class (sf) polygon object containing 3764 rows and 10 variables; each row represents a unique TAZ with associated features.
 #' \describe{
@@ -84,6 +84,32 @@ NULL
 #' @usage data(ggh_taz)
 #' @source "2016 Transportation Tomorrow Survey" from [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
 "ggh_taz"
+
+#' Version GGHM V4 of the traffic analysis zones boundaries in the Greater Golden Horseshoe (GGH) area and associated data.
+#'
+#' This object contains traffic analysis zones (TAZ) sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#'
+#' @format A simple feature class (sf) polygon object containing 3258 rows and 7 variables; each row represents a unique TAZ with associated features. The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
+#' \describe{
+#'   \item{GGHV4}{Unique ID of the traffic analysis zone (TAZ).}
+#'   \item{CSDUID}{Unique ID corresponding with the greater region that each Census Subdivision (CSD) is part of so filtering and analysis, by CSD, is simplified.}
+#'   \item{CSDNAME}{Name of the Census Subdivision (CSD).}
+#'   \item{CMAUID}{Unique identifier for each census metropolitan area (CMA)/census agglomeration (CA). Within, filtering and analysis that can be easily linked to the census data, is simplified.}
+#'   \item{CMAUID}{Retrieved from the ggh_cma object. It is a unique identifier for each census metropolitan area (CMA)/census agglomeration (CA). Within, filtering and analysis that can be easily linked to the census data, is simplified.}
+#'   \item{CMANAME}{Name of the census metropolitan area (CMA)/census agglomeration (CA).}
+#'   \item{workers}{The number of full-time workers in the TAZ.}
+#'   \item{jobs}{The number of full-time workers who declare their typical place of employment in the TAZ. }
+#'   \item{LTGO_split}{The percentage of full-time work related trips made from that origin to that destination using local transit and/or GO transit (regional transit) as a primary mode.}
+#'   \item{W_split}{The percentage of full-time work related trips made from that origin to that destination using a bicyle as a primary mode.}
+#'   \item{BC_split}{The percentage of full-time work related trips made from that origin to that destination by walking as a primary mode.}
+#'   \item{geometry}{The sfc polygon geometry (boundaries) of the TAZ.}
+#'}
+#' @docType data
+#' @keywords Jobs Workers TTS 2016 in the Greater Golden Horseshoe (GGH) area.
+#' @name ggh_taz
+#' @usage data(ggh_taz_v4)
+#' @source "2016 Transportation Tomorrow Survey" from [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
+"ggh_taz_v4"
 
 #' An origin and destination table of workers, place of employment, trip counts, and estimated travel times.
 #'
@@ -116,6 +142,60 @@ NULL
 #' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
 #' @source Travel times calculated using [`r5r`](https://github.com/ipeaGIT/r5r)
 "od"
+
+#' An origin and destination table using version GGHM V4 of the traffic analysis zones with trips by start_time, trip purpose of destination, and primary mode of travel.
+#'
+#' This object contains the trips recorded from origin (TAZ) to destination (TAZ) by time of day, day, purpose, and main mode of travel; it is sourced from the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+#'
+#' TTS collects trips only on weekdays (i.e., Monday to Friday), but some trips are recorded with start times after midnight. Such trips were assigned to the following day.
+#'
+#' Trip purposes at destination:
+#' \describe{
+#'   \item{Work}{First work trip of the day.}
+#'   \item{Subsequent work}{Second and subsequent work trips.}
+#'   \item{School}{First school trip of the day.}
+#'   \item{Subsequent school}{Second and subsequent school trips.}
+#'   \item{Daycare}{Daycare.}
+#'   \item{Home}{Home.}
+#'   \item{Facilitate}{Facilitate.}
+#'   \item{Market}{Marketing/Shopping.}
+#'   \item{Other}{Catch all category for all trips with purposes distinct to those above.}
+#'   }
+#' Primary mode of the trip (if any part of the trip is made by public transit, the primary mode is defined as B, G, or J):
+#' \describe{
+#'   \item{Transit}{Public transit excluding GO rail.}
+#'   \item{Cycle}{Bicycle.}
+#'   \item{Driver}{Auto driver.}
+#'   \item{GO}{GO rail.}
+#'   \item{GO+Transit}{Joint GO rail and local public transit.}
+#'   \item{Motorcycle}{Motorcycle.}
+#'   \item{Other}{Other modes.}
+#'   \item{Passenger}{Auto passenger.}
+#'   \item{School}{School bus.}
+#'   \item{Taxi}{Taxi passenger.}
+#'   \item{Rideshare}{Paid rideshare.}
+#'   \item{Walk}{Walk trips are only collected for trips to and from work or school or when the walk trip is a connecting trip within a chain of trips that use other non-walk modes.}
+#'   }
+#'
+#' NOTE: TTS collects trips taken for unknown purposes and/or using an unknown mode, but these were not downloaded for this data package. There is a small number of trips ($n = 7,368$) that where taken for an unknown purpose by any mode and on any day. There are zero trips that where undertaken by an unkown mode for any purpose on any day.
+#' In other words, this table is incomplete, but the number of trips that are missing is very small.
+#'
+#' @format A dataframe containing 782364 rows and 7 variables; each row represents a origin-destination pair.
+#' \describe{
+#'   \item{Origin}{The unique ID of the origin traffic analysis zone (TAZ). It is equivalent to the IDs used in 'GGHV4' in table 'ggh_taz_v4'.}
+#'   \item{Destination}{The unique ID of the destination traffic analysis zone (TAZ). It is equivalent to the IDs used in 'GGHV4' in table 'ggh_taz_v4'.}
+#'   \item{Trips}{The number of trips between the origin and destination.}
+#'   \item{start_time}{Start time of the trips; it is an object of class "period".}
+#'   \item{day}{Day of the week when the trips started; it is an ordered factor with days of the week.}
+#'   \item{purpose}{The purpose of the trips at the destination; it is a factor.}
+#'   \item{mode}{The main mode of travel for the trips; it is a factor.}
+#'}
+#' @docType data
+#' @keywords Origin Destination Trips mode purpose TTS 2016 in the Greater Golden Horseshoe (GGH) area.
+#' @name od_ggh4_mode_purpose
+#' @usage data(od_ggh4_mode_purpose)
+#' @source "2016 Transportation Tomorrow Survey" from the [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
+"od_ggh4_mode_purpose"
 
 #' Household socio-economic and demographic attributes by TAZ in the Greater Golden Horseshoe (GGH).
 #'

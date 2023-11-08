@@ -21,7 +21,7 @@ A simple feature class (sf) polygon object containing 105 rows and 5 variables; 
 data(ggh_pd)
 }
 \description{
-This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.
+This object contains the planning boundaries (PB) associated with the 2016 Transportation Tomorrow Survey (TTS) in the Greater Golden Horseshoe (GGH) area.  The object is projected as WGS 84 / UTM zone 17N (epsg: 32617).
 }
 \keyword{boundary}
 \keyword{districts}
