@@ -5,15 +5,6 @@
 
 ## 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
 
-<!-- badges: start -->
-<!-- License --->
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /><br /></a>This
-work is licensed under a
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
-Commons Attribution-NonCommercial-ShareAlike 4.0 International
-License</a><br /> <!-- badges: end -->
-
 This package contains objects which are sourced from the 2016
 Transportation Tomorrow Survey [(TTS)](http://dmg.utoronto.ca/drs) and
 objects curated to facilitate the use and analysis of TTS data. TTS 2016
@@ -307,3 +298,11 @@ steps:
     [vignettes](https://github.com/soukhova/TTS2016R/tree/master/vignettes/articles)
     and submit a pull request. Analysis files will be reviewed and added
     as articles (with full credit).
+
+<!-- badges: start -->
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /><br /></a>This
+work is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International
+License</a><br /><!-- badges: end -->

@@ -41,7 +41,7 @@ library(tmap)
 options(scipen = 999)
 ```
 
-**NOTE**: this articles was an initial draft of this now published data paper: @soukhovTTS2016RDataSet2023. This article discusses how {TTS2016R} can be used. This also article also expands on concepts not included in @soukhovTTS2016RDataSet2023 such as the impedance function and accessibility calculation. These concepts were not covered in the data paper due to brevity requirements.  
+**NOTE**: this article was a draft of the now published data paper: @soukhovTTS2016RDataSet2023. It discusses how {TTS2016R} can be used and expands on concepts not included in @soukhovTTS2016RDataSet2023, such as the impedance function and accessibility calculation. These concepts were not covered in the data paper due to brevity requirements.  
 
 # Home-to-work commute data
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}

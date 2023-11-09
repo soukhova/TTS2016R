@@ -12,7 +12,7 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-URL: https://soukhova.github.io/TTS2016R, https://github.com/soukhova/TTS2016R
+URL: https://soukhova.github.io/TTS2016R, https://github.com/soukhova/TTS2016R, https://soukhova.github.io/TTS2016R/
 BugReports: https://github.com/soukhova/TTS2016R/issues
 Depends: 
     R (>= 2.10)

@@ -22,6 +22,7 @@ Useful links:
 \itemize{
   \item \url{https://soukhova.github.io/TTS2016R}
   \item \url{https://github.com/soukhova/TTS2016R}
+  \item \url{https://soukhova.github.io/TTS2016R/}
   \item Report bugs at \url{https://github.com/soukhova/TTS2016R/issues}
 }
 
