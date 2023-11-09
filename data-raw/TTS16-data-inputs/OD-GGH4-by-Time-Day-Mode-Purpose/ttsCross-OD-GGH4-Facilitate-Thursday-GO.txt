@@ -1,0 +1,100 @@
+Fri Nov 03 2023 22:22:14 GMT+0000 (Coordinated Universal Time) - Run Time: 2433ms
+
+Cross Tabulation Query Form - Trip - 2016 v1.1
+
+Row: GGHM V4 zone of origin - ggh4_orig
+Column: GGHM V4 zone of destination - ggh4_dest
+Table: Start time of trip - start_time
+
+
+Filters:
+Day of week trip data were collected - trip_day In 4, 
+and
+Trip purpose of destination - purp_dest In F, 
+and
+Primary travel mode of trip - mode_prime In G, 
+
+Trip 2016 
+Table: 1400
+
+,3268
+1084,19
+
+Trip 2016 
+Table: 1520
+
+,4098
+1100,20
+
+Trip 2016 
+Table: 1530
+
+,3409
+1090,12
+
+Trip 2016 
+Table: 1550
+
+,5114
+1114,20
+
+Trip 2016 
+Table: 1600
+
+,3272,4017
+1084,12,0
+1090,0,18
+
+Trip 2016 
+Table: 1615
+
+,4094
+1110,20
+
+Trip 2016 
+Table: 1630
+
+,2115,3190,4002
+1084,11,0,0
+1100,0,6,0
+1122,0,0,5
+
+Trip 2016 
+Table: 1640
+
+,3116
+1084,12
+
+Trip 2016 
+Table: 1650
+
+,3120
+1122,18
+
+Trip 2016 
+Table: 1700
+
+,2063,4002,5048
+1056,0,0,11
+1061,62,0,0
+1090,0,0,11
+1135,0,5,0
+
+Trip 2016 
+Table: 1705
+
+,1424
+1100,11
+
+Trip 2016 
+Table: 1800
+
+,1222
+1100,9
+
+Trip 2016 
+Table: 2215
+
+,4027
+1056,5
+

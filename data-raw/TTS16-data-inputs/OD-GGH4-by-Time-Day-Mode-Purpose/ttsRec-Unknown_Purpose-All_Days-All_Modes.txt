@@ -1,0 +1,12 @@
+Sat Nov 04 2023 14:43:39 GMT+0000 (Coordinated Universal Time)
+
+Record Count Query Form - Trip - 2016 v1.1
+
+Filters:
+(Primary travel mode of trip - mode_prime Not In 9, )
+and
+Trip purpose of destination - purp_dest In 9, 
+
+Table: Trip 2016
+Row:,Count:,Expanded:
+Total:,337,7368

@@ -1,0 +1,201 @@
+Fri Nov 03 2023 17:27:13 GMT+0000 (Coordinated Universal Time) - Run Time: 2067ms
+
+Cross Tabulation Query Form - Trip - 2016 v1.1
+
+Row: GGHM V4 zone of origin - ggh4_orig
+Column: GGHM V4 zone of destination - ggh4_dest
+Table: Start time of trip - start_time
+
+
+Filters:
+Day of week trip data were collected - trip_day In 3, 
+and
+Trip purpose of destination - purp_dest In F, 
+and
+Primary travel mode of trip - mode_prime In B, 
+
+Trip 2016 
+Table: 725
+
+,1340
+1311,34
+
+Trip 2016 
+Table: 745
+
+,1225,1533
+1166,6,0
+3091,0,34
+
+Trip 2016 
+Table: 800
+
+,1270
+1238,143
+
+Trip 2016 
+Table: 820
+
+,1269
+1375,48
+
+Trip 2016 
+Table: 830
+
+,1204,1303,1446
+1259,24,0,0
+1343,0,36,0
+1408,0,0,47
+
+Trip 2016 
+Table: 930
+
+,1112
+1569,32
+
+Trip 2016 
+Table: 1050
+
+,1174
+1135,17
+
+Trip 2016 
+Table: 1130
+
+,1384
+1188,35
+
+Trip 2016 
+Table: 1300
+
+,1135
+1063,11
+
+Trip 2016 
+Table: 1405
+
+,1162
+1381,51
+
+Trip 2016 
+Table: 1430
+
+,1270,6143
+1238,143,0
+6194,0,55
+
+Trip 2016 
+Table: 1440
+
+,1281
+1154,13
+
+Trip 2016 
+Table: 1500
+
+,1518
+1138,34
+
+Trip 2016 
+Table: 1505
+
+,1204,3072
+1203,0,11
+1270,24,0
+
+Trip 2016 
+Table: 1510
+
+,1488
+2215,45
+
+Trip 2016 
+Table: 1530
+
+,1446
+1408,47
+
+Trip 2016 
+Table: 1600
+
+,3392,4013,6198
+1177,0,18,0
+2069,9,0,0
+6195,0,0,14
+
+Trip 2016 
+Table: 1610
+
+,1182
+1227,12
+
+Trip 2016 
+Table: 1615
+
+,1136
+1047,25
+
+Trip 2016 
+Table: 1630
+
+,1181,1228,1258,1574,3065,6087,6191
+1110,0,17,0,0,0,0,0
+1111,0,0,0,0,17,0,0
+1117,22,0,0,0,0,0,0
+1248,0,0,0,26,0,0,0
+1390,0,0,49,0,0,0,0
+6173,0,0,0,0,0,21,0
+6200,0,0,0,0,0,0,33
+
+Trip 2016 
+Table: 1640
+
+,1126
+1135,20
+
+Trip 2016 
+Table: 1645
+
+,1450
+1195,14
+
+Trip 2016 
+Table: 1650
+
+,1215,1260
+1117,0,12
+1195,10,0
+
+Trip 2016 
+Table: 1700
+
+,1260,1440,1599,4056
+1075,0,0,15,0
+1104,0,19,0,0
+1197,22,0,0,0
+6200,0,0,0,11
+
+Trip 2016 
+Table: 1730
+
+,1500
+1104,7
+
+Trip 2016 
+Table: 1745
+
+,1461
+1228,22
+
+Trip 2016 
+Table: 1800
+
+,1119
+1085,5
+
+Trip 2016 
+Table: 1815
+
+,1321
+1230,9
+

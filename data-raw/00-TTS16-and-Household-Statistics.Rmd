@@ -1,0 +1,80 @@
+---
+title: "TTS Origin-Destination Data by Full-Time Employment"
+output: 
+---
+
+In this notebook we process socio-economic and demographic information about households in their places of residence.
+
+Household income ranges at the level of GTS2006 traffic analysis zones. This is the query:
+
+```
+Cross Tabulation Query Form - Person - 2016 v1.1
+
+Row: 2006 GTA zone of household - gta06_hhld
+Column: Income range of household - income
+
+
+Filters:
+No Filters
+```
+The data are in this table:
+
+- `tts-2016-household-income-by-residence.txt`, retrieved on October 12, 2023
+
+## Preliminaries
+
+Load packages:
+```{r load-packages}
+library(dplyr) # A Grammar of Data Manipulation
+library(readr) # Read Rectangular Text Data
+library(tidyr) # Tidy Messy Data
+```
+
+## Number of household by income range by traffic analysis zones
+
+Read the raw data table
+```{r}
+hh_sed_taz <- read_delim(file = "TTS16-data-inputs/Household-Income/tts-2016-household-income-by-taz.txt", 
+                      delim = "\t", 
+                      col_names = FALSE)
+```
+
+Find the position in the table where the information on work trips begins:
+```{r}
+idx <- which(hh_sed_taz$X1 == "Table: ")
+```
+
+Slice the table to obtain the work trips (remove heading information):
+```{r}
+hh_sed_taz <- hh_sed_taz |> 
+  slice((idx+1):n())
+```
+
+Separate the columns and convert number of households (initially read as a character) to numeric:
+```{r}
+hh_sed_taz <- hh_sed_taz |>
+  separate(X1, into = c("GTA06",
+                        "$0 to $14999",
+                        "$15000 to $39999",
+                        "$40000 to $59999",
+                        "$60000 to $99999",
+                        "$100000 to $124999",
+                        "$125000 and above",
+                        "Decline / do not know"),
+           sep = ",") |>
+  slice_tail(n = nrow(hh_sed_taz) - 1) |>
+  mutate(`$0 to $14999` = as.numeric(`$0 to $14999`),
+         `$15000 to $39999` = as.numeric(`$15000 to $39999`),
+         `$40000 to $59999` = as.numeric(`$40000 to $59999`),
+         `$60000 to $99999` = as.numeric(`$60000 to $99999`),
+         `$100000 to $124999` = as.numeric(`$100000 to $124999`),
+         `$125000 and above` = as.numeric(`$125000 and above`),
+         `Decline / do not know` = as.numeric(`Decline / do not know`))
+```
+
+Save to data folder:
+```{r}
+usethis::use_data(hh_sed_taz)
+```
+
+

@@ -1,0 +1,72 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This notebook is to read a shapefile. The file is a zoning system used by Metrolinx and possibly compatible with TTS. I got this file from Matt Pittlock on November 2, 2023. The file is `OriginalV5_10202023`. 
+
+Load packages:
+```{r}
+library(dplyr) # A Grammar of Data Manipulation
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(sf) # Simple Features for R
+```
+
+Read file:
+```{r}
+ggh_taz_v4 <- st_read("TTS16-data-inputs/Boundaries/OriginalV5_10202023.shp")
+```
+
+```{r}
+ggh_taz_v4 <- st_make_valid(ggh_taz_v4)
+```
+
+Plot:
+```{r}
+ggplot() +
+  geom_sf(data = st_make_valid(ggh_taz_v4))
+```
+
+Summary of object:
+```{r}
+summary(ggh_taz_v4)
+```
+
+Keep only useful columns:
+```{r}
+ggh_taz_v4 <- ggh_taz_v4 |>
+  transmute(GGHV4 = taz, 
+            CSDUID = csduid, 
+            CSDNAME = csdname, 
+            CMAUID = cmauid, 
+            CMANAME = cmaname, 
+            CSDUID = csduid, 
+            PD = pd)
+```
+
+Transform the object so that the projection is consistent with other geographical objects.
+
+Read a simple features object:
+```{r}
+load(glue::glue(here::here(), "/data/ggh_taz.rda"))
+```
+
+The object is projected as NAD83 / UTM zone 17N (epsg: 26917).
+
+```{r}
+ggh_taz_v4 <- ggh_taz_v4 |>
+  st_transform(crs = st_crs(ggh_taz))
+```
+
+Plot:
+```{r}
+ggplot() +
+  geom_sf(data = st_make_valid(ggh_taz_v4))
+```
+
+Save as simple features:
+```{r}
+usethis::use_data(ggh_taz_v4, 
+                  overwrite = TRUE)
+```
+

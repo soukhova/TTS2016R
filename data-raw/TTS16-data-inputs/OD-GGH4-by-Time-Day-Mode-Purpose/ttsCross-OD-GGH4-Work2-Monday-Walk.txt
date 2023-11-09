@@ -1,0 +1,471 @@
+Thu Nov 02 2023 15:09:58 GMT+0000 (Coordinated Universal Time) - Run Time: 2683ms
+
+Cross Tabulation Query Form - Trip - 2016 v1.1
+
+Row: GGHM V4 zone of origin - ggh4_orig
+Column: GGHM V4 zone of destination - ggh4_dest
+Table: Start time of trip - start_time
+
+
+Filters:
+Day of week trip data were collected - trip_day In 1, 
+and
+Trip purpose of destination - purp_dest In R, 
+and
+Primary travel mode of trip - mode_prime In W, 
+
+Trip 2016
+ROW : ggh4_orig
+COLUMN : ggh4_dest
+
+TABLE    : start_time (800)
+
+   ggh4_orig   ggh4_dest      total
+        1064        1080          9
+        3216        3216         29
+
+TABLE    : start_time (825)
+
+   ggh4_orig   ggh4_dest      total
+        9122        9121         16
+
+TABLE    : start_time (845)
+
+   ggh4_orig   ggh4_dest      total
+        1141        1174         10
+
+TABLE    : start_time (850)
+
+   ggh4_orig   ggh4_dest      total
+        1172        1154         11
+
+TABLE    : start_time (855)
+
+   ggh4_orig   ggh4_dest      total
+        8349        8345         13
+
+TABLE    : start_time (900)
+
+   ggh4_orig   ggh4_dest      total
+        1549        1549         28
+
+TABLE    : start_time (915)
+
+   ggh4_orig   ggh4_dest      total
+        8346        8346         31
+
+TABLE    : start_time (920)
+
+   ggh4_orig   ggh4_dest      total
+        1174        1175         10
+
+TABLE    : start_time (930)
+
+   ggh4_orig   ggh4_dest      total
+        1075        1117         17
+        1100        1100         18
+        1114        1050         39
+
+TABLE    : start_time (945)
+
+   ggh4_orig   ggh4_dest      total
+        8526        8532         13
+
+TABLE    : start_time (1000)
+
+   ggh4_orig   ggh4_dest      total
+        1528        1528         16
+
+TABLE    : start_time (1005)
+
+   ggh4_orig   ggh4_dest      total
+        1075        1084         20
+
+TABLE    : start_time (1015)
+
+   ggh4_orig   ggh4_dest      total
+        1138        1154         13
+
+TABLE    : start_time (1025)
+
+   ggh4_orig   ggh4_dest      total
+        6200        6200         48
+
+TABLE    : start_time (1030)
+
+   ggh4_orig   ggh4_dest      total
+        1197        1172         12
+        1528        1528         16
+
+TABLE    : start_time (1035)
+
+   ggh4_orig   ggh4_dest      total
+        7133        7133         11
+
+TABLE    : start_time (1050)
+
+   ggh4_orig   ggh4_dest      total
+        1084        1104         19
+
+TABLE    : start_time (1055)
+
+   ggh4_orig   ggh4_dest      total
+        1104        1110         18
+
+TABLE    : start_time (1100)
+
+   ggh4_orig   ggh4_dest      total
+        1225        1228         20
+        2067        2097         21
+
+TABLE    : start_time (1130)
+
+   ggh4_orig   ggh4_dest      total
+        1154        1138         13
+        8348        8365         18
+
+TABLE    : start_time (1200)
+
+   ggh4_orig   ggh4_dest      total
+        1075        1075         12
+        1110        1104         18
+        1111        1142          5
+        1117        1075         17
+        1172        1197         12
+        1285        1285          6
+
+TABLE    : start_time (1205)
+
+   ggh4_orig   ggh4_dest      total
+        8559        8548         20
+
+TABLE    : start_time (1210)
+
+   ggh4_orig   ggh4_dest      total
+        1084        1084         10
+
+TABLE    : start_time (1225)
+
+   ggh4_orig   ggh4_dest      total
+        1104        1084         19
+
+TABLE    : start_time (1230)
+
+   ggh4_orig   ggh4_dest      total
+        1135        1152         11
+        1152        1152         11
+        1505        1518         40
+        7028        7028         20
+        8345        8352          5
+        8532        8526         13
+        9012        9012         12
+
+TABLE    : start_time (1240)
+
+   ggh4_orig   ggh4_dest      total
+        1080        1063         29
+        9122        9122         11
+
+TABLE    : start_time (1245)
+
+   ggh4_orig   ggh4_dest      total
+        1046        1075         23
+        1135        1122         30
+        1135        1135         18
+        1152        1152         38
+        1180        1142         14
+        1195        1195         19
+        1199        1172         19
+        1321        1307         12
+        1440        1440         16
+
+TABLE    : start_time (1250)
+
+   ggh4_orig   ggh4_dest      total
+        1135        1129         17
+        1138        1154         16
+        1152        1197         11
+        1195        1195         11
+        8369        8371         23
+
+TABLE    : start_time (1300)
+
+   ggh4_orig   ggh4_dest      total
+        1084        1077          7
+        1084        1100         14
+        1138        1154         19
+        1306        1303         23
+        5081        5081         10
+        7115        7115         11
+        8832        8831         78
+
+TABLE    : start_time (1305)
+
+   ggh4_orig   ggh4_dest      total
+        1064        1080         18
+        1164        1138         13
+
+TABLE    : start_time (1310)
+
+   ggh4_orig   ggh4_dest      total
+        1071        1071          5
+
+TABLE    : start_time (1315)
+
+   ggh4_orig   ggh4_dest      total
+        1129        1063          5
+
+TABLE    : start_time (1330)
+
+   ggh4_orig   ggh4_dest      total
+        1104        1104         13
+        1109        1088          3
+        1111        1091          8
+        1177        1175         24
+        8365        8354         16
+        8557        8557         33
+        8596        8596         35
+
+TABLE    : start_time (1335)
+
+   ggh4_orig   ggh4_dest      total
+        1046        1052         15
+
+TABLE    : start_time (1340)
+
+   ggh4_orig   ggh4_dest      total
+        1071        1126          5
+
+TABLE    : start_time (1345)
+
+   ggh4_orig   ggh4_dest      total
+        1043        1044          9
+        1091        1091         29
+        7115        7115         11
+        8343        8345         27
+
+TABLE    : start_time (1350)
+
+   ggh4_orig   ggh4_dest      total
+        1135        1142          7
+        4034        4038         10
+
+TABLE    : start_time (1355)
+
+   ggh4_orig   ggh4_dest      total
+        1052        1084         15
+        6110        6121         57
+
+TABLE    : start_time (1400)
+
+   ggh4_orig   ggh4_dest      total
+        1052        1061         18
+        1138        1117         12
+        1197        1111         12
+        1197        1152         20
+        1282        1301         24
+        1520        1520         40
+        8896        8896         11
+
+TABLE    : start_time (1405)
+
+   ggh4_orig   ggh4_dest      total
+        1084        1075         20
+
+TABLE    : start_time (1410)
+
+   ggh4_orig   ggh4_dest      total
+        1122        1135         30
+        1177        1154          5
+        3069        3071         19
+
+TABLE    : start_time (1415)
+
+   ggh4_orig   ggh4_dest      total
+        1142        1135          7
+
+TABLE    : start_time (1430)
+
+   ggh4_orig   ggh4_dest      total
+        1084        1100         16
+        1129        1152         18
+        1135        1152         18
+        1164        1184         11
+        1177        1175         14
+        3103        3098         41
+        8896        8896         11
+
+TABLE    : start_time (1435)
+
+   ggh4_orig   ggh4_dest      total
+        1161        1154          4
+
+TABLE    : start_time (1445)
+
+   ggh4_orig   ggh4_dest      total
+        1090        1100         16
+
+TABLE    : start_time (1450)
+
+   ggh4_orig   ggh4_dest      total
+        2067        2097         21
+        8402        8402         16
+
+TABLE    : start_time (1455)
+
+   ggh4_orig   ggh4_dest      total
+        8901        8901         13
+
+TABLE    : start_time (1500)
+
+   ggh4_orig   ggh4_dest      total
+        1122        1125         25
+        1125        1095         14
+        3216        3216         29
+        8565        8565          8
+        9122        9122         22
+        9126        9122         19
+
+TABLE    : start_time (1505)
+
+   ggh4_orig   ggh4_dest      total
+        1100        1100         16
+        8565        8539          9
+
+TABLE    : start_time (1530)
+
+   ggh4_orig   ggh4_dest      total
+        1117        1138         15
+        8346        8346         16
+
+TABLE    : start_time (1540)
+
+   ggh4_orig   ggh4_dest      total
+        1111        1080         51
+
+TABLE    : start_time (1545)
+
+   ggh4_orig   ggh4_dest      total
+        1100        1100         18
+
+TABLE    : start_time (1600)
+
+   ggh4_orig   ggh4_dest      total
+        1053        1050         56
+        1152        1197         20
+        1163        1163         14
+        1318        1347         40
+
+TABLE    : start_time (1605)
+
+   ggh4_orig   ggh4_dest      total
+        1197        1152         11
+
+TABLE    : start_time (1610)
+
+   ggh4_orig   ggh4_dest      total
+        1166        1172          7
+
+TABLE    : start_time (1615)
+
+   ggh4_orig   ggh4_dest      total
+        1127        1114          3
+        9122        9122         11
+
+TABLE    : start_time (1620)
+
+   ggh4_orig   ggh4_dest      total
+        1077        1058          7
+        8896        8896         44
+
+TABLE    : start_time (1630)
+
+   ggh4_orig   ggh4_dest      total
+        1050        1053         56
+        1154        1177          5
+
+TABLE    : start_time (1640)
+
+   ggh4_orig   ggh4_dest      total
+        1152        1197         11
+        1197        1197          4
+
+TABLE    : start_time (1645)
+
+   ggh4_orig   ggh4_dest      total
+        1080        1164         20
+        1127        1111         18
+
+TABLE    : start_time (1650)
+
+   ggh4_orig   ggh4_dest      total
+        1112        1166          5
+
+TABLE    : start_time (1700)
+
+   ggh4_orig   ggh4_dest      total
+        1110        1100         15
+        1159        1213         62
+
+TABLE    : start_time (1710)
+
+   ggh4_orig   ggh4_dest      total
+        1061        1100         15
+
+TABLE    : start_time (1730)
+
+   ggh4_orig   ggh4_dest      total
+        1075        1100         12
+
+TABLE    : start_time (1745)
+
+   ggh4_orig   ggh4_dest      total
+        1212        1183         75
+
+TABLE    : start_time (1750)
+
+   ggh4_orig   ggh4_dest      total
+        1088        1110         21
+        1104        1100         21
+        5080        5081          4
+
+TABLE    : start_time (1755)
+
+   ggh4_orig   ggh4_dest      total
+        1080        1091         19
+
+TABLE    : start_time (1810)
+
+   ggh4_orig   ggh4_dest      total
+        1168        1128          5
+
+TABLE    : start_time (1825)
+
+   ggh4_orig   ggh4_dest      total
+        1084        1188         14
+
+TABLE    : start_time (1830)
+
+   ggh4_orig   ggh4_dest      total
+        4267        4257         24
+        6138        6140         13
+
+TABLE    : start_time (1900)
+
+   ggh4_orig   ggh4_dest      total
+        1100        1066         26
+
+TABLE    : start_time (1905)
+
+   ggh4_orig   ggh4_dest      total
+        1063        1083         17
+
+TABLE    : start_time (2025)
+
+   ggh4_orig   ggh4_dest      total
+        1235        1206         84
+
+TABLE    : start_time (2130)
+
+   ggh4_orig   ggh4_dest      total
+        1474        1490         22

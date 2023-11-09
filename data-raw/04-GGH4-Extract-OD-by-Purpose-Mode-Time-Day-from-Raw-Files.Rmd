@@ -1,0 +1,569 @@
+---
+title: "TTS OD by Purpose by Start Time/Day of Week"
+output: 
+---
+
+In this notebook I process _trips_ by origin and destination, cross-tabulated by start time/day of week and purpose.
+
+All tables were retrieved from TTS on November 2-3, 2023. The type of the table is _Trips_ (other table types in TTS are _Household_, _Person_, and _Transit_).
+
+The naming convention for the tables is `ttsCross-OD-GGH4-{Purpose}-{Day}-{Mode}.txt`.
+
+- ttsCross indicate that it is a cross-tabulation.
+- OD indicates that the cross-tabulation is by origin and destination.
+- GGH4 indicate the zoning system, which is GGHM V4.
+- {Purpose} is the purpose of the trip.
+- {Day} is the name of the trip.
+- {Mode} is the primary mode of the trip.
+
+The possible values of {Purpose} and their definitions when not self-explanatory are:
+
+- Work
+- Work2: Subsequent work
+- School
+- School2: Subsequent school
+- Home
+- Daycare
+- Facilitate: Facilitate passenger
+- Market: Market/Shop
+- Other
+- (Unkown: not downloaded)
+
+The possible values for {Day} are (TTS does not collect data for weekends):
+
+- Monday
+- Tuesday
+- Wednesday
+- Thursday
+- Friday
+- (Unknown: not downloaded)
+
+The possible values for {Mode} and their definitions (when not self-explanatory) are:
+
+- Transit: Transit excluding GO rail
+- Cycle 
+- Driver: Auto driver 
+- GO: GO rail only
+- GO+Transit: Joint GO rail and local transit 
+- Motorcycle 
+- Other
+- School: School bus
+- Passenger: Auto passenger
+- Taxi: Taxi passenger
+- Rideshare: Paid rideshare
+- Walk
+- (Unknown: not downloaded)
+
+The Data Guide can be found [here](http://dmg.utoronto.ca/wp-content/uploads/2022/06/2016TTS_DataGuide.pdf).
+
+## Preliminaries
+
+Load packages:
+```{r load-packages}
+library(dplyr) # A Grammar of Data Manipulation
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(glue) # Interpreted String Literals
+library(here) # A Simpler Way to Find Your Files
+library(lubridate) # Make Dealing with Dates a Little Easier
+library(readr) # Read Rectangular Text Data
+library(sf) # Simple Features for R
+library(stringr) # Simple, Consistent Wrappers for Common String Operations
+library(tidyr) # Tidy Messy Data
+```
+
+# Checks
+
+We want to make sure that the tables were downloaded correctly and there are no mismatches between the name of the table and the contents.
+
+Define the parameters for the names of the tables:
+```{r}
+weekday <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+purpose <- c("Work", "Work2", "School", "School2", "Home", "Daycare", "Facilitate", "Market", "Other")
+mode <- c("Transit", "Cycle", "Driver", "GO", "GO+Transit", "Motorcycle", "Other", "School", "Passenger", "Taxi", "Rideshare", "Walk")
+```
+
+Loop through the tables and check the filters recorded in each:
+```{r}
+# Parameters for testing, commented out
+d <- 1
+p <- 2
+m <- 6
+
+# Initialize concordance with the values in file names and the values in filters inside the files
+concordance <- data.frame(prps_file = NULL, day_file = NULL, md_file = NULL,
+                          prps = NULL, day = NULL, md = NULL)
+
+for(p in 1:length(purpose)){
+  # Loop through modes
+  for(m in 1:length(mode)){
+    # Loop through weekdays
+    for(d in 1:length(weekday)){
+      # Read the files in turn
+      raw_data <- read_delim(file = glue("TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/ttsCross-OD-GGH4-{purpose[p]}-{weekday[d]}-{mode[m]}.txt"), 
+                             delim = "\t", 
+                             col_names = FALSE,
+                             show_col_types = FALSE)
+      
+      # Identify the locations in the table where the filters are recorded and store them in a temporary data frame
+      # Record values of the file being read
+      concordance_temp <- data.frame(prps_file = purpose[p],
+                                     day_file = weekday[d],
+                                     md_file = mode[m],
+                                     # Extract the values of the filters as found in the file
+                                     prps = raw_data |> 
+                                       slice(which(str_detect(raw_data$X1, "Trip purpose of destination"))) |>
+                                       transmute(prps = str_sub(X1, -3, -3)) |>
+                                       pull(prps),
+                                     day = raw_data |> 
+                                       slice(which(str_detect(raw_data$X1, "Day of week trip data were collected"))) |>
+                                       transmute(day = str_sub(X1, -3, -3)) |>
+                                       pull(day),
+                                     md = raw_data |> 
+                                       slice(which(str_detect(raw_data$X1, "Primary travel mode of trip"))) |>
+                                       transmute(md = str_sub(X1, -3, -3)) |>
+                                       pull(md)) |>
+        mutate(prps = case_when(prps == "W" ~ "Work",
+                                prps == "R" ~ "Work2",
+                                prps == "S" ~ "School",
+                                prps == "C" ~ "School2",
+                                prps == "H" ~ "Home",
+                                prps == "D" ~ "Daycare",
+                                prps == "F" ~ "Facilitate",
+                                prps == "M" ~ "Market",
+                                prps == "O" ~ "Other"),
+               day = case_when(day == "1" ~ "Monday",
+                               day == "2" ~ "Tuesday",
+                               day == "3" ~ "Wednesday",
+                               day == "4" ~ "Thursday",
+                               day == "5" ~ "Friday",
+                               day == "B" ~ "Transit",
+                               day == "C" ~ "Monday"),
+               md = case_when(md == "B" ~ "Transit",
+                              md == "C" ~ "Cycle",
+                              md == "D" ~ "Driver",
+                              md == "G" ~ "GO",
+                              md == "J" ~ "GO+Transit",
+                              md == "M" ~ "Motorcycle",
+                              md == "O" ~ "Other",
+                              md == "P" ~ "Passenger",
+                              md == "S" ~ "School",
+                              md == "T" ~ "Taxi",
+                              md == "U" ~ "Rideshare",
+                              md == "W" ~ "Walk"))
+      
+      # Bind the latest check to the concordance
+      concordance <- rbind(concordance,
+                           concordance_temp)
+    }
+  }
+}
+
+concordance <- concordance |>
+  mutate(prps_check = prps_file == prps,
+         day_check = day_file == day,
+         md_check = md_file == md)
+```
+
+Review the checks:
+```{r}
+concordance |>
+  summarize(prps_check = sum(prps_check),
+            day_check = sum(day_check),
+            md_check = sum(md_check))
+```
+
+All the checks pass.
+
+# OD tables by purpose, time of day and day of week
+
+Slice the table to obtain the trips (remove heading information) and add day:
+```{r}
+# Define the parameters for reading the files and organizing the data: weekday, purpose and mode
+# weekday <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+# purpose <- c("Work", "Work2", "School", "School2", "Home", "Daycare", "Facilitate", "Market", "Other")
+# mode <- c("Transit", "Cycle", "Drive", "GO", "GO+Transit", "Motorcycle", "Other", "School", "Passenger", "Taxi", "Rideshare", "Walk")
+
+weekday <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday")
+purpose <- c("Work", "Work2", "School", "School2", "Home", "Daycare", "Facilitate", "Market", "Other")
+mode <- c("Transit", "Cycle", "Driver", "GO", "GO+Transit", "Motorcycle", "Other", "School", "Passenger", "Taxi", "Rideshare", "Walk")
+
+# Initialize data frame for the processed data. There will be six columns, for origin/destination ids, number of trips, start time of trip, day of week, and purpose of trip at destination.
+od_purpose_time <- data.frame(ggh4_orig = NULL, 
+                              ggh4_dest = NULL, 
+                              Trips = NULL, 
+                              start_time = NULL, 
+                              day = NULL, 
+                              purpose = NULL,
+                              mode = NULL)
+
+# Initialize data frame to tabulate empty tables
+empty_tables <- expand.grid(day = weekday, prps = purpose, md = mode) |>
+  mutate(status = "Readable")
+
+# Loop through purposes
+for(p in 1:length(purpose)){
+  # Loop through modes
+  for(m in 1:length(mode)){
+    # Loop through weekdays
+    for(d in 1:length(weekday)){
+      # Read data file for purpose/weekday
+      raw_data <- read_delim(file = glue("TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/ttsCross-OD-GGH4-{purpose[p]}-{weekday[d]}-{mode[m]}.txt"), 
+                             delim = "\t", 
+                             col_names = FALSE,
+                             show_col_types = FALSE)
+      
+      # Initialize temporary data frame to process the data
+      od_purpose_temp <- data.frame(X1 = NULL, purpose = NULL)
+      
+      # Identify the locations of the time partitions in the table
+      idx <- which(str_detect(raw_data$X1, "TABLE    :"))
+      idx <- c(idx, nrow(raw_data) + 1)
+      
+      # Retrieve the information about the start time of trips
+      start_time <- raw_data |>
+        slice(idx) |>
+        transmute(start_time = str_extract(X1, "\\d+"))
+      
+      # Run only if the length of idx is not indicative of an empty table 
+      if(length(idx) > 1){
+        
+        # Loop through times to extract all useful information, discard rest
+        for(i in 1:(length(idx) - 1)){
+          od_purpose_temp <- rbind(od_purpose_temp,
+                                   raw_data |>
+                                     slice((idx[i]+2):(idx[i+1]-1)) |>
+                                     mutate(start_time = start_time$start_time[i]))
+        }
+        
+        # Separate the columns and convert variables
+        
+        od_purpose_temp <- od_purpose_temp |>
+          separate(X1, into = c("ggh4_orig", "Trips"), sep = " (?=[^ ]+$)") |>
+          mutate(ggh4_orig = str_trim(ggh4_orig, side = "both")) |>
+          separate(ggh4_orig, into = c("ggh4_orig", "ggh4_dest"), sep = " (?=[^ ]+$)") |>
+          mutate(ggh4_orig = str_trim(ggh4_orig),
+                 Trips = as.numeric(Trips),
+                 start_time = ifelse(str_length(start_time)<4, 
+                                     paste0("0", start_time, ""), 
+                                     start_time),
+                 start_time = paste0(str_sub(start_time, 1, 2), ":", str_sub(start_time, -2, -1)),
+                 start_time = hm(start_time),
+                 day = weekday[d],
+                 purpose = purpose[p],
+                 mode = mode[m])  
+        
+        # Bind the data frames
+        od_purpose_time <- rbind(od_purpose_time,
+                                 od_purpose_temp)
+      }else{
+        # Print warning for manual check
+        print(glue("TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/Table ttsCross-OD-GGH4-{purpose[p]}-{weekday[d]}-{mode[m]}.txt is empty: check"))
+        empty_tables <- empty_tables |>
+          mutate(status = ifelse(day == weekday[d] & prps == purpose[p] & md == mode[m],
+                                 "Not readable", status))
+      }
+    }  
+  }
+}
+
+od_purpose_time <- od_purpose_time |>
+  mutate(day = factor(day,
+                      levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"),
+                      ordered = TRUE),
+         purpose = factor(purpose,
+                          levels = c("Work", "Work2", "School", "School2", "Home", "Daycare", "Facilitate", "Market", "Other"),
+                          labels = c("Work", "Subsequent work", "School", "Subsequent school", "Home", "Daycare", "Facilitate passenger", "Marketing or shopping", "Other")),
+         mode = factor(mode,
+                       levels = c("Transit", "Cycle", "Driver", "GO", "GO+Transit", "Motorcycle", "Other", "Passenger", "School", "Taxi", "Rideshare", "Walk"),
+                       labels = c("Transit excluding GO rail", "Cycle", "Auto driver", "GO rail only", "Joint GO rail and local transit", "Motorcycle", "Other", "Auto passenger", "School bus", "Taxi passenger", "Paid rideshare", "Walk")))
+```
+
+Check empty tables:
+```{r}
+ggplot(data = empty_tables,
+       aes(x = prps, y = md)) +
+  geom_tile(aes(fill = status)) +
+  facet_wrap(~ day) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90))
+```
+
+After checking the tables, I figures out that they do contain information but the format is funky. They contain a header and then a rectangular array of values like a tiny origin-destination table, instead of sensible origin-destination-value tuples.
+
+We can use the record of unreadable tables above to deal with this tables in a different way.
+
+```{r}
+# Find the tables that were not readable
+empty_tables <- empty_tables |> 
+  filter(status == "Not readable")
+
+# Initialize a data frame to deposit the data
+od_purpose_temp <- data.frame(ggh4_orig = NULL, 
+                              ggh4_dest = NULL, 
+                              Trips = NULL, 
+                              start_time = NULL, 
+                              day = NULL, 
+                              purpose = NULL,
+                              mode = NULL)
+
+# Loop through tables that were not successfully read using the previous protocol
+for(t in 1:nrow(empty_tables)){
+  # Read data file for purpose/weekday
+  raw_data <- read_delim(file = glue("TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/ttsCross-OD-GGH4-{empty_tables$prps[t]}-{empty_tables$day[t]}-{empty_tables$md[t]}.txt"), 
+                         delim = "\t", 
+                         col_names = FALSE,
+                         show_col_types = FALSE,
+                         skip_empty_rows = FALSE)
+  
+  # Identify the locations of the time partitions in the table
+  idx <- which(str_detect(raw_data$X1, "Table: \\d+"))
+  idx <- c(idx, nrow(raw_data) + 2)
+  
+  # Retrieve the information about the start time of trips
+  start_time <- raw_data |>
+    slice(idx) |>
+    transmute(start_time = str_extract(X1, "\\d+"))
+  
+  # Run only if the length of idx is not indicative of an empty table 
+  if(length(idx) > 1){
+    # Loop through segments of table
+    for(i in 1:(length(idx) - 1)){
+      
+      
+      od_purpose_temp2 <- read_csv(glue("TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/ttsCross-OD-GGH4-{empty_tables$prps[t]}-{empty_tables$day[t]}-{empty_tables$md[t]}.txt"),
+                                   skip = idx[i] + 1,
+                                   n_max = (idx[i+1]-3) - (idx[i]+2),
+                                   show_col_types = FALSE,
+                                   name_repair = "minimal") |>
+        rename(ggh4_orig = 1) |>
+        pivot_longer(cols = -ggh4_orig,
+                     names_to = "ggh4_dest",
+                     values_to = "Trips") |>
+        mutate(start_time = start_time$start_time[i],
+               day = empty_tables$day[t],
+               purpose = empty_tables$prps[t],
+               mode = empty_tables$md[t])
+      
+      # Bind to table
+      od_purpose_temp <- rbind(od_purpose_temp,
+                               od_purpose_temp2) |>
+        filter(Trips > 0)
+    }
+  }
+}
+
+# Finish preparing the variables
+od_purpose_temp <- od_purpose_temp |>
+  mutate(start_time = ifelse(str_length(start_time) < 4, 
+                             paste0("0", start_time, ""), 
+                             start_time),
+         start_time = paste0(str_sub(start_time, 1, 2), ":", str_sub(start_time, -2, -1)),
+         start_time = hm(start_time),
+         day = factor(day,
+                      levels = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"),
+                      ordered = TRUE),
+         purpose = factor(purpose,
+                          levels = c("Work", "Work2", "School", "School2", "Home", "Daycare", "Facilitate", "Market", "Other"),
+                          labels = c("Work", "Subsequent work", "School", "Subsequent school", "Home", "Daycare", "Facilitate passenger", "Marketing or shopping", "Other")),
+         mode = factor(mode,
+                       levels = c("Transit", "Cycle", "Driver", "GO", "GO+Transit", "Motorcycle", "Other", "Passenger", "School", "Taxi", "Rideshare", "Walk"),
+                       labels = c("Transit excluding GO rail", "Cycle", "Auto driver", "GO rail only", "Joint GO rail and local transit", "Motorcycle", "Other", "Auto passenger", "School bus", "Taxi passenger", "Paid rideshare", "Walk")))
+```
+
+
+Bind the tables:
+```{r}
+od_ggh4_mode_purpose <- rbind(od_purpose_time,
+                         od_purpose_temp) 
+```
+
+Summary of table:
+```{r}
+summary(od_ggh4_mode_purpose)
+```
+
+Make start times of trips consistent with day. Some trips are recorded on a certain day, say Monday, but with a start time that exceed midnight (i.e., 24:00). Those trips should be recorded as having been made on the following day. This code corrects this quirk of the data:
+```{r}
+od_ggh4_mode_purpose <- od_ggh4_mode_purpose |>
+  # Convert days to numeric; the convention is that Sunday is 1
+  mutate(day = case_when(day == "Monday" ~ 2,
+                         day == "Tuesday" ~ 3,
+                         day == "Wednesday" ~ 4,
+                         day == "Thursday" ~ 5,
+                         day == "Friday" ~ 6),
+         # Check whether the starting time is greater than 24:00; if true, calculate the time as if it was on the following day, otherwise keep as is
+         start_time = if_else(start_time > hm("24:00"), 
+                              start_time - hm("24:00"), 
+                              start_time),
+         # Check whether the starting time is greater than 24:00; if true, change the day of the trip to the following day, otherwise keep as is
+         day = if_else(start_time >= hm("24:00"), 
+                       day + 1, 
+                       day),
+         # Convert days from numeric to weekdays
+         day = wday(day,
+                    label = TRUE))
+```
+
+Summary of table:
+```{r}
+summary(od_ggh4_mode_purpose)
+```
+
+Some trips are now recorded as having taken place on Saturday. In general, a small number of trips are changed to the following day, but now the maximum start time is 24:00.
+
+Total number of trips in table:
+```{r}
+sum(od_ggh4_mode_purpose$Trips)
+```
+
+There is a small number of trips ($n = 7,368$) that where taken for an unknown purpose by any mode and on any day. There are zero trips that where undertaken by an unkown mode for any purpose on any day.
+
+In other words, the table above is incomplete, but the number of trips that are missing is very small.
+
+Rename columns to make it consistent with other data objects in package:
+```{r}
+od_ggh4_mode_purpose <- od_ggh4_mode_purpose |>
+  rename(Origin = ggh4_orig,
+         Destination = ggh4_dest)
+```
+
+Save the data:
+```{r}
+usethis::use_data(od_ggh4_mode_purpose, 
+                  overwrite = TRUE)
+```
+
+<!---
+
+-->
+
+Load data object:
+```{r}
+library(TTS2016R)
+data("od_ggh4_mode_purpose")
+```
+
+# Analysis
+
+Summary of table:
+```{r}
+summary(od_ggh4_mode_purpose)
+```
+
+Check the total number of trips in the survey:
+```{r}
+sum(od_ggh4_mode_purpose$Trips)
+```
+
+Plot frequency by start time of trips:
+```{r}
+ggplot(data = od_ggh4_mode_purpose |>
+         filter(day != "Sat") |>
+         mutate(start_time = as.numeric(start_time, "hours")),
+       aes(x = start_time,
+           weight = Trips,
+           color = day)) +
+  geom_density(bw = 0.5) +
+  ggtitle("Trip start time for all purposes")# +
+#facet_wrap(~ purpose)
+```
+
+Plot frequency by start time of trips:
+```{r}
+ggplot(data = od_ggh4_mode_purpose |>
+         filter(day != "Sat") |>
+         mutate(start_time = as.numeric(start_time, "hours")),
+       aes(x = start_time,
+           weight = Trips,
+           color = day)) +
+  geom_freqpoly(bins = 50) +
+  ggtitle("Trip start time for all purposes")# +
+#facet_wrap(~ purpose)
+```
+
+Summary of trips:
+```{r}
+od_ggh4_mode_purpose |>
+  group_by(mode, day) |>
+  summarize(Trips = sum(Trips),
+            .groups = "drop")
+```
+
+
+```{r}
+ggplot(data = od_ggh4_mode_purpose |>
+         filter(day != "Sat", purpose == "Home") |>
+         mutate(start_time = as.numeric(start_time, "hours")),
+       aes(x = start_time,
+           weight = Trips,
+           color = day)) +
+  geom_density(bw = 0.5) +
+  ggtitle("Trip start time for home")# +
+#facet_wrap(~ purpose)
+```
+
+Read geography file:
+```{r}
+load(file = glue(here::here(), "/Geography Files/gghv5.rda"))
+```
+
+Calculate trip production for WORK:
+```{r}
+trip_production <- od_purpose_time |>
+  filter(purpose == "Work") |>
+  group_by(ggh4_orig, day) |>
+  summarize(trip_production = sum(Trips),
+            .groups = "drop") |>
+  pivot_wider(names_from = day,
+              values_from = trip_production,
+              names_prefix = "trip_production_")
+```
+
+Calculate trip attraction:
+```{r}
+trip_attraction <- od_purpose_time |>
+  filter(purpose == "Work") |>
+  group_by(ggh4_dest, day) |>
+  summarize(trip_attraction = sum(Trips),
+            .groups = "drop") |>
+  pivot_wider(names_from = day,
+              values_from = trip_attraction,
+              names_prefix = "trip_attraction_")
+```
+
+Join to sf object:
+```{r}
+gghv5 <- gghv5 |>
+  left_join(trip_production |>
+              mutate(ggh4_orig = as.numeric(ggh4_orig)),
+            by = c("taz_v4" = "ggh4_orig")) |>
+  left_join(trip_attraction |>
+              mutate(ggh4_dest = as.numeric(ggh4_dest)),
+            by = c("taz_v4" = "ggh4_dest"))
+```
+
+
+Plot trip production:
+```{r}
+ggplot() +
+  geom_sf(data = gghv5 |>
+            filter(cmaname == "Hamilton"),
+          aes(fill = trip_production_Monday),
+          color = NA) +
+  scale_fill_distiller(name = "Trips", direction = 1, trans = "log") +
+  ggtitle("Trip production for work - Monday")
+theme_minimal()
+```
+
+Plot trip attraction:
+```{r}
+ggplot() +
+  geom_sf(data = gghv5 |>
+            filter(cmaname == "Hamilton"),
+          aes(fill = trip_attraction_Monday),
+          color = NA) +
+  scale_fill_distiller(name = "Trips", direction = 1, trans = "log") +
+  ggtitle("Trip attraction for work - Monday") +
+  theme_minimal()
+```
+--->
