@@ -137,7 +137,7 @@ NULL
 #'}
 #' @docType data
 #' @keywords Jobs Workers TTS 2016 in the Greater Golden Horseshoe (GGH) area.
-#' @name ggh_taz
-#' @usage data(ggh_taz)
+#' @name hh_sed_taz
+#' @usage data(hh_sed_taz)
 #' @source "2016 Transportation Tomorrow Survey" from [Data Management Group](http://dmg.utoronto.ca/transportation-tomorrow-survey/tts-introduction) accessed November 14 2021.
 "hh_sed_taz"
