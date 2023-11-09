@@ -5,7 +5,14 @@
 
 ## 2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada
 
-[![DOI](https://zenodo.org/badge/465815515.svg)](https://zenodo.org/badge/latestdoi/465815515)
+<!-- badges: start -->
+<!-- License --->
+
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /><br /></a>This
+work is licensed under a
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative
+Commons Attribution-NonCommercial-ShareAlike 4.0 International
+License</a><br /> <!-- badges: end -->
 
 This package contains objects which are sourced from the 2016
 Transportation Tomorrow Survey [(TTS)](http://dmg.utoronto.ca/drs) and
@@ -22,8 +29,7 @@ Survey in the Greater Golden Horseshoe area, Ontario, Canada*.
 Environment and Planning B: Urban Analytics and City Science, 50(2)
 556-563. <DOI:10.1177/23998083221146781>
 
-<!-- badges: start -->
-<!-- badges: end -->
+[![DOI](https://zenodo.org/badge/465815515.svg)](https://zenodo.org/badge/latestdoi/465815515)
 
 ## What is this data package?
 
