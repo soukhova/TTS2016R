@@ -1,6 +1,11 @@
 ---
 title: "The potential of this data package"
 bibliography: REFERENCES.bib
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The potential of this data package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
@@ -223,7 +228,7 @@ It can also be seen that from the bottom plot in Figure 2 that high to medium-lo
 
 It is important to note that the travel times within this data set reflect car travel, centroids of origins to destinations, and an uncongested street network. These assumptions are not completely realistic, but are done for generalization and due to data limitations. The car mode for commuting is still critically important, as `r (sum(od$C_DPC, od$C_PPC, od$C_RS, od$C_SB, od$C_TA) / sum(od$sum_trips)) %>% percent()` of the work trips are made this way. Additionally, a finer resolutions of data nor average departure times are publicly available through the TTS Data Retrieval System. As such, we include the number of mode-specific trips from each OD pair so the user can make their own mode- and associated travel time/cost specific assumptions.
 
-```{r data-for-impedance}
+```{r data-for-impedance, eval=FALSE}
 # remove all NA trips from dataset and set all 0min travel times to 0.1 min
 od  <- TTS2016R::od %>% 
   filter( !is.na(travel_time)) %>% 
@@ -236,6 +241,10 @@ all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 
 #fitting impedance function
 gamma_ <- fitdistrplus::fitdist(data=all_tt, "gamma", method="mle", optim.method="Nelder-Mead") 
+```
+```{r data-for-impedance-load, include=FALSE}
+#save(gamma_, file=paste0(here::here(),"/data-raw/TTS16-data-inputs/gamma_.Rdata"))
+load(file=paste0(here::here(),"/data-raw/TTS16-data-inputs/gamma_.Rdata"))
 ```
 
 ```{r calc-for-accessibility-GGH}
@@ -290,13 +299,20 @@ Impedance functions are useful to understand mobility behavior and are part, for
 
 A useful technique to calibrate an impedance function is to use the trip length distribution (TLD) as measured from origin-destination data [@horbachov_theoretical_2018; @batista_estimation_2019]. The TLD is the representation of the likelihood that a proportion of trips are taken at a specific travel cost. In our data set, where we assume cost is travel time, the impedance function maps low travel times to higher proportions of trips, and high travel times are mapped to low proportion of trips.
 
-```{r TLD-Gamma-plot, fig.height=6}
+```{r TLD-Gamma-plot, fig.height=6, eval=FALSE}
 plot(gamma_)
+```
+
+```{r TLD-Gamma-plot-load, include=FALSE}
+# png(file=paste0(here::here(),"/data-raw/TTS16-data-inputs/gamma_plot.png"))
+# plot(gamma_)
+# dev.off() 
+knitr::include_graphics(paste0(here::here(),"/data-raw/TTS16-data-inputs/gamma_plot.png"))
 ```
 
 __Figure 5.__ _Empirical TTS 2016 home-based car trip length distribution (black) and calibrated gamma distribution impedance function (red) with associated Q-Q and P-P plots._
 
-```{r create-cullen-frey-data, message = FALSE, echo=FALSE, fig.height=6}
+```{r create-cullen-frey-data, message = FALSE, echo=FALSE, fig.height=6, eval=FALSE}
 # remove all NA Persons from dataset and set all 0min travel times to 0.1min
 od  <- od %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
 all_tt <- od  %>% dplyr::select(Persons, travel_time)
@@ -305,6 +321,15 @@ all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 fitdistrplus::descdist(data=all_tt) 
 ```
 
+```{r create-cullen-frey-data-load, include=FALSE}
+# od  <- od %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
+# all_tt <- od  %>% dplyr::select(Persons, travel_time)
+# all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
+# png(file=paste0(here::here(),"/data-raw/TTS16-data-inputs/cullen-frey_plot.png"))
+# fitdistrplus::descdist(data=all_tt) 
+# dev.off() 
+knitr::include_graphics(paste0(here::here(),"/data-raw/TTS16-data-inputs/cullen-frey_plot.png"))
+```
 __Figure 6.__ _Cullen and frey graph for the 2016 TTS calculated travel times._
 
 In the GGH data presented, the empirical TLD (i.e., proportion of trips taken vs. travel time in minutes) is fitted to a density distribution using maximum likelihood techniques and the Nelder-Mead method for direct optimization available within the `fitdistrplus` package [@fitdistrplus_2015]. Based on goodness-of-fit criteria and diagnostics seen in Figure 5 and Figure 6, the gamma distribution is selected for the presented data. 
