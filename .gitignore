@@ -7,3 +7,6 @@
 **/Manuscript-Data-Package/Manuscript-Data-Package_cache/
 docs
 data-raw
+inst/doc
+/doc/
+/Meta/
