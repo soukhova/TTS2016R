@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">TTS2016R</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1-1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,15 +41,25 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="articles/A-Intro.html">The potential of this data package</a>
+    <a class="dropdown-item" href="articles/Intro.html">The potential of this data package</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="search.json" id="search-input" placeholder="Search for" autocomplete="off">
 </form>
 
-      <ul class="navbar-nav"></ul>
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/soukhova/TTS2016R/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 
     
@@ -62,12 +72,10 @@
 <div class="section level2">
 <h2 id="id_2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada">2016 Transportation Tomorrow Survey (TTS) data package: trips and estimated travel time to work in the Greater Golden Horsehoe area, Canada<a class="anchor" aria-label="anchor" href="#id_2016-transportation-tomorrow-survey-tts-data-package-trips-and-estimated-travel-time-to-work-in-the-greater-golden-horsehoe-area-canada"></a>
 </h2>
-<p><a href="https://zenodo.org/badge/latestdoi/465815515" class="external-link"><img src="https://zenodo.org/badge/465815515.svg" alt="DOI"></a></p>
 <p>This package contains objects which are sourced from the 2016 Transportation Tomorrow Survey <a href="http://dmg.utoronto.ca/drs" class="external-link">(TTS)</a> and objects curated to facilitate the use and analysis of TTS data. TTS 2016 is one of the largest travel surveys in southern Ontario, Canada, and a slice of this survey has been cleaned, packaged, and augmented for easy use in an <code>R</code> environment.</p>
 <p>A data paper describing and discussing this package has been published:</p>
 <p>Soukhov, A., &amp; Páez, A. (2023). <em>TTS2016R: A data set to study population and employment patterns from the 2016 Transportation Tomorrow Survey in the Greater Golden Horseshoe area, Ontario, Canada</em>. Environment and Planning B: Urban Analytics and City Science, 50(2) 556-563. <a href="DOI:10.1177/23998083221146781" class="uri">DOI:10.1177/23998083221146781</a></p>
-<!-- badges: start -->
-<!-- badges: end -->
+<p><a href="https://zenodo.org/badge/latestdoi/465815515" class="external-link"><img src="https://zenodo.org/badge/465815515.svg" alt="DOI"></a></p>
 </div>
 <div class="section level2">
 <h2 id="what-is-this-data-package">What is this data package?<a class="anchor" aria-label="anchor" href="#what-is-this-data-package"></a>
@@ -83,7 +91,7 @@
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span>, character.only <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>      <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"soukhova/TTS2016R"</span>,</span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"soukhova/TTS2016R"</span>,</span>
 <span>                        build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -291,13 +299,22 @@ Travel Time (min)
 <li>If you notice spelling errors or other hick-ups, please submit an issue.</li>
 <li>If you use the data package and would like to share an interesting use case or analysis, please fork the repository, save the analysis file in <a href="https://github.com/soukhova/TTS2016R/tree/master/vignettes/articles" class="external-link">vignettes</a> and submit a pull request. Analysis files will be reviewed and added as articles (with full credit).</li>
 </ol>
+<!-- badges: start -->
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/soukhova/TTS2016R/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/soukhova/TTS2016R/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://creativecommons.org/licenses/by/4.0" class="external-link">CC BY 4.0</a></small></li>
 </ul>
 </div>
 
@@ -317,7 +334,12 @@ Travel Time (min)
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" class="external-link"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"><br></a></li>
+</ul>
+</div>
 
   </aside>
 </div>

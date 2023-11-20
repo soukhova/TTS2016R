@@ -4,13 +4,10 @@
     <loc>https://soukhova.github.io/TTS2016R/404.html</loc>
   </url>
   <url>
-    <loc>https://soukhova.github.io/TTS2016R/LICENSE-text.html</loc>
-  </url>
-  <url>
     <loc>https://soukhova.github.io/TTS2016R/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://soukhova.github.io/TTS2016R/articles/A-Intro.html</loc>
+    <loc>https://soukhova.github.io/TTS2016R/articles/Intro.html</loc>
   </url>
   <url>
     <loc>https://soukhova.github.io/TTS2016R/articles/index.html</loc>
@@ -20,6 +17,9 @@
   </url>
   <url>
     <loc>https://soukhova.github.io/TTS2016R/index.html</loc>
+  </url>
+  <url>
+    <loc>https://soukhova.github.io/TTS2016R/news/index.html</loc>
   </url>
   <url>
     <loc>https://soukhova.github.io/TTS2016R/reference/TTS2016R-package.html</loc>
@@ -32,6 +32,9 @@
   </url>
   <url>
     <loc>https://soukhova.github.io/TTS2016R/reference/ggh_taz.html</loc>
+  </url>
+  <url>
+    <loc>https://soukhova.github.io/TTS2016R/reference/hh_sed_taz.html</loc>
   </url>
   <url>
     <loc>https://soukhova.github.io/TTS2016R/reference/index.html</loc>
