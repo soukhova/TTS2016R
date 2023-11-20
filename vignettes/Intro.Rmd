@@ -305,7 +305,7 @@ A useful technique to calibrate an impedance function is to use the trip length 
 plot(gamma_)
 ```
 
-```{r TLD-Gamma-plot-load, echo=FALSE}
+```{r TLD-Gamma-plot-load, echo=FALSE, fig.width= 8}
 # png(file=paste0(here::here(),"/data-raw/TTS16-data-inputs/gamma_plot.png"))
 # plot(gamma_)
 # dev.off() 
@@ -323,7 +323,7 @@ all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]
 fitdistrplus::descdist(data=all_tt) 
 ```
 
-```{r create-cullen-frey-data-load, echo=FALSE}
+```{r create-cullen-frey-data-load, echo=FALSE, fig.width= 8}
 # od  <- od %>% filter( !is.na(travel_time)) %>% mutate(travel_time = ifelse(travel_time == 0, 0.1, travel_time))
 # all_tt <- od  %>% dplyr::select(Persons, travel_time)
 # all_tt <- all_tt[rep(seq_len(dim(all_tt)[1]), all_tt$Persons), 2]

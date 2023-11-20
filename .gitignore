@@ -2,11 +2,10 @@
 .Rhistory
 .Rdata
 .httr-oauth
-.DS_Store
 /Editorial-Correspondance
-**/Manuscript-Data-Package/Manuscript-Data-Package_cache/
+**/Manuscript-Data-Package/*
 docs
 data-raw
 inst/doc
 /doc/
-/Meta/
+Proceedures-that-work.R
