@@ -7,8 +7,8 @@ In this notebook we provide a toy dataset that is used to calculate both convent
 
 Libraries:
 ```{r message=FALSE}
-library(sf)
-library(tidyverse)
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(sf) # Simple Features for R
 ```
 
 Load data for example:
@@ -36,4 +36,6 @@ Save it to /data folder:
 usethis::use_data(toy_od_table, overwrite = TRUE)
 usethis::use_data(toy_sim_zones, overwrite = TRUE)
 ```
+
+
 

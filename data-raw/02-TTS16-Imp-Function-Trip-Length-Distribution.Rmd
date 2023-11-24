@@ -5,19 +5,18 @@ output:
 
 Load packages:
 ```{r}
-library(ggplot2)
-library(dplyr)
-library(MASS)
-
-# install.packages("fitdistrplus")
-# install.packages("logspline")
-library(fitdistrplus)
-library(logspline)
+library(dplyr) # A Grammar of Data Manipulation
+library(fitdistrplus) # Help to Fit of a Parametric Distribution to Non-Censored or Censored Data
+library(ggplot2) # Create Elegant Data Visualisations Using the Grammar of Graphics
+library(logspline) # Routines for Logspline Density Estimation
+library(MASS) # Support Functions and Datasets for Venables and Ripley's MASS
 
 options(scipen = 999)
 ```
 
 ##-- Exploring the OD travel time data
+
+<!--FILE NOT THERE!!-->
 
 ```{r}
 load(file = "TTS16-data-inputs/OD-by-FT-Employment/od.Rdata")
@@ -121,5 +120,6 @@ usethis::use_data(ggh_pd, overwrite = TRUE)
 load(file = "TTS16-data-inputs/Boundaries/ggh_cma.Rdata")
 usethis::use_data(ggh_cma, overwrite = TRUE)
 ```
+
 
 

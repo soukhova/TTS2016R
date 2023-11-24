@@ -433,9 +433,51 @@ usethis::use_data(od_ggh4_mode_purpose,
                   overwrite = TRUE)
 ```
 
-<!---
+Save to parquet for sharing:
+```{r}
+library(arrow)
+# using compression
+if (codec_is_available("gzip")) {
+  tf <- tempfile(tmpdir = glue::glue(stringr::str_replace_all(here::here(), "/", "\\\\"),
+                                     "\\data-raw\\TTS16-data-inputs\\OD-GGH4-by-Time-Day-Mode-Purpose\\"),
+                 fileext = ".gz.parquet")
+  write_parquet(od_ggh4_mode_purpose,
+                tf, 
+                compression = "gzip", 
+                compression_level = 5)
+}
+```
 
--->
+Rename file:
+```{r}
+arrow_file <- list.files(path = glue::glue(here::here(), 
+                             "/data-raw/TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose"),
+           pattern = "^(.*)\\.gz.parquet$")
+# arrow_file <- stringr::str_replace(arrow_file,
+#                                    stringr::str_extract(arrow_file, "[^.]+"),
+#                                    glue::glue(, ""))
+
+file.rename(from = glue::glue(here::here(), 
+                             "/data-raw/TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/{arrow_file}"), 
+            to = glue::glue(here::here(), 
+                             "/data-raw/TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/od_ggh4_mode_purpose.gz.parquet"))
+```
+
+Remove data object:
+```{r}
+rm(od_ggh4_mode_purpose)
+```
+
+Check that parquet file can be read:
+```{r}
+od_ggh4_mode_purpose <- read_parquet(glue::glue(here::here(), 
+                             "/data-raw/TTS16-data-inputs/OD-GGH4-by-Time-Day-Mode-Purpose/od_ggh4_mode_purpose.gz.parquet"),
+             as_data_frame = FALSE)
+```
+
+
+
+<!---
 
 Load data object:
 ```{r}
