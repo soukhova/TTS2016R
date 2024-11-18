@@ -24,6 +24,7 @@ library(stplanr) # not installed on this machine
 library(tidycensus) # not installed on this machine
 library(tidyr) # Tidy Messy Data
 library(tmap) # Thematic Maps
+library(TTS2016R)
 library(zoo) # for rollapplyr
 
 # setup options
@@ -39,10 +40,23 @@ library(r5r) # Rapid Realistic Routing with 'R5'
 ```
 
 ##--- Prepare Input Data
-loading the destination points and origins points:
+
+Prepare destination points and origins points:
 ```{r}
-load(file = "TTS16-data-inputs/Travel-Time-Calculations/inputs/work_origins.Rdata")
-load(file = "TTS16-data-inputs/Travel-Time-Calculations/inputs/job_destinations.Rdata")
+data("ggh_taz_v4")
+
+coords <- ggh_taz_v4 |>
+  st_transform(crs = 4326) |>
+  st_centroid() |>
+  st_coordinates()
+
+work_origins <- ggh_taz_v4 |>
+  st_drop_geometry() |>
+  transmute(id = GGHV4,
+            lon = coords[,1],
+            lat = coords[,2])
+
+job_destinations <- work_origins
 ```
 
 
@@ -60,15 +74,20 @@ dir.create("TTS16-data-inputs/Travel-Time-Calculations/r5_graph") # for the r5 n
 r5_path <- file.path("TTS16-data-inputs/Travel-Time-Calculations/r5_graph")
 ```
 
+
+Version of data downloaded:
+
 ```{r download data, include=FALSE, eval=FALSE}
 #downloading ontario osm in the correct format
-download.file(url = paste0("https://download.geofabrik.de/north-america/canada/ontario-latest.osm.pbf"),
+download.file(url = paste0("https://download.openstreetmap.fr/extracts/north-america/canada/ontario/golden_horseshoe-latest.osm.pbf"),
               destfile = file.path(r5_path, "osm.pbf"),
               mode = "wb")
 
 ```
 
 ##--- Set Up R5 Routing
+
+<!-- QUESTION FOR RAFA ET AL. IS IT POSSIBLE TO HAVE MULTIPLE osm.pbf FILES IN THE SAME DIRECTORY AND CALL THEM BY NAME? -->
 
 ```{r build graph, include = FALSE}
 r5_ONT <- setup_r5(data_path = r5_path, verbose = FALSE)
